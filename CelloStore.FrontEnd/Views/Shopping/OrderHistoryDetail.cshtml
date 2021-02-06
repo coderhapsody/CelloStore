@@ -1,0 +1,209 @@
+﻿@model CelloStore.ViewModels.OrderHistoryDetailViewModel
+<div style="width: 960px;">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(false)
+
+        @Html.HiddenFor(m => m.SelectedOrder.Id)
+
+        <div id="tabs">
+            <ul>
+                <li class="k-state-active">Order</li>
+                <li>Recipient Info</li>
+                <li>Card</li>
+                <li>Notes</li>
+                <li>Order Details</li>
+                <li>Status Histories</li>
+                <li>Payment Confirmation</li>
+            </ul>
+            <div>
+                <br />
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Order No.</div>
+                        <div class="col-md-4">@Model.SelectedOrder.OrderNo</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Order Date</div>
+                        <div class="col-md-4">@Model.SelectedOrder.OrderDate.ToString("dddd, dd MMMM yyyy")</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Delivery Date</div>
+                        <div class="col-md-4">@Model.SelectedOrder.DeliveryDate.GetValueOrDefault().ToString("dddd, dd MMMM yyyy")</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Delivery Time</div>
+                        <div class="col-md-4">@Model.DeliveryTimeName</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Hide Sender Name</div>
+                        <div class="col-md-4">@Model.SelectedOrder.SecretSenderName</div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div>
+                <br />
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Recipient Name: </div>
+                        <div class="col-md-5">@Model.SelectedOrder.RecipientName</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Recipient Address: </div>
+                        <div class="col-md-5">@Model.SelectedOrder.RecipientAddress</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Company Name: </div>
+                        <div class="col-md-5">@Model.SelectedOrder.RecipientCompanyName</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Recipient Email: </div>
+                        <div class="col-md-5">@Model.SelectedOrder.RecipientEmail</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Recipient Phone: </div>
+                        <div class="col-md-5">@Model.SelectedOrder.RecipientPhoneNumber</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Call Recipient First: </div>
+                        <div class="col-md-5">@(Model.SelectedOrder.CallRecipientFirst ? "Yes" : "No")</div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div>
+                <br />
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">From: </div>
+                        <div class="col-md-10">@Model.SelectedOrder.FromCardMessage</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">To: </div>
+                        <div class="col-md-10">@Model.SelectedOrder.ToCardMessage</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-bold">Card Message: </div>
+                        <div class="col-md-10">
+                            <div class="well">
+                                @Model.SelectedOrder.CardMessage
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div>
+                <br />
+                <div class="well">
+                    @Model.SelectedOrder.Notes
+                </div>
+                <br />
+            </div>
+            <div>
+                <br />
+                @Html.Kendo().Grid(Model.SelectedOrderDetails).Name("Grid").EnableCustomBinding(true).Columns(
+                    col =>
+                    {
+                        col.Bound(m => m.Product.Code);
+                        col.Bound(m => m.Product.Name);
+                        col.Bound(m => m.Qty).Format("{0:###,##0}");
+                        col.Bound(m => m.UnitPrice).Format("{0:###,##0}");
+                        col.Bound(m => m.DiscValue).Format("{0:###,##0}");
+                    })
+                <br />
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @(Html.Kendo().Grid(Model.StatusHistories).Name("gridStatusHistory").HtmlAttributes(new {style = "width:95%;"}).EnableCustomBinding(true).Columns(
+                              col =>
+                              {
+                                  col.Bound(m => m.Date).Format("{0:ddd, dd-MMM-yyyy}").Width(150);
+                                  col.Bound(m => m.Status).Width(100);
+                                  col.Bound(m => m.Notes);
+                              }).DataSource(ds => ds
+                                  .Ajax()
+                                  .Read(read => read.Action("ListStatusHistory", "Order", new {area = "Sales"})
+                                      .Data("orderHistoryParameters")))
+                              )
+                    </div>
+                </div>
+
+                <br/>
+            </div>
+            <div>
+                <br />
+                @if (Model.PaymentConfirmation != null)
+                {
+                    @Html.HiddenFor(m => m.PaymentConfirmation.Id, new { id = "paymentConfirmationId", name = "paymentConfirmationId" })
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table style="border-spacing: 10px; border-collapse: separate;">
+                                <tr>
+                                    <td>Payment Method: </td>
+                                    <td>@Model.PaymentConfirmation.PaymentMethod.Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Bank: </td>
+                                    <td>@Model.PaymentConfirmation.Bank.Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Payment Date: </td>
+                                    <td>@Model.PaymentConfirmation.Date.ToString("ddd, dd MMMM yyyy")</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Amount: </td>
+                                    <td>@Model.PaymentConfirmation.Amount.ToString("###,##0.00")</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Verified Date: </td>
+                                    <td>
+                                        @(Model.PaymentConfirmation.VerifiedWhen.HasValue ? Model.PaymentConfirmation.VerifiedWhen.Value.ToString("ddd, dd MMMM yyyy HH:mm") : "Not Verified")
+
+                                    </td>
+                                </tr>                                
+                            </table>
+                        </div>
+                    </div>
+                }
+                else
+                {<text>
+                    <p>Payment Confirmation has not been made for this order</p></text>
+                }
+            </div>
+        </div>
+    }
+    <br />
+    @Html.Kendo().Button().Content("Close This Window").Name("closeOrderHistoryDetailButton").Events(ev => ev.Click("closeOrderHistoryDetailButtonClick"))
+
+</div>
+
+<script>
+    $(function () {
+        $("#tabs").kendoTabStrip({
+            animation: false,
+            width: 200
+        });
+    });
+
+
+</script>

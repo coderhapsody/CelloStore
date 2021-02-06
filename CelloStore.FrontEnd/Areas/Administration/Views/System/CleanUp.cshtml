@@ -1,0 +1,26 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h4><i class="fa fa-trash-o"></i> Clean Up</h4>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="k-button" id="btnSubmit" name="btnSubmit"><i class="fa fa-trash"></i> Start Clean Up Process</button>
+            </div>
+        </div>
+
+        if(IsPost)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    @ViewBag.TotalFiles orphan file(s) has been deleted.
+                </div>
+            </div>
+        }
+    }
+</div>

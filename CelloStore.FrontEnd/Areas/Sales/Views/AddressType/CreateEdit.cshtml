@@ -1,0 +1,40 @@
+﻿@model CelloStore.ViewModels.Sales.AddressType.CreateEditViewModel
+
+
+<div class="container">
+    <div class="page-header">
+        <h4>Address Type</h4>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(false)
+        
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.Name)</div>
+                <div class="col-md-4">@Html.TextBoxFor(m => m.Name, new { @class="form-control"})</div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.IsActive)</div>
+                <div class="col-md-4">@Html.CheckBoxFor(m => m.IsActive)</div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <button type="submit" id="btnSave" name="btnSave" class="k-button"><span class="fa fa-save"></span> Save</button>
+                    <a href="@Url.Action("Index")" class="k-button"><span class="fa fa-undo"></span> Back to List</a>
+                </div>
+            </div>
+        </div>
+   }
+</div>
+
+<script>
+    $(function () {
+        $("form:first").kendoValidator();
+        $("#Name").focus();
+    });
+</script>

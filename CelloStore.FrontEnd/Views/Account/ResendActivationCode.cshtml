@@ -1,0 +1,57 @@
+﻿<div style="width: 380px; overflow: hidden;">
+    <br/>
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-md-1">
+                Email:
+            </div>
+            <div class="col-md-6">
+                <td>@Html.Kendo().TextBox().Name("EmailResend").HtmlAttributes(new {style = "width:250px;"})</td>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                <button id="btnResendActivationCode" type="submit" class="k-button">Submit</button>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $(function() {
+        $("#EmailResend").focus();
+        $("#btnResendActivationCode").click(function(e) {
+            e.preventDefault();
+            $("#btnResendActivationCode").attr("disabled", "disabled");
+            $("#btnResendActivationCode").addClass("k-state-disabled");
+            $("#btnResendActivationCode").text("Please wait...");
+            $.ajax({
+                url: "@Url.Action("ResendActivationCode")",
+                type: "POST",
+                data: {
+                    email: $("#EmailResend").val()
+                },
+                success: function (result) {
+                    $("#btnResendActivationCode").removeAttr("disabled");
+                    $("#btnResendActivationCode").removeClass("k-state-disabled");
+                    $("#btnResendActivationCode").text("Submit");
+                    if (result.Success) {
+                        alert("Successfully send activation code to " + $("#EmailResend").val());
+                    } else {
+                        alert(result.ExceptionMessage);
+                    }
+                    $("#resendActivationWindow").data("kendoWindow").close();
+                },
+                error: function (err) {
+                    $("#btnResendActivationCode").removeAttr("disabled");
+                    $("#btnResendActivationCode").removeClass("k-state-disabled");
+                    $("#btnResendActivationCode").text("Submit");
+                    alert(err);
+                    $("#resendActivationWindow").data("kendoWindow").close();
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,27 @@
+﻿body {
+    padding-top: 40px;
+    color: #000;
+}
+
+
+#cs-title  {
+    color: #000;
+}                 
+
+.div-table {
+    display: table;
+    width: auto;
+    border-spacing: 5px; /*cellspacing:poor IE support for  this*/
+}
+
+.div-table-row {
+    display: table-row;
+    width: auto;
+    clear: both;
+}
+
+.div-table-col {
+    float: left; /*fix for  buggy browsers*/
+    display: table-column;
+    padding: 10px;
+}

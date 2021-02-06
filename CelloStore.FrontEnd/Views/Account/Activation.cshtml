@@ -1,0 +1,62 @@
+﻿<div class="container">
+    <div class="page-header">
+        <h4><i class="fa fa-check-square-o"></i> Account activation</h4>
+    </div>
+
+    <div class="alert alert-info">
+        Your account must be activated first before shopping. Please check your mailbox for activation code.
+    </div>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new {id = "regForm", name = "regForm"}))
+    {
+        @Html.ValidationSummary()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">Email :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBox().Name("Email").HtmlAttributes(new {style = "width:250px;"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Activation Code :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBox().Name("ActivationCode").HtmlAttributes(new {style = "width:400px;"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <button type="submit" id="btnActivation" class="k-button"><i class="fa fa-check-circle-o"></i> Activate My Account</button>
+                    <button type="button" id="btnResendActivation" class="k-button"><i class="fa fa-send-o"></i> Resend Activation Code</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div id="resendActivationWindow"></div>
+
+<script>
+    $(function() {
+        var windowOptions = {
+            visible: false,
+            animation: false,
+            width: 400,
+            height: 150,
+            iframe: false,
+            modal: true,
+            title: "Resend Activation Code"
+        };
+        $("#resendActivationWindow").kendoWindow(windowOptions);
+
+        $("#btnResendActivation").click(function (e) {
+            e.preventDefault();
+            $("#resendActivationWindow").data("kendoWindow").refresh({
+                url: "@Url.Action("ResendActivationCode", "Account", new { area = String.Empty })"
+            }).center().open();
+        });
+
+    });
+
+</script>

@@ -1,0 +1,84 @@
+﻿@model CelloStore.ViewModels.MyAccountViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="page-header">
+            <h3><i class="fa fa-user"></i> My Account</h3>
+        </div>
+    </div>
+    
+    @if (TempData["EditSuccess"] != null)
+    {
+        <div class="alert alert-success">Account Information has been saved.</div>
+    }
+    
+    <div class="row">
+        <div class="col-md-2 text-right">User Name : </div>
+        <div class="col-md-6">@Html.DisplayFor(m => m.PersonInfo.Email) </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-right">Name : </div>
+        <div class="col-md-6">@Html.DisplayFor(m => m.PersonInfo.FirstName)&nbsp;@Html.DisplayFor(m => m.PersonInfo.LastName) </div>
+    </div>
+
+    
+    <div class="row">
+        <div class="col-md-2 text-right">Gender : </div>
+        <div class="col-md-6">@(Model.PersonInfo.Gender.GetValueOrDefault() == 'M' ? "Male" : "Female") </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2 text-right">Address : </div>
+        <div class="col-md-6">@Html.DisplayFor(m => m.PersonInfo.Address) </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2 text-right">City / State : </div>
+        <div class="col-md-6">@Html.DisplayFor(m => m.PersonInfo.City) &nbsp;&nbsp; @Html.DisplayFor(m => m.PersonInfo.State)</div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2 text-right">Postal Code : </div>
+        <div class="col-md-6">@Html.DisplayFor(m => m.PersonInfo.PostalCode)</div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2 text-right">Phone Number : </div>
+        <div class="col-md-6">@Html.DisplayFor(m => m.PersonInfo.PhoneNumber)</div>
+    </div>
+    
+    <br/>
+    
+    <div class="row">
+        <div class="col-md-2 text-right">Account Activated Since : </div>
+        <div class="col-md-6">@Model.PersonInfo.ActivatedWhen.GetValueOrDefault().ToString("dddd, dd MMMM yyyy HH:mm:ss")</div>
+    </div>
+
+    
+    <div class="row">
+        <div class="col-md-2 text-right">Role : </div>
+        <div class="col-md-6">@Html.DisplayFor(m => m.PersonInfo.Role.Name)</div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2 text-right">Last Log On : </div>
+        <div class="col-md-6">@Model.PersonInfo.LastLogOn.GetValueOrDefault().ToString("dddd, dd MMMM yyyy HH:mm:ss")</div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2 text-right">Last Change Password : </div>
+        <div class="col-md-6">@Model.PersonInfo.LastChangePassword.GetValueOrDefault().ToString("dddd, dd MMMM yyyy HH:mm:ss")</div>
+    </div>
+
+    
+    <br/>
+    <div class="row">
+        <div class="col-md-2 text-right"></div>
+        <div class="col-md-6">
+            @Html.ActionLink("Edit Account Information", "Edit", null, new { @class="btn btn-primary"}) 
+            &nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Change Password", "ChangePassword", "Account", null, new { @class="btn btn-primary"})
+            
+        </div>
+    </div>
+</div>

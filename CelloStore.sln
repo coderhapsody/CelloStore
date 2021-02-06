@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelloStore.FrontEnd", "CelloStore.FrontEnd\CelloStore.FrontEnd.csproj", "{2F631D25-D3F2-450D-B0F2-FF40FB6C7A87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelloStore.Providers", "CelloStore.Providers\CelloStore.Providers.csproj", "{C6FDBFE8-D7F6-49AB-8E7D-A70EBA105FA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelloStore.Data", "CelloStore.Data\CelloStore.Data.csproj", "{DD8F0BD3-9AFF-48A9-AEE3-81A2D6C5509E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelloStore.ViewModels", "CelloStore.ViewModels\CelloStore.ViewModels.csproj", "{58D4BEB7-453E-4AD5-ADF9-2307BAD10D23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelloStore.Utilities", "CelloStore.Utilities\CelloStore.Utilities.csproj", "{34FFBDF3-41C2-4886-97E5-A6A8EA9D408B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://benecello.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CelloStore.Data\\CelloStore.Data.csproj
+		SccProjectName1 = CelloStore.Data
+		SccLocalPath1 = CelloStore.Data
+		SccProjectUniqueName2 = CelloStore.FrontEnd\\CelloStore.FrontEnd.csproj
+		SccProjectName2 = CelloStore.FrontEnd
+		SccLocalPath2 = CelloStore.FrontEnd
+		SccProjectUniqueName3 = CelloStore.Providers\\CelloStore.Providers.csproj
+		SccProjectName3 = CelloStore.Providers
+		SccLocalPath3 = CelloStore.Providers
+		SccProjectUniqueName4 = CelloStore.Utilities\\CelloStore.Utilities.csproj
+		SccProjectName4 = CelloStore.Utilities
+		SccLocalPath4 = CelloStore.Utilities
+		SccProjectUniqueName5 = CelloStore.ViewModels\\CelloStore.ViewModels.csproj
+		SccProjectName5 = CelloStore.ViewModels
+		SccLocalPath5 = CelloStore.ViewModels
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F631D25-D3F2-450D-B0F2-FF40FB6C7A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F631D25-D3F2-450D-B0F2-FF40FB6C7A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F631D25-D3F2-450D-B0F2-FF40FB6C7A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F631D25-D3F2-450D-B0F2-FF40FB6C7A87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6FDBFE8-D7F6-49AB-8E7D-A70EBA105FA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6FDBFE8-D7F6-49AB-8E7D-A70EBA105FA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6FDBFE8-D7F6-49AB-8E7D-A70EBA105FA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6FDBFE8-D7F6-49AB-8E7D-A70EBA105FA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD8F0BD3-9AFF-48A9-AEE3-81A2D6C5509E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD8F0BD3-9AFF-48A9-AEE3-81A2D6C5509E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD8F0BD3-9AFF-48A9-AEE3-81A2D6C5509E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD8F0BD3-9AFF-48A9-AEE3-81A2D6C5509E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D4BEB7-453E-4AD5-ADF9-2307BAD10D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D4BEB7-453E-4AD5-ADF9-2307BAD10D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D4BEB7-453E-4AD5-ADF9-2307BAD10D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D4BEB7-453E-4AD5-ADF9-2307BAD10D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34FFBDF3-41C2-4886-97E5-A6A8EA9D408B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34FFBDF3-41C2-4886-97E5-A6A8EA9D408B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34FFBDF3-41C2-4886-97E5-A6A8EA9D408B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34FFBDF3-41C2-4886-97E5-A6A8EA9D408B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

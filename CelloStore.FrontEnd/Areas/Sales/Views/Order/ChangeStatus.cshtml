@@ -1,0 +1,101 @@
+﻿@model CelloStore.ViewModels.Sales.Order.ChangeStatusViewModel
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmChangeStatus", name = "frmChangeStatus" }))
+{
+    <div style="width: 80%;">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table borderless">
+                    <tbody>
+                        <tr>
+                            <td>Current Status: </td>
+                            <td>
+                                @Model.CurrentStatus
+                            @Html.HiddenFor(m => m.CurrentStatusId)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>New Status: </td>
+                        <td>
+                            @(Html.Kendo()
+                                  .DropDownListFor(m => m.NewStatusId)
+                                  .DataSource(ds => ds.Read("GetOrderStatuses", "Order", new { area = "Sales" }))
+                                  .DataTextField("Name").DataValueField("Id")
+                                  .OptionLabel("Select New Status").Value("-2")
+              .Events(ev => ev.Change("order.onSelectedStatusChanged"))
+                                  )
+                            <br/><br/>
+                            @Html.Kendo().CheckBoxFor(m => m.SendMail).Label("Send Mail Notification to Customer") 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Notes</td>
+                        <td>@Html.TextAreaFor(m => m.Notes, new { style = "height:150px; width: 400px;" })</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="button" class="k-button" id="btnSubmitStatus">Submit</button>
+                            <button type="button" class="k-button" id="btnCloseWindow">Close</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+    @Html.HiddenFor(m => m.OrderId)
+}
+
+
+<script>
+    var changeStatus = (function (changeStatus) {
+
+        changeStatus.submitStatus = function (e) {
+            e.preventDefault();
+
+            var currentStatusId = $("#CurrentStatusId").val();
+            var newStatusId = $("#NewStatusId").val();            
+            if (currentStatusId == newStatusId) {
+                alert("New status must be different than current status");
+                return;
+            }
+            $(this).attr("disabled", "disabled");
+            $.ajax({
+                url: "@Url.Action("ChangeStatus")",
+                data: $("#frmChangeStatus").serialize(),
+                type: "POST",
+                success: function (result) {
+                    $(this).removeAttr("disabled");
+                    order.refreshOrderHistory();
+                    order.refreshOrderStatus();
+                    changeStatus.closeWindow(e);                    
+                },
+                error: function (err) {
+                    alert(err);
+                    $(this).removeAttr("disabled");
+                }
+
+            });
+        };
+
+        changeStatus.closeWindow = function (e) {
+            e.preventDefault();
+            $("#changeStatusWindow").data("kendoWindow").close();
+        };
+
+        return changeStatus;
+    })(changeStatus || {});
+
+
+    $(function () {
+        $("#btnCloseWindow").click(changeStatus.closeWindow);
+        $("#btnSubmitStatus").click(changeStatus.submitStatus);
+        $("#Notes").kendoEditor({
+            tools: []
+        });
+    });
+</script>

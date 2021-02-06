@@ -1,0 +1,98 @@
+﻿@model CelloStore.ViewModels.MyAccountEditViewModel
+
+
+<div class="container">
+    <div class="container">
+        <div class="page-header">
+            <h4><i class="fa fa-user"></i> Update Account Information</h4>
+        </div>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frm", name = "frm" }))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary()
+
+
+            <div class="form-group">
+                <div class="col-md-2">Email :</div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(m => m.Email)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-2">Name :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.FirstName).HtmlAttributes(new { placeholder = "First Name" })
+                    @Html.Kendo().TextBoxFor(m => m.LastName).HtmlAttributes(new { placeholder = "Last Name" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Address :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.Address).HtmlAttributes(new { placeholder = "Address", style = "width:600px" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.City).HtmlAttributes(new { placeholder = "City" })
+                    @Html.Kendo().TextBoxFor(m => m.State).HtmlAttributes(new { placeholder = "State" })
+                    @Html.Kendo().TextBoxFor(m => m.PostalCode).HtmlAttributes(new { placeholder = "Postal Code" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Phone Number :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.PhoneNumber)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Gender :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().RadioButtonFor(m => m.Gender).Value("M").Label("Male").Checked(true)
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.Kendo().RadioButtonFor(m => m.Gender).Value("F").Label("Female")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Birthday :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().DatePickerFor(m => m.BirthDate)
+                </div>
+            </div>
+
+            @Html.HiddenFor(m => m.Email)
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <button type="submit" id="btnSubmit" name="btnSubmit" value="Submit" class="btn btn-default"><i class="fa fa-save"></i> Save</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="@Url.Action("Index", "Account")" class="k-button"><i class="fa fa-undo"></i> Back to My Account</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<script>
+    $(function () {
+        $("#btnSubmit").click(function (e) {
+            e.preventDefault();
+            var validator = $("#frm").kendoValidator().data("kendoValidator");
+            if (validator.validate()) {
+                $("#frm").submit();
+            }
+        });
+
+        $("#FirstName").focus();
+    });
+</script>

@@ -1,0 +1,65 @@
+﻿@model CelloStore.ViewModels.Sales.OrderStatus.EditViewModel
+
+
+<div class="container">
+    <div class="page-header">
+        <h4>Order Status</h4>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmOrderStatus", name = "frmOrderStatus" }))
+    {
+        @Html.ValidationSummary(false)
+
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.Name)</div>
+                <div class="col-md-3">@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })</div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.EmailTemplate)</div>
+                <div class="col-md-8">
+                    @Html.Kendo().EditorFor(m => m.EmailTemplate)<br />
+                    @Html.Kendo().CheckBoxFor(m => m.SendMail).Label("Send Mail Notification")
+                    <br /><small>
+                        <b>Available Tokens:</b> <br /><ul>
+                            @{
+        var assembly = System.Reflection.Assembly.Load("CelloStore.ViewModels");
+
+        foreach (var prop in assembly.GetType("CelloStore.ViewModels.MailTemplate.OrderMailViewModel").GetProperties())
+        {
+            <li>@prop.Name</li>
+        }
+                            }
+                        </ul>
+
+                    </small>                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <button type="submit" id="btnSave" name="btnSave" class="k-button"><span class="fa fa-save"></span> Save</button>
+                    <a href="@Url.Action("Index")" class="k-button"><span class="fa fa-undo"></span> Back to List</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(function () {
+        $("#Name").focus();
+
+        $("#frmOrderStatus").submit(function (e) {
+            $("#frmOrderStatus").kendoValidator();
+            var validator = $("#frmOrderStatus").data("kendoValidator");
+            if (!validator.validate()) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+</script>
+

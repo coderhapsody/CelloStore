@@ -1,0 +1,14 @@
+﻿<ul class="nav navbar-nav">
+    <li>
+        <a href="@Url.RouteUrl("Article", new { urlToken = "CaraPesan"})">Cara memesan</a>
+    </li>
+    <li>
+        <a href="@Url.RouteUrl("Article", new { urlToken = "FAQ"})">FAQ</a>
+    </li>
+    <li>
+        <a href="@Url.RouteUrl("Article", new { urlToken = "ContactUs"})">Hubungi Kami</a>
+    </li>
+    <li>
+        <a href="@Url.Action("PaymentConfirmation", "Shopping", new {area = String.Empty})">Konfirmasi Pembayaran</a>        
+    </li>
+</ul>

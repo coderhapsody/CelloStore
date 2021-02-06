@@ -1,0 +1,44 @@
+﻿@model CelloStore.ViewModels.Administration.Role.CreateEditViewModel
+
+
+<div class="container">
+    <div class="page-header">
+        <h4>Role</h4>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new{ id="frmRole", name="frmRole"}))
+    {
+        @Html.ValidationSummary()
+        
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.Name)</div>
+                <div class="col-md-4">@Html.TextBoxFor(m => m.Name, new { @class="form-control"})</div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <button type="submit" id="btnSave" name="btnSave" class="k-button"><span class="fa fa-save"></span> Save</button>
+                    <a href="@Url.Action("Index")" class="k-button"><span class="fa fa-undo"></span> Back to List</a>
+                </div>
+            </div>
+        </div>
+   }
+</div>
+
+<script>
+    $(function () {
+        
+        $("#Name").focus();
+
+        $("#btnSave").click(function(e) {
+            e.preventDefault();
+            var validator = $("#frmRole").kendoValidator().data("kendoValidator");
+
+            if (validator.validate()) {
+                $("#frmRole").submit();
+            }
+        });
+    });
+</script>

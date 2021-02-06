@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{58D4BEB7-453E-4AD5-ADF9-2307BAD10D23}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CelloStore.ViewModels</RootNamespace>
+    <AssemblyName>CelloStore.ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.OpenAccess, Version=2015.1.225.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2015.1.225.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountInfoViewModel.cs" />
+    <Compile Include="Administration\Person\EditViewModel.cs" />
+    <Compile Include="Administration\Person\IndexViewModel.cs" />
+    <Compile Include="Administration\Person\ListPersonViewModel.cs" />
+    <Compile Include="Administration\Role\CreateEditViewModel.cs" />
+    <Compile Include="Administration\Role\IndexViewModel.cs" />
+    <Compile Include="Administration\Role\ListRoleViewModel.cs" />
+    <Compile Include="Administration\Role\RoleViewModel.cs" />
+    <Compile Include="Administration\System\ConfigurationViewModel.cs" />
+    <Compile Include="AjaxViewModel.cs" />
+    <Compile Include="Base\IViewModel.cs" />
+    <Compile Include="CartViewModel.cs" />
+    <Compile Include="Catalog\Area\ListAreaViewModel.cs" />
+    <Compile Include="Catalog\Category\ListCategoryViewModel.cs" />
+    <Compile Include="Catalog\Product\CreateEditViewModel.cs" />
+    <Compile Include="Catalog\Product\IndexViewModel.cs" />
+    <Compile Include="Catalog\Product\ListProductViewModel.cs" />
+    <Compile Include="CategoryViewModel.cs" />
+    <Compile Include="CheckOutSuccessViewModel.cs" />
+    <Compile Include="CheckOutViewModel.cs" />
+    <Compile Include="Common\DropDownViewModel.cs" />
+    <Compile Include="ForgetPasswordViewModel.cs" />
+    <Compile Include="MailTemplate\ForgetPasswordMailViewModel.cs" />
+    <Compile Include="MailTemplate\OrderMailViewModel.cs" />
+    <Compile Include="MyAccountEditViewModel.cs" />
+    <Compile Include="MyAccountViewModel.cs" />
+    <Compile Include="OrderDetailViewModel.cs" />
+    <Compile Include="OrderHistoryDetailViewModel.cs" />
+    <Compile Include="OrderHistoryViewModel.cs" />
+    <Compile Include="OrderStatusHistoryViewModel.cs" />
+    <Compile Include="Page\Article\CreateEditViewModel.cs" />
+    <Compile Include="Page\Article\IndexViewModel.cs" />
+    <Compile Include="Page\Article\ListArticleViewModel.cs" />
+    <Compile Include="Page\EmailTemplate\EditViewModel.cs" />
+    <Compile Include="Page\EmailTemplate\IndexViewModel.cs" />
+    <Compile Include="Page\EmailTemplate\ListEmailTemplateViewModel.cs" />
+    <Compile Include="PaymentConfirmationViewModel.cs" />
+    <Compile Include="ProductViewModel.cs" />
+    <Compile Include="Reports\DeliveryOrderDetailViewModel.cs" />
+    <Compile Include="Reports\DeliveryOrderViewModel.cs" />
+    <Compile Include="Sales\AddressType\CreateEditViewModel.cs" />
+    <Compile Include="Sales\AddressType\IndexViewModel.cs" />
+    <Compile Include="Sales\AddressType\ListAddressTypeViewModel.cs" />
+    <Compile Include="Sales\DeliveryTime\CreateEditViewModel.cs" />
+    <Compile Include="Sales\DeliveryTime\IndexViewModel.cs" />
+    <Compile Include="Sales\DeliveryTime\ListAddressTypeViewModel.cs" />
+    <Compile Include="Sales\OrderStatus\EditViewModel.cs" />
+    <Compile Include="Sales\OrderStatus\IndexViewModel.cs" />
+    <Compile Include="Sales\Order\ChangeStatusViewModel.cs" />
+    <Compile Include="Sales\Order\CreateEditViewModel.cs" />
+    <Compile Include="Sales\Order\IndexViewModel.cs" />
+    <Compile Include="Sales\Order\ListOrderViewModel.cs" />
+    <Compile Include="Sales\PaymentMethod\CreateEditViewModel.cs" />
+    <Compile Include="Sales\PaymentMethod\IndexViewModel.cs" />
+    <Compile Include="Catalog\Tag\CreateEditViewModel.cs" />
+    <Compile Include="Catalog\Tag\IndexViewModel.cs" />
+    <Compile Include="Catalog\Area\CreateEditViewModel.cs" />
+    <Compile Include="Catalog\Area\IndexViewModel.cs" />
+    <Compile Include="Catalog\Category\CreateEditViewModel.cs" />
+    <Compile Include="Catalog\Category\IndexViewModel.cs" />
+    <Compile Include="Administration\System\ChangePasswordViewModel.cs" />
+    <Compile Include="ArticleViewModel.cs" />
+    <Compile Include="Base\BasePageableViewModel.cs" />
+    <Compile Include="Base\BaseRowDataViewModel.cs" />
+    <Compile Include="Base\BaseViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationViewModel.cs" />
+    <Compile Include="Sales\PaymentMethod\ListPaymentMethodViewModel.cs" />
+    <Compile Include="Page\Showcase\ListShowcaseViewModel.cs" />
+    <Compile Include="Page\Showcase\CreateEditViewModel.cs" />
+    <Compile Include="Page\Showcase\IndexViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CelloStore.Data\CelloStore.Data.csproj">
+      <Project>{dd8f0bd3-9aff-48a9-aee3-81a2d6c5509e}</Project>
+      <Name>CelloStore.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

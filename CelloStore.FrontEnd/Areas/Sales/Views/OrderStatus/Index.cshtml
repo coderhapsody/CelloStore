@@ -1,0 +1,28 @@
+﻿@model CelloStore.ViewModels.Sales.OrderStatus.IndexViewModel
+
+<div class="container">
+    <div class="page-header">
+        <h4>Order Status</h4>
+    </div>
+
+    <div class="container-form">
+        @using (Html.BeginForm())
+        {
+            @(Html.Kendo().Grid(Model.List).Name("Grid").EnableCustomBinding(true).Columns(
+                  col =>
+                  {
+                      col.Bound(m => m.Id).Width(50);
+                      col.Bound(m => m.Name);
+                      col.Bound(m => m.SendMail);
+                      col.Template(@<text></text>).ClientTemplate(String.Format("<a class='k-button' href='{0}/#=Id#'><i class='fa fa-edit'></i> Edit</a>", Url.Action("Edit"))).Width(100);
+                  })
+                      .Pageable()
+                      .Filterable()
+                      .DataSource(ds => ds.Ajax().Read("List", "OrderStatus", new { area = "Sales" }))
+                      .PrefixUrlParameters(false)
+
+                      .Sortable(s => s.SortMode(GridSortMode.SingleColumn))
+            )
+        }
+    </div>
+</div>

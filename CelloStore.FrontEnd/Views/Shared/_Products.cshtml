@@ -1,0 +1,71 @@
+﻿
+@model CelloStore.ViewModels.ProductViewModel
+
+@if (Model != null && Model.CurrentCategory != null)
+{
+    <div class="recomended_items">
+        <h2 class="title text-center">@Model.CurrentCategory.Name</h2>
+    </div>
+}
+
+@if (Model != null && Model.Products != null)
+{
+    if(Model.Products.Any())
+    {
+        <div class="category-tab">
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="products">
+                    @foreach(var product in Model.Products)
+                    {
+                        <div class="col-sm-3">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="@Url.Content("~/Media/Products/" + product.Photo)" alt=""/>
+                                        <p>@product.Name</p>
+                                        <h2 style="font-size:18px">@product.UnitPrice.ToString("Rp ###,##0")</h2>
+                                        <a href="@Url.Action("ProductDetail", "Shopping", new {areaName = TempData["areaName"], id = product.Id})" class="btn btn-default">Detail</a>
+                                        <a data-productcode="@product.Code" href="#" class="addToCart btn btn-default">Add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!--/category-tab-->
+    }
+    else
+    {
+        if(Model.CurrentCategory != null)
+        {
+            <div class="alert alert-info text-center">No Products in @Model.CurrentCategory.Name </div>
+        }
+    }
+}
+
+@if (Model != null && Model.PageCount > 0)
+{
+    <div class="text-center">
+        <ul class="pagination">
+            @for (var page = 1; page <= Model.PageCount; page++)
+            {
+                <li><a href="?page=@page" data-original-title="" title="">@page</a></li>
+            }
+        </ul>
+    </div>
+}
+
+<script>
+    $(".addToCart").click(function (e) {
+        e.preventDefault();
+
+        var productCode = $(this).attr("data-productcode");
+        var qty = 1;
+        var areaName = $("#areaName").data("kendoDropDownList").text();
+        var ajaxUrl = appVars.addToCartUrl;
+        var countAjaxUrl = appVars.cartUrl;
+        cart.addToCart(productCode, qty, areaName, ajaxUrl, countAjaxUrl);
+    });
+</script>

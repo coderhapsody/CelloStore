@@ -1,0 +1,27 @@
+﻿@model CelloStore.ViewModels.Page.EmailTemplate.IndexViewModel
+
+<div class="container">
+    <div class="page-header">
+        <h4>Email Template</h4>
+    </div>
+
+    <div class="container-form">
+        @using (Html.BeginForm())
+        {
+            @(Html.Kendo().Grid(Model.List).Name("Grid").EnableCustomBinding(true).Columns(
+                  col =>
+                  {
+                      @*col.Template(@<text></text>).ClientTemplate("<input type='checkbox' id='chkDelete' name='chkDelete' value='#=Id#' />")
+                          .Width(50).HtmlAttributes(new { style = "text-align:center;" });*@
+                      col.Bound(m => m.Name);
+                      col.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Edit", new { id = "#=Id#" }) + "' class='k-button'><i class='fa fa-edit'></i> Edit</a>").Width(100).Title("");
+                  })
+                    .Pageable()
+                    .Filterable()
+                    .DataSource(ds => ds.Ajax().Read("List", "EmailTemplate", new { area = "Page" }))
+                    .PrefixUrlParameters(false)
+                    .Sortable(s => s.SortMode(GridSortMode.SingleColumn))
+)
+        }
+    </div>
+</div>

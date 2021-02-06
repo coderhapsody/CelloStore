@@ -1,0 +1,40 @@
+﻿@model CelloStore.ViewModels.Catalog.Product.IndexViewModel
+
+<div class="container">
+    <div class="page-header">
+        <h4>Product</h4>
+    </div>
+
+    <div class="container-form">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <p>
+                <a href="@Url.Action("Create")" class="k-button k-button-icon"><span class="fa fa-plus"></span> Add New</a>
+                <button type="submit" class="k-button" id="btnDelete" name="btnDelete"><span class="fa fa-eraser"></span> Delete</button>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @*@Html.Kendo().TextBoxFor(m => m.Search)
+                <button type="submit" class="k-button" id="btnSearch" name="btnSearch"><span class="fa fa-search"></span> Search</button>*@
+            </p>
+            @(Html.Kendo().Grid(Model.List).Name("Grid").EnableCustomBinding(true).Columns(
+                  col =>
+                  {
+                      col.Template(@<text></text>).ClientTemplate("<input type='checkbox' id='chkDelete' name='chkDelete' value='#=Id#' />")
+                          .Width(50).HtmlAttributes(new { style = "text-align:center;" });
+                      col.Bound(m => m.Code);
+                      col.Bound(m => m.Name);
+                      //col.Bound(m => m.CategoryName);
+                      col.Bound(m => m.UnitPrice).Format("{0:###,##0}");
+                      col.Bound(m => m.IsActive);
+                      col.Template(@<text></text>).ClientTemplate(String.Format("<a class='k-button' href='{0}/#=Id#'><i class='fa fa-edit'></i> Edit</a>", Url.Action("Edit"))).Width(100);
+                  })
+            .Pageable()
+            .Filterable()            
+            .DataSource(ds => ds.Ajax().Read("List", "Product", new {area = "Catalog"}).ServerOperation(true) )
+            .PrefixUrlParameters(false)
+            .Sortable(s => s.SortMode(GridSortMode.SingleColumn))
+            )
+        }
+    </div>
+</div>

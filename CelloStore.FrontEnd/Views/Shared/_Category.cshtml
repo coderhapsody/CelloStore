@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CelloStore.ViewModels.CategoryViewModel>
+
+<div class="left-sidebar">
+    @*<h2>Category</h2>*@
+    <div class="panel-group category-products" id="flowerproduct">
+        <!--category-productsr-->
+    
+        @foreach (var rootCategory in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#flowerproduct" href="#@rootCategory.RootCategory.Name.Replace(" ","")">
+                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                            @rootCategory.RootCategory.Name
+                        </a>
+                    </h4>
+                </div>                
+                <div id="@rootCategory.RootCategory.Name.Replace(" ","")" class="panel-collapse collapse @(Convert.ToInt32(ViewContext.RouteData.Values["parentCategoryId"])==rootCategory.RootCategory.Id ? "in" : String.Empty)">
+                    <div class="panel-body">
+                        <ul>    
+                            @foreach(var childCategory in rootCategory.ChildCategories)
+                            {
+                                <li><a href="@Url.Action("Catalog", "Shopping", new { areaName = TempData["areaName"], categoryName=childCategory.Name.Replace(" ", String.Empty) })">@childCategory.Name </a></li>                             
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }           
+    </div><!--/category-products-->
+
+    <div class="shipping text-center">
+        <!--shipping-->
+        <img src="@Url.Content("~/images/home/shipping.jpg")" alt="" />
+    </div><!--/shipping-->
+
+</div>

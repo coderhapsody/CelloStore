@@ -1,0 +1,41 @@
+﻿@model CelloStore.ViewModels.CheckOutSuccessViewModel
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h4>Check Out Success</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                Your order has been submitted. Below is the detail :
+                <table class="table table-striped">
+                    <tr>
+                        <td style="width:250px;">Order Tracking Number: </td>
+                        <td>@Model.SubmittedOrder.OrderNo </td>
+                    </tr>
+                    <tr>
+                        <td>Order Date: </td>
+                        <td>@Model.SubmittedOrder.OrderDate.ToString("dddd, dd MMMM yyyy") </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Submitted Date: </td>
+                        <td>@Model.SubmittedOrder.CreatedWhen.ToString("dddd, dd MMMM yyyy HH:mm:ss") </td>
+                    </tr>
+                </table>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                You can view all of your submitted orders at @Html.ActionLink("Order History", "OrderHistory")
+            </p>
+        </div>
+    </div>
+</div>

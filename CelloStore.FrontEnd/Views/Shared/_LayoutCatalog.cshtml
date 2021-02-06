@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section showcase {
+    @RenderSection("showcase", false)
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                @Html.Action("Area", "Shopping", new { areaName = TempData["areaName"] })
+                @Html.Action("Category", "Shopping", new { areaName = TempData["areaName"] })
+            </div>
+            <div class="col-sm-9 padding-right">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,57 @@
+﻿@model CelloStore.ViewModels.Administration.Person.IndexViewModel
+
+<div class="container">
+    <div class="page-header">
+        <h4>People</h4>
+    </div>
+
+    <div class="container-form">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <p>
+                <button type="submit" class="k-button" id="btnDelete" name="btnDelete"><span class="fa fa-eraser"></span> Delete</button>
+            </p>
+            @(Html.Kendo().Grid(Model.List).Name("Grid").EnableCustomBinding(true).Columns(
+                  col =>
+                  {
+                      col.Template(@<text></text>).ClientTemplate(@"#if(RoleId!=1) { #<input type='checkbox' id='chkDelete' name='chkDelete' value='#=Id#' /> #}#")
+                          .Width(50).HtmlAttributes(new { style = "text-align:center;" });
+                      col.Bound(m => m.Name);
+                      col.Bound(m => m.Email);
+                      col.Bound(m => m.PhoneNumber);
+                      col.Bound(m => m.RoleName);
+                      //col.Bound(m => m.LastChangePassword).Format("{0:dd-MMM-yyyy HH:mm:ss}");
+                      col.Bound(m => m.LastLogOn).Format("{0:dd-MMM-yyyy HH:mm:ss}");
+                      col.Bound(m => m.IsActive);
+                      col.Bound(m => m.IsVerified);
+                      col.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("ResetPassword", new { id = "#=Id#" }) + "' class='k-button reset-password' data-id='#=Id#' data-email='#=Email#'><i class='fa fa-edit'></i> Reset Password</a>").Width(100).Title("");
+                      col.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Edit", new { id = "#=Id#" }) + "' class='k-button'><i class='fa fa-edit'></i> Edit</a>").Width(100).Title("");
+                  })
+                .Pageable()
+                .Filterable()
+                .DataSource(ds => ds.Ajax().Read("List", "Person", new { area = "Administration" }))
+                .Sortable(s => s.SortMode(GridSortMode.SingleColumn))
+            )
+        }
+    </div>
+</div>
+
+<script>
+    $(function () {
+        
+        $(".reset-password").click(function (e) {            
+            e.preventDefault();
+            var email = $(this).attr("data-email");
+            if (confirm('Are you sure want to reset password for ' + email)) {
+                $.ajax({
+                        
+                });
+                
+                $.ajax({
+
+                });
+            }
+        });
+    });
+</script>

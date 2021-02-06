@@ -1,0 +1,141 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@model CelloStore.ViewModels.RegistrationViewModel
+
+<div class="container">
+    <div class="page-header">
+        <h4><i class="fa fa-check-square-o"></i> Registration</h4>
+    </div>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "regForm", name = "regForm" }))
+    {
+        @Html.ValidationSummary()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">Name :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.FirstName).HtmlAttributes(new { placeholder = "First Name" })
+                    @Html.Kendo().TextBoxFor(m => m.LastName).HtmlAttributes(new { placeholder = "Last Name" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Address :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.Address).HtmlAttributes(new { placeholder = "Address", style = "width:600px" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.City).HtmlAttributes(new { placeholder = "City" })
+                    @Html.Kendo().TextBoxFor(m => m.State).HtmlAttributes(new { placeholder = "State" })
+                    @Html.Kendo().TextBoxFor(m => m.PostalCode).HtmlAttributes(new { placeholder = "Postal Code" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Phone Number :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.PhoneNumber)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Gender :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().RadioButtonFor(m => m.Gender).Value("M").Label("Male").Checked(true)
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.Kendo().RadioButtonFor(m => m.Gender).Value("F").Label("Female")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Birthday :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().DatePickerFor(m => m.BirthDate)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-2">Email :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.Email).HtmlAttributes(new { type = "email", @style = "width:300px;" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Password :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.Password).HtmlAttributes(new { type = "password" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">Confirm Password :</div>
+                <div class="col-md-10">
+                    @Html.Kendo().TextBoxFor(m => m.ConfirmPassword).HtmlAttributes(new { type = "password" })
+                    <span class="text text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
+                    @*<span class="k-invalid-msg" data-for="ConfirmPassword"></span>*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    @{
+        var captcha = Html.Captcha("Refresh", "Input", 5, "Is required field.", false);
+        @captcha
+                        @Html.ValidationMessage(captcha.BuildInfo.InputElementId)
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <input type="submit" id="btnSubmit" name="btnSubmit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<script>
+    $(function () {
+        $("#btnSubmit").removeAttr("disabled");
+        $("#btnSubmit").removeClass("k-state-disabled");
+
+        $("#btnSubmit").click(function (e) {
+            var validatorOptions = {
+                rules: {
+                    verifyPasswords: function(input) {
+                        var ret = true;
+                        if (input.is("[name=ConfirmPassword]")) {
+                            ret = input.val() === $("#Password").val();
+                        }
+                        return ret;
+                    }
+                },
+                messages: {
+                    verifyPasswords: $("#ConfirmPassword").attr("data-val-equalto")
+                }
+            };
+
+            e.preventDefault();
+            
+            var validator = $("#regForm").kendoValidator(validatorOptions).data("kendoValidator");            
+            if (validator.validate()) {
+                $("#btnSubmit").attr("disabled", "disabled");
+                $("#btnSubmit").addClass("k-state-disabled");
+                $("#regForm").submit();
+            } 
+
+        });
+
+        $("#FirstName").focus();
+    });
+</script>

@@ -1,0 +1,144 @@
+﻿@model CelloStore.ViewModels.Administration.System.ConfigurationViewModel
+<div class="container">
+    <div class="page-header">
+        <h4><i class="fa fa-gears"></i> Configuration</h4>
+    </div>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id="frmConfig", name="frmConfig" }))
+    {
+        @Html.ValidationSummary()
+
+        @(Html.Kendo().TabStrip()
+              .Name("configurations")
+              .Animation(false)
+              .Items(tab =>
+              {
+                  tab.Add().Text("Mail").Selected(true)
+                      .Content(@<text>
+                                   <p>
+                                       <div class="form-horizontal">
+                                           <div class="form-group">
+                                               <div class="col-md-2">SMTP Server</div>
+                                               <div class="col-md-5">
+                                                   @Html.Kendo().TextBoxFor(m => m.SmtpServer).HtmlAttributes(new {style = "width:350px;"})
+                                               </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <div class="col-md-2">SMTP Port</div>
+                                               <div class="col-md-5">
+                                                   @Html.Kendo().NumericTextBoxFor(m => m.SmtpPort).Decimals(0).Format("###")
+                                               </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <div class="col-md-2">SMTP Authentication</div>
+                                               <div class="col-md-5">
+                                                   @(Html.Kendo().DropDownListFor(m => m.SmtpAuthentication).Items(items =>
+                                                     {
+                                                         items.Add().Text("Yes").Value(true.ToString());
+                                                         items.Add().Text("No").Value(false.ToString());
+                                                     }))
+                                               </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <div class="col-md-2">SMTP SSL Required</div>
+                                               <div class="col-md-5">
+                                                   @(Html.Kendo().DropDownListFor(m => m.SmtpSsl).Items(items =>
+                                                     {
+                                                         items.Add().Text("Yes").Value(true.ToString());
+                                                         items.Add().Text("No").Value(false.ToString());
+                                                     }))
+                                               </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <div class="col-md-2">SMTP User Name</div>
+                                               <div class="col-md-5">
+                                                   @Html.Kendo().TextBoxFor(m => m.SmtpUserName).HtmlAttributes(new {style = "width:350px;"})
+                                               </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <div class="col-md-2">SMTP Password</div>
+                                               <div class="col-md-5">
+                                                   @Html.Kendo().TextBoxFor(m => m.SmtpPassword)
+                                               </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <div class="col-md-2">System Sender Name</div>
+                                               <div class="col-md-5">
+                                                   @Html.Kendo().TextBoxFor(m => m.SystemSenderName)
+                                               </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <div class="col-md-2">System Sender Address</div>
+                                               <div class="col-md-5">
+                                                   @Html.Kendo().TextBoxFor(m => m.SystemSenderAddress).HtmlAttributes(new {style = "width:350px;"})
+                                               </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <div class="col-md-2"></div>
+                                               <div class="col-md-5">
+                                                   <button type="button" class="k-button" id="TestSendMail" name="TestSendMail"><i class="fa fa-envelope"></i> Test Send Mail</button>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </p>
+                                </text>);
+
+              }))
+        <br/>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <button type="submit" id="btnSave" name="btnSave" class="k-button"><span class="fa fa-save"></span> Save</button>
+                    &nbsp;&nbsp;&nbsp;
+                    @if(IsPost)
+                    {
+                        if(ViewBag.Success)
+                        {
+                            <div class="label label-success">Configurations have been saved.</div>
+                        }
+                        else
+                        {
+                            <div class="label label-danger">Failed to save configurations</div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $("#btnSave").click(function(e) {
+        e.preventDefault();
+
+        var validator = $("#frmConfig").kendoValidator().data("kendoValidator");
+        if (validator.validate()) {
+            $("#frmConfig").submit();
+        }
+    });
+
+    $("#TestSendMail").click(function(e) {
+        e.preventDefault();        
+        $("#TestSendMail").attr("disabled", "disabled");
+        $.ajax({
+            url: "@Url.Action("TestSendEmail")",
+            type: "POST",
+            success: function(result) {
+                alert(result);
+                $("#TestSendMail").removeAttr("disabled");
+            },
+            error: function(err) {
+                alert("ERROR: " + err);
+                $("#TestSendMail").removeAttr("disabled");
+            }
+        });
+    });
+</script>

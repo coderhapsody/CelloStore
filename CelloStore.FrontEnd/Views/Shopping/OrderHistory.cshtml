@@ -1,0 +1,76 @@
+﻿@model CelloStore.ViewModels.OrderHistoryViewModel
+<div class="container">
+    <div class="row">
+        <div class="page-header">
+            <h3>Riwayat Pemesanan</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                @(Html.Kendo().Grid(Model.Orders).Name("grid").EnableCustomBinding(true).Columns(
+                      col =>
+                      {
+                          col.Bound(m => m.OrderNo);
+                          col.Bound(m => m.OrderDate).Format("{0:ddd, dd-MMM-yyyy}");
+                          col.Bound(m => m.PersonName);
+                          col.Bound(m => m.OrderStatus);
+                          col.Bound(m => m.DeliveryDate).Format("{0:ddd, dd-MMM-yyyy}");
+                          col.Bound(m => m.DeliveryTimeName);
+                          col.Template(@<text></text>).ClientTemplate(String.Format("<a data-orderid='#=Id#' class='k-button orderDetail' name='orderDetail' href='{0}/#=Id#'><i class='fa fa-edit'></i> Detail</a>", Url.Action("OrderHistoryDetail"))).Width(120);
+                      })
+                      .Pageable()
+                      .Filterable()
+                      .DataSource(ds => ds.Ajax().Read("ListOrderHistory", "Shopping", new {area = "", personId = Model.PersonId}))
+                      .PrefixUrlParameters(false)
+
+                      .Sortable(s => s.SortMode(GridSortMode.SingleColumn))
+                      )
+            }
+        </div>
+    </div>
+</div>
+
+<div id="orderDetailWindow">
+    
+</div>
+
+<script>
+    $(function() {
+        $("#grid").on("click", ".orderDetail", function(e) {
+            e.preventDefault();
+
+            var orderId = $(e.target).attr("data-orderid");
+            $("#orderDetailWindow").data("kendoWindow").refresh({
+                url: "@Url.Action("OrderHistoryDetail")",                
+                data: {
+                    orderId: orderId
+                }
+            }).center().open();
+
+        });
+
+        var windowOptions = {
+            height: 500,
+            width: 1000,
+            modal: true,
+            visible: false,
+            title: "Order Detail"
+        };
+
+        $("#orderDetailWindow").kendoWindow(windowOptions);
+    });
+
+    function closeOrderHistoryDetailButtonClick() {
+        $("#orderDetailWindow").data("kendoWindow").close();
+    }
+
+
+    function orderHistoryParameters() {
+        return {
+            orderId: $("#SelectedOrder_Id").val()
+        }
+    }
+</script>

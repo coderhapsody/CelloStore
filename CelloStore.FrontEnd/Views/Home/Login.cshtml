@@ -1,0 +1,81 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header"><h4><i class="fa fa-sign-in"></i> Login</h4></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                <br />
+                <table class="table borderless">
+                    <tr>
+                        <td class="text-right">User Name :</td>
+                        <td>@Html.Kendo().TextBox().Name("UserName").HtmlAttributes(new { style = "width:250px;" })</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">Password :</td>
+                        <td>@Html.Kendo().TextBox().Name("Password").HtmlAttributes(new { style = "width:250px;", type = "password" })</td>
+                    </tr>
+                    <tr>
+
+                        <td></td>
+                        <td>@Html.Kendo().Button().Name("LoginButton").Icon("lock").Content("Login").Events(ev => ev.Click("LoginButtonClick"))</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="@Url.Action("ForgetPassword", "Home", new {area = String.Empty})">Forget Password</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="@Url.Action("ForgetPassword","Home", new{ area = String.Empty})">Account Activation</a>
+                        </td>
+                    </tr>
+                </table>
+                <br />                
+            }
+        </div>
+    </div>  
+</div>
+@Html.Hidden("ReturnUrl")
+
+<script>
+    $(function() {
+        $("#UserName").focus();
+    });
+    function LoginButtonClick(arg) {
+        arg.preventDefault();
+        var username = $("#UserName").val();
+        var password = $("#Password").val();
+        var returnUrl = $("#ReturnUrl").val();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Login", "Home")',
+            data: "UserName=" + username + "&Password=" + password,
+            success: function (result) {
+                if (result.Activated && result.Authenticated) {
+                    if(returnUrl == undefined)
+                        document.location.href = "@Url.Action("Index","Home")";
+                    else
+                        document.location.href = returnUrl;
+                } else if (result.Authenticated && !result.Activated) {
+                    document.location.href = "@Url.Action("Activation", "Account")";
+                }
+                else {
+                    alert("Invalid username or password");
+                    $("#UserName").val("");
+                    $("#Password").val("");
+                    $("#UserName").focus();
+                }
+            },
+            error: function (data) {
+                alert("Error when trying to log in");
+                console.log(data);
+            }
+        });
+    }
+</script>

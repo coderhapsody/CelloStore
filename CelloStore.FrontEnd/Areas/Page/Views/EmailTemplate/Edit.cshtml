@@ -1,0 +1,84 @@
+﻿@model CelloStore.ViewModels.Page.EmailTemplate.EditViewModel
+
+
+<div class="container">
+    <div class="page-header">
+        <h4>Email Template</h4>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmailTemplate", name = "frmEmailTemplate" }))
+    {
+        @Html.ValidationSummary()
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Name)
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.Name):</div>
+                <div class="col-md-4">@Html.DisplayFor(m => m.Name)</div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.Subject):</div>
+                <div class="col-md-4">@Html.Kendo().TextBoxFor(m => m.Subject).HtmlAttributes(new { style = "width:350px;" })</div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.Bcc):</div>
+                <div class="col-md-4">@Html.Kendo().TextBoxFor(m => m.Bcc).HtmlAttributes(new { style = "width:400px;" })</div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.Content):</div>
+                <div class="col-md-4">
+                    @Html.Kendo().EditorFor(m => m.Content).Encode(false).Tools(tool => tool.ViewHtml()).ImageBrowser(imageBrowser => imageBrowser
+          .Image("~/Content/UserFiles/Images/{0}")
+          .Read("Read", "ImageBrowser")
+          .Create("Create", "ImageBrowser")
+          .Destroy("Destroy", "ImageBrowser")
+          .Upload("Upload", "ImageBrowser")
+          .Thumbnail("Thumbnail", "ImageBrowser")
+      ).HtmlAttributes(new { style = "width: 740px;height:300px" }).Resizable()
+
+                    <br />
+                    <small>
+                        <b>Available Tokens:</b> <br /><ul>
+                            @{
+                                var assembly = System.Reflection.Assembly.Load("CelloStore.ViewModels");
+                                
+        foreach (var prop in assembly.GetType(Model.Tokens).GetProperties())
+        {
+            <li>@prop.Name</li>
+        }
+                            }
+                        </ul>
+
+                    </small>
+                    @Html.HiddenFor(m => m.Tokens)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <button type="submit" id="btnSave" name="btnSave" class="k-button"><span class="fa fa-save"></span> Save</button>
+                    <a href="@Url.Action("Index")" class="k-button"><span class="fa fa-undo"></span> Back to List</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(function () {
+        $("#btnSave").click(function (e) {
+            e.preventDefault();
+            var validator = $("#frmEmailTemplate").kendoValidator().data("kendoValidator");
+            if (validator.validate()) {
+                $("#frmEmailTemplate").submit();
+            }
+        });
+
+        $("#UrlToken").focus();
+    });
+</script>

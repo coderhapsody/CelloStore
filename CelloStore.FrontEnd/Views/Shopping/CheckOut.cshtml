@@ -1,0 +1,402 @@
+﻿@model CelloStore.ViewModels.CheckOutViewModel
+<div class="container">
+    <div class="page-header">
+        <h4><i class="fa fa-check"></i> Checkout</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <table>
+                @foreach (var cartItem in Model.Cart.OrderDetails)
+                {
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-12 text-primary">
+                                    @cartItem.ProductCode - @cartItem.ProductName
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Qty: @cartItem.Qty @@ @cartItem.UnitPrice.ToString("###,##0")
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Total: @((cartItem.Qty * cartItem.UnitPrice).ToString("###,##0"))
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                }
+                <tr>
+                    <td><hr /></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Delivery Date:</strong></td>
+                </tr>
+                <tr>
+                    <td>@Model.Cart.DeliveryDate.ToString("dddd, dd MMMM yyyy") </td>
+                </tr>
+
+                <tr>
+                    <td><br /></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Delivery Time:</strong> </td>
+                </tr>
+                <tr>
+                    <td>@Model.Cart.DeliveryTimeName </td>
+                </tr>
+
+                <tr>
+                    <td><br /></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Grand Total:</strong><br />
+                        @Model.Cart.GrandTotal.ToString("###,##0")
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <div class="col-md-9">
+            <ul id="panelbar">
+                @*<li id="box1">
+                        <i class="glyphicon glyphicon-file"></i> Sender Information
+                        <div class="row">
+                            <form id="form1">
+                                @Html.ValidationSummary()
+                                <div class="col-md-12">
+                                    <table class="checkout-form">
+                                        <tr>
+                                            <td class="checkout-fieldheader">Hide sender name: </td>
+                                            <td>@Html.Kendo().CheckBoxFor(m => m.SecretSenderName) </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <button type="button" id="box1Next" class="btn btn-default">Next <i class="fa fa-arrow-right"></i> </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </li>*@
+
+                <li id="box2">
+                    Recipient Information
+                    <div class="row">
+                        <form id="form2">
+                            <div class="col-md-12">
+                                <table class="checkout-form">
+
+                                    <tr>
+                                        <td class="checkout-fieldheader">Delivery Area:</td>
+                                        <td>@Model.DeliveryArea </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="checkout-fieldheader">Name: (*)</td>
+                                        <td>@Html.Kendo().TextBoxFor(m => m.RecipientName).HtmlAttributes(new {style = "width:300px;"}) </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email:</td>
+                                        <td>@Html.Kendo().TextBoxFor(m => m.RecipientEmail).HtmlAttributes(new {style = "width:250px;"}) </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Company Name: </td>
+                                        <td>@Html.Kendo().TextBoxFor(m => m.CompanyName) </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recipient Address: (*)</td>
+                                        <td>@Html.Kendo().TextBoxFor(m => m.RecipientAddress).HtmlAttributes(new {style = "width:80%;"}) </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recipient City: (*)</td>
+                                        <td>@Html.Kendo().TextBoxFor(m => m.RecipientCity).HtmlAttributes(new {style = "width:80%;"}) </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recipient State: (*)</td>
+                                        <td>@Html.Kendo().TextBoxFor(m => m.RecipientState).HtmlAttributes(new {style = "width:80%;"})
+                                            <br/>
+                                            <small>e.g. : Jakarta Pusat / Jakarta Barat / Jakarta Utara</small> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Postal Code: (*)</td>
+                                        <td>@Html.Kendo().TextBoxFor(m => m.ZipCode) </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recipient Location: (*)</td>
+                                        <td>@Html.Kendo().DropDownListFor(m => m.RecipientLocationTypeId).DataTextField("Name").DataValueField("Id").BindTo(Model.AddressTypes).OptionLabel("Select recipient location").HtmlAttributes(new {style = "width:200px;"}) </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact Number: (*)</td>
+                                        <td>
+                                            @Html.Kendo().TextBoxFor(m => m.RecipientPhoneNumber)
+                                            @Html.Kendo().CheckBoxFor(m => m.CallRecipientFirst).Label("Call recipient first")
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center">
+                                            <small>Fields marked with asterisk (*) are mandatory</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <button type="button" id="box2Next" class="btn btn-default">Next <i class="fa fa-arrow-right"></i> </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+
+                <li id="box3">
+                    Card Message
+                    <div class="row">
+                        <form id="form3">
+                            <div class="col-md-12">
+                                <table class="checkout-form">
+                                    <tr>
+                                        <td>From</td>
+                                        <td>
+                                            @Html.Kendo().TextBoxFor(m => m.FromCardMessage)
+                                        @Html.Kendo().CheckBoxFor(m => m.SecretSenderName).Label("Hide Sender Name")
+                                    </td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>To</td>
+                                    <td>@Html.Kendo().TextBoxFor(m => m.ToCardMessage)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        @Html.Kendo().EditorFor(m => m.CardMessage).HtmlAttributes(new { style = "width:600px;" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" >
+                                        <button type="button" id="box3Next" class="btn btn-default">Next <i class="fa fa-arrow-right"></i> </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+            <li id="box4">
+                Special Instruction
+                <div class="row">
+                    <form id="form4">
+                        <div class="col-md-12">
+                            <table class="checkout-form">
+                                <tr>
+                                    <td>@Html.Kendo().EditorFor(m => m.Notes).HtmlAttributes(new { style = "width:600px;" }) </td>
+                                </tr>
+                                <tr>
+                                    <td><button type="button" id="box4Next" class="btn btn-default">Next <i class="fa fa-arrow-right"></i> </button></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+            <li id="box5">
+                Payment Method
+                <div class="row">
+                    <form id="form5">
+                        <div class="col-md-12">
+                            <table class="checkout-form">
+                                <tr>
+                                    <td>
+                                        @Html.Kendo().DropDownListFor(m => m.PaymentMethodId).BindTo(Model.PaymentMethods).DataTextField("Name").DataValueField("Id").HtmlAttributes(new {style = "width:300px;"}).OptionLabel("Select Payment Method")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="paymentNotes"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td><button type="button" id="submitCart" class="btn btn-default">Submit <i class="fa fa-arrow-right"></i> </button></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+
+        </ul>
+    </div>
+
+
+</div>
+</div>
+
+<script>
+    var panel = (function () {
+        var self = this;
+
+        self.panelBar = function () {
+            return $("#panelbar").data("kendoPanelBar");
+        }
+
+        return {
+
+            //onBox1Next: function (e) {
+            //    var validator = $("#form1").data("kendoValidator");
+            //    if(validator.validate()) {
+            //        self.panelBar().enable($("#box2"), true);
+            //        self.panelBar().select($("#box2"));
+            //        self.panelBar().expand($("#box2"));
+            //    }
+            //},
+
+            onBox2Next: function (e) {
+                var validator = $("#form2").data("kendoValidator");
+                if (validator.validate()) {
+                    self.panelBar().enable($("#box3"), true);
+                    self.panelBar().select($("#box3"));
+                    self.panelBar().expand($("#box3"));
+                }
+            },
+
+            onBox3Next: function (e) {
+                var validator = $("#form3").data("kendoValidator");
+                if (validator.validate()) {
+                    self.panelBar().enable($("#box4"), true);
+                    self.panelBar().select($("#box4"));
+                    self.panelBar().expand($("#box4"));
+                }
+            },
+
+            onBox4Next: function (e) {
+                var validator = $("#form4").data("kendoValidator");
+                if (validator.validate()) {
+                    self.panelBar().enable($("#box5"), true);
+                    self.panelBar().select($("#box5"));
+                    self.panelBar().expand($("#box5"));
+                }
+            },
+
+            onError: function (e) {
+                alert("Error: " + e);
+            }
+        }
+    })();
+
+    $(function () {
+        var panelBarOptions = {
+            activate: panel.onActivate,
+            select: panel.onSelect,
+            error: panel.onError
+        };
+        //$("#state").val("box2");
+        $("#panelbar").kendoPanelBar(panelBarOptions);
+
+
+
+        var panelBar = $("#panelbar").data("kendoPanelBar");
+        //panelBar.enable($("#box2"), false);
+        panelBar.enable($("#box3"), false);
+        panelBar.enable($("#box4"), false);
+        panelBar.enable($("#box5"), false);
+
+        //$("#box1Next").click(panel.onBox1Next);
+        $("#box2Next").click(panel.onBox2Next);
+        $("#box3Next").click(panel.onBox3Next);
+        $("#box4Next").click(panel.onBox4Next);
+
+        panelBar.select("#box2");
+        panelBar.expand($("#box2"));
+        $("#Name", "#panelbar").focus();
+
+        $("#form1").kendoValidator();
+        $("#form2").kendoValidator();
+        $("#form3").kendoValidator();
+        $("#form4").kendoValidator();
+        $("#form5").kendoValidator();
+
+    });
+
+    $("#SecretSenderName").change(function (e) {
+        var checked = $(this).is(":checked");
+        if (checked) {
+            $("#FromCardMessage").addClass("k-state-disabled");
+            $("#FromCardMessage").attr("readonly", "readonly");
+        } else {
+            $("#FromCardMessage").removeClass("k-state-disabled");
+            $("#FromCardMessage").removeAttr("readonly", "readonly");
+        }
+
+    });
+
+    $("#submitCart").click(function (e) {
+        e.preventDefault();
+
+        var validator = $("#form5").data("kendoValidator");
+        if (validator.validate()) {
+            if (!confirm("Are you sure want to submit your order?")) {
+                return false;
+            }
+
+            $.ajax({
+                url: "@Url.Action("CheckOut")",
+                type: "POST",
+                data: $("form").serialize(),
+                success: function(result) {
+                    if (result.Error) {
+                        var msg = "";
+                        $(result.Errors).each(function(i, data) {
+                            msg += data + "\n";
+                        });
+                        alert(msg);
+                        return false;
+                    }
+
+                    alert("Your order has been created with tracking number " + result.OrderNo);
+                    document.location.href = result.ReturnUrl;
+                    return false;
+                }
+            });
+        }
+
+        return false;
+    });
+
+    $("#PaymentMethodId").change(function(e) {
+        var selectedPayment = $(this).data("kendoDropDownList").value();
+        if (selectedPayment.length === 0) {
+            alert("Payment Method must be specified");
+            $(this).focus();
+        } else {
+            $.getJSON("@Url.Action("GetPaymentMethodNotes")", { paymentMethodId: selectedPayment }, function(result) {
+                $("#paymentNotes").empty();
+                $("#paymentNotes").html(result);
+            });
+        }
+    });
+</script> 

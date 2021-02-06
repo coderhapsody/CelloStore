@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CelloStore.Data.Showcase>
+
+@{
+    var showcases = Model.ToList();
+}
+@if(showcases.Count > 0)
+{
+    <section id="slider">
+        <!--slider-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            @for(var index = 0; index < showcases.Count; index++)
+                            {
+                                <li data-target="#slider-carousel" data-slide-to="@index" @(showcases[index].First ? "class='active'" : "")></li>
+                            }
+                        </ol>
+
+                        <div class="carousel-inner">
+                            @for(var index = 0; index < showcases.Count; index++)
+                            {
+                                <div class="item @(showcases[index].First ? "active" : "")">
+                                    
+                                    <div class="col-sm-12">                                    
+                                        <a href="@(showcases[index].ExtLinkType.GetValueOrDefault() == 1 ? Url.Action("ViewContent","Article", new{ area = String.Empty, id = showcases[index].ArticleId.GetValueOrDefault()}) : showcases[index].Url)"><img title="@(showcases[index].Title) - @(showcases[index].Description)" src="~/Media/Ads/@showcases[index].ImagePath" class="girl img-responsive" alt="" /></a>
+                                        @*@if(!String.IsNullOrEmpty(showcases[index].PriceImagePath))
+                                        {
+                                            <img src="~/Media/Ads/@showcases[index].PriceImagePath" class="pricing" alt="" />
+                                        }*@
+                                    
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/slider-->
+}

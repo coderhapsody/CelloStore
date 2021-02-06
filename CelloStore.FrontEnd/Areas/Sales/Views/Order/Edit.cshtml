@@ -1,0 +1,332 @@
+﻿@model CelloStore.ViewModels.Sales.Order.CreateEditViewModel
+
+<div class="container">
+    <div class="page-header">
+        <h4>Order</h4>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(false)
+
+        @Html.HiddenFor(m => m.SelectedOrder.Id)
+
+        <div id="tabs">
+            <ul>
+                <li class="k-state-active">Order</li>
+                <li>Recipient Info</li>
+                <li>Card</li>
+                <li>Notes</li>
+                <li>Order Details</li>
+                <li>Status Histories</li>
+                <li>Payment Confirmation</li>
+            </ul>
+            <div>
+                <br />
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2">Order No.</div>
+                        <div class="col-md-4">@Model.SelectedOrder.OrderNo</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">Order Date</div>
+                        <div class="col-md-4">@Model.SelectedOrder.OrderDate.ToString("dddd, dd MMMM yyyy")</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">Delivery Date</div>
+                        <div class="col-md-4">@Model.SelectedOrder.DeliveryDate.GetValueOrDefault().ToString("dddd, dd MMMM yyyy")</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">Delivery Time</div>
+                        <div class="col-md-4">@Model.SelectedOrder.DeliveryTime</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">Hide Sender Name</div>
+                        <div class="col-md-4">@Model.SelectedOrder.SecretSenderName</div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div>
+                <br />
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2">Recipient Name: </div>
+                        <div class="col-md-4">@Model.SelectedOrder.RecipientName</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">Recipient Address: </div>
+                        <div class="col-md-4">@Model.SelectedOrder.RecipientAddress</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">Recipient Company Name: </div>
+                        <div class="col-md-4">@Model.SelectedOrder.RecipientCompanyName</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">Recipient Email: </div>
+                        <div class="col-md-4">@Model.SelectedOrder.RecipientEmail</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">Recipient Phone: </div>
+                        <div class="col-md-4">
+                            @Model.SelectedOrder.RecipientPhoneNumber
+                            &nbsp;&nbsp;&nbsp;
+                            @Html.CheckBoxFor(m => m.SelectedOrder.CallRecipientFirst, new { disabled = "disabled" }) Call Recipient First
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+            </div>
+            <div>
+                <br />
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-1">From: </div>
+                        <div class="col-md-10">@Model.SelectedOrder.FromCardMessage</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-1">To: </div>
+                        <div class="col-md-10">@Model.SelectedOrder.ToCardMessage</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-1">Card Message: </div>
+                        <div class="col-md-10">
+                            <div class="well">
+                                @Model.SelectedOrder.CardMessage
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div>
+                <br />
+                <div class="well">
+                    @Model.SelectedOrder.Notes
+                </div>
+                <br />
+            </div>
+            <div>
+                <br />
+                @Html.Kendo().Grid(Model.SelectedOrderDetails).Name("Grid").EnableCustomBinding(true).Columns(
+                    col =>
+                    {
+                        col.Bound(m => m.Product.Code);
+                        col.Bound(m => m.Product.Name);
+                        col.Bound(m => m.Qty).Format("{0:###,##0}");
+                        col.Bound(m => m.UnitPrice).Format("{0:###,##0}");
+                        col.Bound(m => m.DiscValue).Format("{0:###,##0}");
+                    })
+                <br />
+            </div>
+            <div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <table style="border-spacing: 10px; border-collapse: separate;">
+                            <tr>
+                                <td>Current Status: </td>
+                                <td>
+                                    <b>
+                                        <span id="currentStatus"></span>
+                                    </b>
+                                </td>
+                                <td><button type="button" id="btnChangeStatus" class="k-button"><i class="fa fa-history"></i> Change Status</button> </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        @(Html.Kendo().Grid(Model.StatusHistories).Name("gridStatusHistory").HtmlAttributes(new { style = "width:95%;" }).EnableCustomBinding(true).Columns(
+                              col =>
+                              {
+                                  col.Bound(m => m.CreatedDate).Format("{0:ddd, dd-MMM-yyyy HH:mm}").Width(220);
+                                  col.Bound(m => m.Notes);
+                                  col.Bound(m => m.Status);
+                                  col.Bound(m => m.SendMail).Width(80).HtmlAttributes(new { style = "text-align:center;" });
+                              }).DataSource(ds => ds
+                                  .Ajax()
+                                  .Read(read => read.Action("ListStatusHistory", "Order", new { area = "Sales" })
+                                      .Data("orderHistoryParameters")))
+                        )
+                    </div>
+                </div>
+
+                <br />
+            </div>
+            <div>
+                <br />
+                @if (Model.PaymentConfirmation != null)
+                {
+                    @Html.HiddenFor(m => m.PaymentConfirmation.Id, new { id = "paymentConfirmationId", name = "paymentConfirmationId" })
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table style="border-spacing: 10px; border-collapse: separate;">
+                                <tr>
+                                    <td>Payment Method: </td>
+                                    <td>@Model.PaymentConfirmation.PaymentMethod.Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Bank: </td>
+                                    <td>@Model.PaymentConfirmation.Bank.Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Payment Date: </td>
+                                    <td>@Model.PaymentConfirmation.Date.ToString("ddd, dd MMMM yyyy")</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Amount: </td>
+                                    <td>@Model.PaymentConfirmation.Amount.ToString("###,##0.00")</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Verified Date: </td>
+                                    <td>
+                                        @(Model.PaymentConfirmation.VerifiedWhen.HasValue ? Model.PaymentConfirmation.VerifiedWhen.Value.ToString("ddd, dd MMMM yyyy HH:mm") : "Not Verified")
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        @if(!Model.PaymentConfirmation.VerifiedWhen.HasValue)
+                                        {
+                                        <br />
+                                        <button id="btnVerifyPayment" class="k-button"><i class="fa fa-check"></i> Set as Verified</button>
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                }
+                else
+                {<text>
+                    <p>Payment Confirmation has not been made for this order</p></text>
+                }
+            </div>
+        </div>
+
+        <br />
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-6">
+                    <a href="#" class="k-button" id="printDeliveryOrder"><span class="fa fa-print"></span> Print Delivery Order</a>
+                    <a href="@Url.Action("Index")" class="k-button"><span class="fa fa-undo"></span> Back to List</a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+<div id="changeStatusWindow"></div>
+
+
+<script>
+    var order = (function ($) {
+        return {
+            refreshOrderHistory: function () {
+                $("#gridStatusHistory").data("kendoGrid").dataSource.read();
+                $("#gridStatusHistory").data("kendoGrid").refresh();
+            },
+
+
+            refreshOrderStatus: function () {
+                $.getJSON("@Url.Action("GetCurrentOrderStatus")", {
+                    orderId: $("#SelectedOrder_Id").val()
+                }, function (result) {
+                    $("#currentStatus").text(result.OrderStatusName);
+                });
+            },
+
+            onSelectedStatusChanged: function (e) {
+                var selectedOrderStatusId = e.sender.value();
+                $.getJSON("@Url.Action("GetOrderStatus")", {
+                    orderStatusId: selectedOrderStatusId
+                }, function (result) {
+                    if (result.SendMail) {
+                        $("#SendMail").attr("checked", "checked");
+                    } else {
+                        $("#SendMail").removeAttr("checked");
+                    }
+                });
+            }
+        }
+    })(jQuery);
+
+    $(function () {
+        $("#tabs").kendoTabStrip({
+            animation: false
+        });
+
+        var windowOptions = {
+            visible: false,
+            modal: true,
+            width: 700,
+            height: 400,
+            animation: false
+        };
+        $("#changeStatusWindow").kendoWindow(windowOptions);
+        order.refreshOrderStatus();
+    });
+
+    $("#btnVerifyPayment").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "@Url.Action("VerifyPayment")",
+            data: {
+                paymentConfirmationId: $("#paymentConfirmationId").val()
+            },
+            type: "POST",
+            success: function (result) {
+                if (result) {
+                    alert("Payment has been verified");
+                    $("#btnVerifyPayment").hide();
+                } else {
+                    alert("Unable to verify payment");
+                }
+            },
+            error: function (err) {
+                alert("ERROR: " + err);
+            }
+        });
+    });
+
+
+    $("#btnChangeStatus").click(function (e) {
+        var changeStatusWindow = $("#changeStatusWindow").data("kendoWindow");
+        changeStatusWindow.refresh({
+            url: "@Url.Action("ChangeStatus", new { orderId = Model.SelectedOrder.Id })"
+        }).center().open();
+    });
+
+    $("#printDeliveryOrder").click(function (e) {
+        e.preventDefault();
+        var orderId = $("#SelectedOrder_Id").val();
+        popUpWindow.show('@Url.Content("~/Reports")/ReportPreview.aspx?ReportName=DeliveryOrder&OrderId=' + orderId);
+    });
+
+    function orderHistoryParameters() {
+        return {
+            orderId: $("#SelectedOrder_Id").val()
+        }
+    }
+</script>

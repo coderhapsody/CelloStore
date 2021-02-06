@@ -1,0 +1,180 @@
+﻿@model CelloStore.ViewModels.Catalog.Product.CreateEditViewModel
+
+
+<div class="container">
+    <div class="page-header">
+        <h4>Product</h4>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frm", name = "frm" }))
+    {
+        @Html.HiddenFor(m => m.Id)
+
+
+        @(Html.Kendo().TabStrip()
+                .Name("tabs")
+                .Animation(false)
+                .Items(tab =>
+                {
+                    tab.Add()
+                        .Text("Product Info")
+                        .Selected(true)
+                        .Content(@<text>
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.Code)</div>
+                                    <div class="col-md-4">@Html.Kendo().TextBoxFor(m => m.Code)</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.Name)</div>
+                                    <div class="col-md-4">@Html.Kendo().TextBoxFor(m => m.Name).HtmlAttributes(new { style = "width:450px;" })</div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.Description)</div>
+                                    <div class="col-md-4">@Html.Kendo().Editor().Name("Description").Value(Model.Description).HtmlAttributes(new { style="height:350px; width: 600px;"}) </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.UnitPrice)</div>
+                                    <div class="col-md-4">
+                                        IDR
+                                        @Html.Kendo().NumericTextBoxFor(m => m.UnitPrice).Format("###,##0")
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.IsActive)</div>
+                                    <div class="col-md-4">@Html.Kendo().CheckBoxFor(m => m.IsActive) </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.IsFeatured)</div>
+                                    <div class="col-md-4">@Html.Kendo().CheckBoxFor(m => m.IsFeatured) </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.Photo)</div>
+                                    <div class="col-md-4">
+                                        @(Html.Kendo().Upload()
+                                                        .Name("files")
+                                                        .Async(a => a.Save("Save", "Product").Remove("Remove", "Product").AutoUpload(true))
+                                                        .Events(ev => ev.Success("uploadSuccess").Error("uploadError").Remove("removeSuccess"))
+                                        )
+
+                                        @Html.HiddenFor(m => m.Photo)
+                                        <span id="preview">
+                                            @if (!String.IsNullOrEmpty(Model.Photo))
+                                            {
+                                                <img src="@Href("~/Media/Products/" + Model.Photo + ".ashx?w=200&h=200&mode=max")" />
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </text>);
+
+                    tab.Add()
+                        .Text("Taxonomies")
+                        .Content(@<text>
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.Categories)</div>
+                                    <div class="col-md-4">
+                                        @(Html.Kendo().MultiSelect()
+                                          .Name("selectedCategories")
+                                          .DataTextField("Name")
+                                          .DataValueField("Name")
+                                          .Placeholder("Select categories...")
+                                          .AutoClose(false)
+                                          .DataSource(source => source.Read(read => read.Action("GetCategories", "Product"))
+                                              .ServerFiltering(false))
+                                        )
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.Tags)</div>
+                                    <div class="col-md-4">
+                                        @(Html.Kendo().MultiSelect()
+                                          .Name("selectedTags")
+                                          .DataTextField("Name")
+                                          .DataValueField("Name")
+                                          .Placeholder("Select tags...")    
+                                          .AutoClose(false)                                      
+                                          .DataSource(source => source.Read(read => read.Action("GetTags", "Product"))
+                                              .ServerFiltering(false))
+                                        )
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-2">@Html.LabelFor(m => m.Areas)</div>
+                                    <div class="col-md-4">
+                                        @(Html.Kendo().MultiSelect()
+                                          .Name("selectedAreas")
+                                          .DataTextField("Name")
+                                          .DataValueField("Name")
+                                          .Placeholder("Select areas...")
+                                          .AutoClose(false)
+                                          .DataSource(source => source.Read(read => read.Action("GetAreas", "Product"))
+                                              .ServerFiltering(false))
+                                        )
+                                    </div>
+                                </div>
+                            </div>
+                        </text>);
+                })
+        )
+        <br />
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <button type="submit" id="btnSave" name="btnSave" class="k-button"><span class="fa fa-save"></span> Save</button>
+                    <a href="@Url.Action("Index")" class="k-button"><span class="fa fa-undo"></span> Back to List</a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+<script>
+    function uploadSuccess(data) {
+        if (data.files.length > 0) {
+            var fileName = data.files[0].name;
+            alert("Success upload file " + fileName);
+            $("#Photo").val(fileName);
+            $("#preview").empty();
+            $("<img />").attr("src", '@Href("~/Media/Products/")' + fileName + '.ashx?w=200&h=200&mode=max').appendTo("#preview");
+        } else {
+            $("#Photo").val("");
+            $("#preview").empty();
+        }
+    }
+
+    function uploadError(data) {
+        alert("Error to upload file: " + data);
+    }
+
+    function removeSuccess(data) {
+        $("#Photo").val("");
+        $("#preview").empty();
+    }
+
+    $(function () {
+        $("#btnSave").click(function (e) {
+            e.preventDefault();
+
+            var validator = $("#frm").kendoValidator().data("kendoValidator");
+            if (validator.validate()) {
+                $("#frm").submit();
+            }
+        });
+    });
+</script>

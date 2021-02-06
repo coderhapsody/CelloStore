@@ -1,0 +1,172 @@
+﻿@model CelloStore.ViewModels.CartViewModel
+
+@{
+    DateTime deliveryDate = ViewBag.DeliveryDate;
+    string deliveryTime = Convert.ToString(ViewBag.DeliveryTime);
+}
+
+@using (Html.BeginForm())
+{
+
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h3>My Cart</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                @(Html.Kendo().Grid(Model.OrderDetails).Name("OrderDetails")
+                      .Columns(cols =>
+                      {
+                          cols.Bound(m => m.LineNo).HtmlAttributes(new { style = "display:none; width:0;" }).HeaderHtmlAttributes(new { style = "display:none; width:0;" });
+                          cols.Bound(m => m.ProductCode).Width(150);
+                          cols.Bound(m => m.ProductName).Width(350);
+                          cols.Bound(m => m.Qty).Width(100).Title("Quantity");
+                          cols.Bound(m => m.UnitPrice).Format("{0:###,##0}").Title("Unit Price (IDR)");
+                          cols.Command(cmd => cmd.Custom("DeleteRow").Text("Delete").DataRouteValues(data => data.Add(m => m.LineNo)).Action("RemoveFromCart", "Shopping")).Width(50);
+                      })
+                )
+            </div>
+            <div class="col-md-3">
+                <table>
+                    <tr>
+                        <td>Delivery Date</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.Kendo().DatePicker().Name("deliveryDate").Value(deliveryDate).Events(ev => ev.Change("verifyDeliveryDate")) </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <br />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Delivery Time</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @(Html.Kendo().DropDownListFor(m => m.DeliveryTime)
+                                        .DataSource(ds => ds.Read("ListDeliveryTimes", "Shopping", new { area = String.Empty }))
+                                        .DataTextField("Name")
+                                        .DataValueField("Id")
+                                        .Value(deliveryTime)
+                                        .Events(ev => ev.Change("verifyDeliveryTime")))
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <br />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Voucher Code</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.Kendo().TextBoxFor(m => m.VoucherCode)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ActionLink("Continue shopping", "Index", "Home", new { area = String.Empty }, new { @class = "btn btn-default" })
+
+                <button type="submit" id="checkout" class="btn btn-success"><i class="fa fa-check"></i> Checkout</button>
+                @*<a href="@Url.Action("CheckOut")" id="checkout" class="btn btn-success"><i class="fa fa-check"></i> Checkout</a>*@
+                &nbsp;&nbsp;&nbsp;
+                <a href="#" id="emptyCart" class="btn btn-danger"><i class="fa fa-trash"></i> Empty Cart</a>
+            </div>
+        </div>
+
+        @Html.Hidden("count", Model.OrderDetails.Count)
+    </div>
+}
+
+<script>
+    $(function () {
+        $("#checkout").click(function (e) {
+            if ($("#count").val() == 0) {
+                alert("Your shopping cart is empty.");
+                e.preventDefault();
+                return false;
+            }
+
+            if (!confirm("Are you sure want to checkout?")) {
+                e.preventDefault();
+            }
+
+            verifyDeliveryDate();
+            verifyDeliveryTime();
+
+            return true;
+        });
+
+        $("#emptyCart").click(function (e) {
+            e.preventDefault();
+            if (!confirm("Are you sure want to empty cart ?")) {
+                return false;
+            }
+
+            $.ajax({
+                url: "@Url.Action("EmptyCart", "Shopping", new { area = String.Empty})",
+                type: "POST",
+                success: function (result) {
+                    document.location.href = "@Url.Action("ViewCart")";
+                }
+            });
+
+            return false;
+        });
+    });
+
+    function verifyDeliveryDate() {
+
+        var selectedDate = moment($("#deliveryDate").data("kendoDatePicker").value());
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "@Url.Action("VerifyDeliveryDate")",
+            data: {
+                date: selectedDate.format("YYYY-MM-DD")
+            },
+            success: function (result) {
+                if (!result.IsValid) {
+                    alert("Delivery Date is invalid");
+                    $("#deliveryDate").data("kendoDatePicker").value(moment(result.ValidDate).toDate());
+                }
+            }
+        });
+    }
+
+
+    function verifyDeliveryTime() {
+        var selectedDate = moment($("#deliveryDate").data("kendoDatePicker").value());
+        var selectedTime = $("#DeliveryTime").data("kendoDropDownList").value();
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "@Url.Action("VerifyDeliveryTime")",
+            data: {
+                date: selectedDate.format("YYYY-MM-DD"),
+                time: selectedTime
+            },
+            success: function (result) {
+                if (!result.IsValid) {
+                    alert("Delivery Time is invalid");
+                    $("#DeliveryTime").data("kendoDropDownList").value(result.ValidTime);
+                }
+            }
+        });
+    }
+
+</script>

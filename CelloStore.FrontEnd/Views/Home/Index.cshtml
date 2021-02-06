@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCatalog.cshtml";
+    ViewBag.Title = "Belanja Bunga";
+}
+
+@section showcase {
+    @Html.Action("Showcase")
+}
+
+@Html.Action("Products", "Shopping", 
+    new { areaName = TempData["areaName"], 
+          categoryName = TempData["categoryName"] })
+
+@Html.Hidden("areaName")
+@Html.Hidden("categoryName")            

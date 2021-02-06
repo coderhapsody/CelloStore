@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C6FDBFE8-D7F6-49AB-8E7D-A70EBA105FA1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CelloStore.Providers</RootNamespace>
+    <AssemblyName>CelloStore.Providers</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.OpenAccess, Version=2015.1.225.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2015.1.225.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressTypeProvider.cs" />
+    <Compile Include="BankProvider.cs" />
+    <Compile Include="ConfigurationKeys.cs" />
+    <Compile Include="ConfigurationProvider.cs" />
+    <Compile Include="DeliveryTimeProvider.cs" />
+    <Compile Include="EmailTemplateProvider.cs" />
+    <Compile Include="Mailer.cs" />
+    <Compile Include="OrderProvider.cs" />
+    <Compile Include="OrderStatuses.cs" />
+    <Compile Include="OrderStatusProvider.cs" />
+    <Compile Include="ReportProvider.cs" />
+    <Compile Include="RoleProvider.cs" />
+    <Compile Include="ShowcaseProvider.cs" />
+    <Compile Include="AreaProvider.cs" />
+    <Compile Include="ArticleProvider.cs" />
+    <Compile Include="BaseProvider.cs" />
+    <Compile Include="CategoryProvider.cs" />
+    <Compile Include="CelloStoreException.cs" />
+    <Compile Include="PaymentMethodProvider.cs" />
+    <Compile Include="PersonProvider.cs" />
+    <Compile Include="ProductProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityProvider.cs" />
+    <Compile Include="TagProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CelloStore.Data\CelloStore.Data.csproj">
+      <Project>{dd8f0bd3-9aff-48a9-aee3-81a2d6c5509e}</Project>
+      <Name>CelloStore.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CelloStore.Utilities\CelloStore.Utilities.csproj">
+      <Project>{34ffbdf3-41c2-4886-97e5-a6a8ea9d408b}</Project>
+      <Name>CelloStore.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CelloStore.ViewModels\CelloStore.ViewModels.csproj">
+      <Project>{58D4BEB7-453E-4AD5-ADF9-2307BAD10D23}</Project>
+      <Name>CelloStore.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

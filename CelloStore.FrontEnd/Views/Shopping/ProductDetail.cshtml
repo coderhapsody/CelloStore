@@ -1,0 +1,68 @@
+﻿@model CelloStore.Data.Product
+
+@{
+    Layout = "~/Views/Shared/_LayoutCatalog.cshtml";
+}
+
+@if (Model != null)
+{
+     using (Html.BeginForm(null, null, FormMethod.Post, new { id="frmProductDetail", name="frmProductDetail"}))
+     {
+         @Html.HiddenFor(m => m.Code)
+        
+         <h2>@Model.Code - @Model.Name</h2>
+         <div class="row">
+             <div class="col-md-5 well">
+                 <img src="@Url.Content("~/Media/Products/" + Model.Photo + ".ashx?w=300&h=300&mode=max")"/>
+             </div>
+
+             <div class="col-md-7">
+                 <div class="row">
+                     <div class="col-md-12">
+                         <div class="well">
+                             <p>
+                                 @Html.Raw(Model.Description)
+                             </p>
+                             <br/>
+                             <p>
+                                 @Model.UnitPrice.ToString("Rp ###,##0")
+                             </p>
+                         </div>
+
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-md-12">
+                         <div class="well">
+                             Quantity: @Html.Kendo().NumericTextBox().Name("qty").Spinners(true).Min(1).Decimals(0).Format("##0").HtmlAttributes(new {style = "width:80px;"}).Value(1)
+
+                             <button id="btnSubmit" name="btnSubmit" type="submit" data-productcode="@Model.Code" href="#" class="addToCart btn btn-default"><i class="fa fa-cart-plus"></i> Add to cart</button>
+                             <a id="back" name="back" class="k-button" href="#"><i class="fa fa-undo"></i> Back</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     }
+}
+
+@Html.Hidden("areaName")
+
+<script>
+    $("#back").click(function(e) {
+        e.preventDefault();
+        history.go(-1);
+    });
+
+    $("#btnSubmit").click(function(e) {
+        e.preventDefault();
+        var productCode = $(this).attr("data-productcode");
+        var qty = $("#qty").val();
+        var areaName = $("#areaName").data("kendoDropDownList").text();
+        var ajaxUrl = appVars.addToCartUrl;
+        var countAjaxUrl = appVars.cartUrl;
+        cart.addToCart(productCode, qty, areaName, ajaxUrl, countAjaxUrl);
+
+        return false;
+    });
+</script>

@@ -1,0 +1,237 @@
+﻿@model CelloStore.ViewModels.Page.Showcase.CreateEditViewModel
+
+
+<div class="container">
+    <div class="page-header">
+        <h4>Showcase</h4>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frm", name = "frm" }))
+    {
+        @Html.ValidationSummary()
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.Title)</div>
+                <div class="col-md-4">@Html.Kendo().TextBoxFor(m => m.Title).HtmlAttributes(new { style = "width:500px;" })</div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.Description)</div>
+                <div class="col-md-4">@Html.Kendo().TextBoxFor(m => m.Description).HtmlAttributes(new {style = "width:500px;"})</div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.ExtLinkType)</div>
+                <div class="col-md-4">@Html.Kendo().DropDownListFor(m => m.ExtLinkType).BindTo(Model.ExtLinkTypes).DataValueField("Value").DataTextField("Text").OptionLabel("Select Link Type").Events(ev => ev.Change("linkTypeChanged")) </div>
+            </div>
+
+
+            <div class="form-group" id="linkTypeUrl">
+                <div class="col-md-2">@Html.LabelFor(m => m.Url)</div>
+                <div class="col-md-4">@Html.Kendo().TextBoxFor(m => m.Url).HtmlAttributes(new {style = "width:500px;"})</div>
+            </div>
+
+            <div class="form-group" id="linkTypeArticle">
+                <div class="col-md-2">@Html.LabelFor(m => m.ArticleId)</div>
+                <div class="col-md-4">@Html.Kendo().DropDownListFor(m => m.ArticleId).DataTextField("Subject").DataValueField("Id").DataSource(ds => ds.Read("GetArticles", "Showcase", new { area = "Page"})).OptionLabel("Select Article").HtmlAttributes(new { style="width:300px;"}) </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.ImagePath)</div>
+                <div class="col-md-4">
+                    @(Html.Kendo().Upload()
+                          .Name("imageFiles")
+                  .Async(a => a.Save("Save", "Showcase", new { area = "Page" }).Remove("Remove", "Showcase", new { area = "Page" }).AutoUpload(true))
+                          .Events(ev => ev.Success("uploadImageSuccess").Error("uploadError").Remove("removePriceSuccess"))
+                          )
+                    <small>Minimum resolution: 1200x400</small>
+                    @Html.HiddenFor(m => m.ImagePath)
+                    <span id="preview1">
+                        <img id="imgPreview1" src="@Href("~/Media/Ads/" + Model.ImagePath + ".ashx?w=200&h=200&mode=max")" />
+                    </span>
+                </div>
+            </div>
+
+
+
+            @*<div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.PriceImagePath)</div>
+                <div class="col-md-4">
+                    @(Html.Kendo().Upload()
+                          .Name("priceFiles")
+                          .Async(a => a.Save("SavePriceImages", "Showcase", new { area = "Widget" }).Remove("Remove", "Showcase", new { area = "Widget" }).AutoUpload(true))
+                          .Events(ev => ev.Success("uploadPriceSuccess").Error("uploadError").Remove("removePriceSuccess"))
+                          )
+
+                    @Html.HiddenFor(m => m.PriceImagePath)
+                    <span id="preview2">
+                        <img id="imgPreview2" src="@Href("~/Media/Ads/" + Model.PriceImagePath + ".ashx?w=200&h=200&mode=max")" />
+                    </span>
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.FromDate)</div>
+                <div class="col-md-4">
+                    @Html.Kendo().DatePickerFor(m => m.FromDate)
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.Kendo().CheckBoxFor(m => m.NoFromDate).Label(" Not specified")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.ToDate)</div>
+                <div class="col-md-4">
+                    @Html.Kendo().DatePickerFor(m => m.ToDate)
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.Kendo().CheckBoxFor(m => m.NoToDate).Label(" Not specified")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    @Html.Kendo().CheckBoxFor(m => m.IsActive).Label("Set Active")
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    @Html.Kendo().CheckBoxFor(m => m.First).Label("Set First")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <button type="submit" id="btnSave" name="btnSave" class="k-button"><span class="fa fa-save"></span> Save</button>
+                    <a href="@Url.Action("Index")" class="k-button"><span class="fa fa-undo"></span> Back to List</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@Html.Hidden("path", Href("~/Media/Ads/"))
+
+<script>
+    var validatorOptions = {
+        rules: {
+            extLinkTypeArticle: function(input) {
+                if (input.is("#ArticleId")) {
+                    var extLinkTypeDropDownList = $("#ExtLinkType").data("kendoDropDownList");
+                    if (extLinkTypeDropDownList.value() == "1") {
+                        if (input.val() == "")
+                            return false;
+                    }                    
+                }
+                return true;
+            },
+            extLinkTypeUrl: function(input) {
+                if (input.is("#Url")) {
+                    var extLinkTypeDropDownList = $("#ExtLinkType").data("kendoDropDownList");
+                    if (extLinkTypeDropDownList.value() == "0") {
+                        if (input.val() == "")
+                            return false;
+                    }
+                }
+                return true;
+            }
+        },
+        messages: {
+            extLinkTypeArticle: function () {
+                return "Article must be specified";
+            },
+            extLinkTypeUrl: function () {
+                return "Url must be specified";
+            }
+        }
+    }
+
+    $(function () {        
+        $("#Name").focus();
+
+        if ($("#ExtLinkType").data("kendoDropDownList").value() == "1") {
+            $("#linkTypeArticle").show();
+            $("#linkTypeUrl").hide();
+        } else if ($("#ExtLinkType").data("kendoDropDownList").value() == "0") {
+            $("#linkTypeArticle").hide();
+            $("#linkTypeUrl").show();
+        } else {
+            $("#linkTypeUrl").hide();
+            $("#linkTypeArticle").hide();
+        }
+            
+        
+
+        $("#btnSave").click(function(e) {
+            e.preventDefault();
+            var validator = $("#frm").kendoValidator(validatorOptions).data("kendoValidator");
+            if (validator.validate()) {
+                $("#frm").submit();
+            }
+        });
+    });
+
+    function linkTypeChanged(e) {
+        if (e.sender.value() == "1") {
+            // article
+            $("#linkTypeArticle").show();
+            $("#linkTypeUrl").hide();
+        } else {
+            // url            
+            $("#linkTypeArticle").hide();
+            $("#linkTypeUrl").show();
+        }        
+    }
+
+    function uploadImageSuccess(data) {
+        if (data.files.length > 0) {
+            var fileName = data.files[0].name;
+            alert("Success upload file " + fileName);
+            $("#ImagePath").val(fileName);            
+            $("#imgPreview1").attr("src", $("#path").val() + fileName + ".ashx?w=200&h=200&mode=max");
+        } else {
+            $("#ImagePath").val("");
+            $("#imgPreview1").attr("src", "");
+        }
+    }
+
+    function uploadPriceSuccess(data) {
+        if (data.files.length > 0) {
+            var fileName = data.files[0].name;
+            alert("Success upload file " + fileName);
+            $("#PriceImagePath").val(fileName);
+            $("#preview2").empty();
+            $("#imgPreview2").attr("src", $("#path").val() + fileName + ".ashx?w=200&h=200&mode=max");
+        } else {
+            $("#PriceImagePath").val("");
+            $("#imgPreview2").attr("src", "");
+        }
+    }
+
+    function removeImageSuccess(data) {
+        $("#ImagePath").val("");
+        $("#preview1").empty();
+    }
+
+
+    function removePriceSuccess(data) {
+        $("#PriceImagePath").val("");
+        $("#preview2").empty();
+    }
+
+    function uploadError(data) {
+        alert("Error to upload file: " + data);
+    }
+
+    $("#NoFromDate").click(function () {
+        if ($(this).is(":checked"))
+            $("#FromDate").data("kendoDatePicker").enable(false);
+        else
+            $("#FromDate").data("kendoDatePicker").enable(true);
+    });
+
+    $("#NoToDate").click(function () {
+        if ($(this).is(":checked"))
+            $("#ToDate").data("kendoDatePicker").enable(false);
+        else
+            $("#ToDate").data("kendoDatePicker").enable(true);
+    });
+</script>

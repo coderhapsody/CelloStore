@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CelloStore.Data.Area>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel-group category-products text-center" id="flowerproduct">
+            <h5>Delivery Area:</h5>
+            @using (Html.BeginForm("Area", "Shopping", FormMethod.Post, new {id = "frmArea", name = "frmArea"}))
+            {
+                @(Html.Kendo().DropDownList()
+                      .Name("areaName")
+                      .BindTo(Model)
+                      .DataValueField("Name")
+                      .DataTextField("Name")
+                      .Events(ev => ev.Select("areaSelected").Change("areaChanged"))
+                      )
+            }
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function areaSelected(arg) {        
+        var areaName = $(arg.item).text();
+        if (!confirm("Change the area to " + areaName + " will empty your cart. Are you sure?")) {
+            arg.preventDefault();
+        }        
+    }
+
+    function areaChanged(arg) {        
+        $("#frmArea").submit();
+    }
+</script>

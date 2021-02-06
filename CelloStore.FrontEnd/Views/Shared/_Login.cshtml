@@ -1,0 +1,105 @@
+﻿@(Html.Kendo().Window().Name("loginWindow")
+      .Title("Login")
+      .Actions(action => action.Close())
+      .Animation(false)
+      .Modal(true)
+      .Width(600)
+      .Height(280)
+      .Content(@<text>
+        @using (Html.BeginForm())
+        {
+            <br />
+            <table class="table borderless">
+                <tr>
+                    <td class="text-right">User Name :</td>
+                    <td>@Html.Kendo().TextBox().Name("WindowUserName").HtmlAttributes(new { style = "width:250px;" })</td>
+                </tr>
+                <tr>
+                    <td class="text-right">Password :</td>
+                    <td>@Html.Kendo().TextBox().Name("WindowPassword").HtmlAttributes(new { style = "width:250px;", type = "password" })</td>
+                </tr>
+                <tr>
+
+                    <td></td>
+                    <td>
+                        @Html.Kendo().Button().Name("LoginButton").Icon("lock").Content("Login").Events(ev => ev.Click("LoginButtonClick"))
+                        <br />
+                        <div id="loginProgress"><i class="fa fa-spinner fa-spin"></i> Please wait</div>
+                        <br />
+                        <a href="@Url.Action("ForgetPassword", "Home", new {area = String.Empty})">Forget Password</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="@Url.Action("Activation", "Account", new {area = String.Empty})">Account Activation</a>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        }
+    </text>)
+                              .Scrollable(false)
+                              .Visible(false)
+                              .AutoFocus(true))
+
+<script>
+    $(function () {
+        $("#loginProgress").hide();
+    });
+
+    $("#WindowUserName").keydown(function (e) {
+        if (e.keyCode == 13) {
+            $("#WindowPassword").focus();
+        }
+
+        if (e.keyCode == 27) {
+            $("#loginWindow").data("kendoWindow").close();
+        }
+    });
+
+    $("#WindowPassword").keydown(function (e) {
+        if (e.keyCode == 13) {
+            doLogin();
+        }
+
+        if (e.keyCode == 27) {
+            $("#loginWindow").data("kendoWindow").close();
+        }
+
+    });
+
+    function doLogin() {
+        var username = $("#WindowUserName").val();
+        var password = $("#WindowPassword").val();
+        var loginButton = $("#LoginButton").kendoButton().data("kendoButton");
+        loginButton.enable(false);
+        $("#loginProgress").show();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Login", "Home")',
+            data: "UserName=" + username + "&Password=" + password,
+            success: function (result) {
+                if (result.Activated && result.Authenticated) {
+                    document.location.href = "@Url.Action("Index", "Home")";
+                }
+                else if (result.Authenticated && !result.Activated) {
+                    document.location.href = "@Url.Action("Activation", "Account")";
+                }
+                else {
+                    alert("Invalid username or password");
+                    $("#UserName").val("");
+                    $("#Password").val("");
+                    $("#UserName").focus();
+                    loginButton.enable(true);
+                    $("#loginProgress").hide();
+                }
+            },
+            error: function (data) {
+                alert("Error when trying to log in");
+                console.log(data);
+            }
+        });
+    }
+
+    function LoginButtonClick(arg) {
+        arg.preventDefault();
+        doLogin();
+    }
+</script>

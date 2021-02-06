@@ -1,0 +1,1893 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="EntitiesModel" namespace="CelloStore.Data" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="EntitiesModel" backend="mssql" default-schema="dbo" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="CelloStore.Data" default="true">
+      <orm:class name="Tag" uniqueId="13e968f5-8405-427b-946a-04db6ecfdd57">
+        <orm:table name="Tag" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="140275a5-82c7-4c18-8517-4d5d5d547148" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="5ed58543-cfc7-445d-93ca-d0f4cfa1be4e" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="207bb8f2-f2ae-49ad-adcb-3f09fff3257b" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="7afb1e2b-a936-4d01-9624-9b466d491e3f" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="abcc6f44-5fd6-4591-8545-8a08065cf41e" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="61fce0cd-dd7b-4536-a513-1793b292df94" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="products" property="Products" behavior="readwrite" uniqueId="5f80b70b-5771-4906-944a-3dd2284afb94" type="CelloStore.Data.Product">
+          <orm:join-table uniqueId="969a1f15-155f-40a6-a1ba-46a468f8fa2e" association-name="TagsHaveProducts">
+            <orm:table name="ProductTag" join-table="true" />
+            <orm:owner>
+              <orm:constraint name="FK_ProductTag_Tag" delete-action="dbdefaultrule" destination-table="Tag">
+                <orm:column name="TagId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="CelloStore.Data.Tag" target-field="id" />
+              </orm:constraint>
+            </orm:owner>
+            <orm:value>
+              <orm:constraint name="FK_ProductTag_Product" delete-action="dbdefaultrule" destination-table="Product">
+                <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="CelloStore.Data.Product" target-field="id" />
+              </orm:constraint>
+            </orm:value>
+          </orm:join-table>
+        </orm:field>
+      </orm:class>
+      <orm:class name="Role" uniqueId="b3174df7-5925-4292-b916-467f3898f003">
+        <orm:table name="Role" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="2da3005e-ce7e-4005-829f-aafc8b03bddc" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="390e5887-47f1-4ddd-af6a-4c79805b08c6" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="isSystemRole" property="IsSystemRole" behavior="readwrite" uniqueId="c083914d-b5b8-45a6-8723-a6d82ed83aa6" type="System.Boolean">
+          <orm:column name="IsSystemRole" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="5db7ae2d-ba90-4e0e-a853-e2a886419103" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="b744c08f-7a12-4c83-8b45-4fc505aa3f48" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="ff225b79-7df3-4c58-916c-364515cecf1a" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="89f1230c-3f38-450e-90e4-2a8126b60d98" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="people" property="People" behavior="readwrite" uniqueId="c21e9511-47ea-4c0b-8451-974e126c021a" type="CelloStore.Data.Person">
+          <orm:collection element-class="CelloStore.Data.Person" inverse-field="role" order-by="" uniqueId="43c01ed9-cea5-44e3-a5ab-0c7476b3481d" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Product" uniqueId="9877391b-944f-4820-9190-e0a6d07996a5">
+        <orm:table name="Product" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="ac6c97c2-3c12-4284-b965-801280ad64a0" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="code" property="Code" behavior="readwrite" uniqueId="d7ac91a2-fa3d-4ba8-9867-24f05eec70fe" type="System.String">
+          <orm:column name="Code" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="9ec3ed81-f8e0-4b14-8a0f-839503f34259" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="unitPrice" property="UnitPrice" behavior="readwrite" uniqueId="2b17c81c-e4c3-4696-9463-704541a666a7" type="System.Decimal">
+          <orm:column name="UnitPrice" sql-type="money" nullable="false" length="0" scale="0" ado-type="Currency" />
+        </orm:field>
+        <orm:field name="isActive" property="IsActive" behavior="readwrite" uniqueId="c6de581c-94e5-48d3-8348-7681443293ac" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="photo" property="Photo" behavior="readwrite" uniqueId="30c9be0f-fd1a-4581-878e-74acbc6460fe" type="System.String">
+          <orm:column name="Photo" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="581eca89-b2e1-46b9-9e23-f859a11e879e" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="8d5dda97-9f1c-4245-93d3-73cf4fa58929" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="7cfbeebc-d0b0-429e-80b6-b69a9e921a1f" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="f9ea8a08-3227-4388-8a9e-4bcde8175d98" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="description" property="Description" behavior="readwrite" uniqueId="2d0f4c23-dd0e-431d-a377-6cd8fc732393" type="System.String">
+          <orm:column name="Description" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="isFeatured" property="IsFeatured" behavior="readwrite" uniqueId="9ed7e702-4c76-40f1-8c71-7bde931175e0" type="System.Boolean">
+          <orm:column name="IsFeatured" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="areas" property="Areas" behavior="readwrite" uniqueId="ef06fb59-4dfe-430d-ab2f-b7c87689d06f" type="CelloStore.Data.Area">
+          <orm:join-table uniqueId="699e6f59-96ab-44b4-b54f-590e6ae8fcf3" association-name="ProductsHaveAreas">
+            <orm:table name="ProductArea" join-table="true" />
+            <orm:owner>
+              <orm:constraint name="FK_ProductArea_Product" delete-action="dbdefaultrule" destination-table="Product">
+                <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="CelloStore.Data.Product" target-field="id" />
+              </orm:constraint>
+            </orm:owner>
+            <orm:value>
+              <orm:constraint name="FK_ProductArea_Area" delete-action="dbdefaultrule" destination-table="Area">
+                <orm:column name="AreaId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="CelloStore.Data.Area" target-field="id" />
+              </orm:constraint>
+            </orm:value>
+          </orm:join-table>
+        </orm:field>
+        <orm:field name="categories" property="Categories" behavior="readwrite" uniqueId="10ca0cf8-a1a5-47c1-a033-859d712a02d6" type="CelloStore.Data.Category">
+          <orm:join-table uniqueId="c6911f8d-98d0-4773-af21-33cf24a54adb" association-name="ProductsHaveCategories">
+            <orm:table name="ProductCategory" join-table="true" />
+            <orm:owner>
+              <orm:constraint name="FK_ProductCategory_Product" delete-action="dbdefaultrule" destination-table="Product">
+                <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="CelloStore.Data.Product" target-field="id" />
+              </orm:constraint>
+            </orm:owner>
+            <orm:value>
+              <orm:constraint name="FK_ProductCategory_Category" delete-action="dbdefaultrule" destination-table="Category">
+                <orm:column name="CategoryId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="CelloStore.Data.Category" target-field="id" />
+              </orm:constraint>
+            </orm:value>
+          </orm:join-table>
+        </orm:field>
+        <orm:field name="orderDetails" property="OrderDetails" behavior="readwrite" uniqueId="261c71d7-6202-445f-880d-7da11ef862af" type="CelloStore.Data.OrderDetail">
+          <orm:collection element-class="CelloStore.Data.OrderDetail" inverse-field="product" order-by="" uniqueId="502de0f0-57c9-4b34-bc67-944d818d2ea0" />
+        </orm:field>
+        <orm:field name="tags" property="Tags" behavior="readwrite" uniqueId="725ca25b-c703-4f86-947e-60c98deddfd0" type="CelloStore.Data.Tag">
+          <orm:collection element-class="CelloStore.Data.Tag" inverse-field="products" managed="true" order-by="" uniqueId="969a1f15-155f-40a6-a1ba-46a468f8fa2e" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Person" uniqueId="e824d5b0-8924-4168-88f9-7c128d727864">
+        <orm:table name="Person" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="5904514a-1e10-43ae-98ab-fec889db7bb8" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="email" property="Email" behavior="readwrite" uniqueId="970e9708-3fba-486f-9a6a-fdc78a6ee5d2" type="System.String">
+          <orm:column name="Email" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="phoneNumber" property="PhoneNumber" behavior="readwrite" uniqueId="d023eb2e-a8d4-4055-8859-594db1e46a13" type="System.String">
+          <orm:column name="PhoneNumber" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="password" property="Password" behavior="readwrite" uniqueId="7041ca1c-d200-4a5d-a6b3-85ca88f000dd" type="System.String">
+          <orm:column name="Password" sql-type="varchar" nullable="false" length="200" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="address" property="Address" behavior="readwrite" uniqueId="f3841fcb-b885-4cab-bcb3-eeb91be95a27" type="System.String">
+          <orm:column name="Address" sql-type="varchar" nullable="true" length="500" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="city" property="City" behavior="readwrite" uniqueId="00eef18a-aa7d-4b90-802f-2e53c4231389" type="System.String">
+          <orm:column name="City" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="state" property="State" behavior="readwrite" uniqueId="1ef7b2b6-4cbe-4b89-926a-fe34021250ce" type="System.String">
+          <orm:column name="State" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="postalCode" property="PostalCode" behavior="readwrite" uniqueId="dacc0808-9ae4-49e6-aa3b-32abf5870a46" type="System.String">
+          <orm:column name="PostalCode" sql-type="varchar" nullable="true" length="10" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="gender" property="Gender" behavior="readwrite" uniqueId="1c2b2ddf-41b5-4536-b948-480203493147" type="System.Nullable`1[[System.Char, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Gender" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="birthDate" property="BirthDate" behavior="readwrite" uniqueId="4c97e95a-cfdf-4a2b-9369-b20a04b64c0a" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="BirthDate" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
+        </orm:field>
+        <orm:field name="isActive" property="IsActive" behavior="readwrite" uniqueId="e1c05f75-3ef9-4da8-9bae-4342fc1ba6fd" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="isVerified" property="IsVerified" behavior="readwrite" uniqueId="47bd31a3-2929-4fcf-b750-97deac8c1d47" type="System.Boolean">
+          <orm:column name="IsVerified" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="roleId" property="RoleId" behavior="readwrite" uniqueId="964b0343-e6f1-4053-b7ed-6b4b3470b39c" type="System.Int32">
+          <orm:column name="RoleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="challangeCode" property="ChallangeCode" behavior="readwrite" uniqueId="a278dd51-29eb-4eb7-b385-f129167cbed5" type="System.String">
+          <orm:column name="ChallangeCode" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="lastIpAddress" property="LastIpAddress" behavior="readwrite" uniqueId="bc07025c-2c5c-4a34-aeed-e24fcb38a49d" type="System.String">
+          <orm:column name="LastIpAddress" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="lastLogOn" property="LastLogOn" behavior="readwrite" uniqueId="a2ea74c5-3369-410f-bab8-a3e1d51ed698" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="LastLogOn" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="7764130a-4222-4953-9052-b757f22913b7" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="ebaad8cf-1115-4955-bf28-42f17ecf3c90" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="2a9b45d1-83eb-4c3d-84c1-752b4f2ebe63" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="d05170ec-179c-4845-b77d-ec232136ebee" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="activatedWhen" property="ActivatedWhen" behavior="readwrite" uniqueId="a6e2666b-3644-4a4c-9b57-29679993ed77" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ActivatedWhen" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="challangedWhen" property="ChallangedWhen" behavior="readwrite" uniqueId="96490b54-1bc4-4c45-b812-64cfa42e397f" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ChallangedWhen" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="lastChangePassword" property="LastChangePassword" behavior="readwrite" uniqueId="67a43a06-d388-410a-8ebd-d7f6bc1d3776" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="LastChangePassword" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="lastName" property="LastName" behavior="readwrite" uniqueId="6b870e81-050b-4add-9b33-2839c5951957" type="System.String">
+          <orm:column name="LastName" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="firstName" property="FirstName" behavior="readwrite" uniqueId="46e9373e-2423-4060-95b5-deacc0fea42e" type="System.String">
+          <orm:column name="FirstName" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="role" property="Role" behavior="readwrite" uniqueId="353ab814-9ace-40fc-a8ae-8fc5def8b98b" type="CelloStore.Data.Role">
+          <orm:reference uniqueId="43c01ed9-cea5-44e3-a5ab-0c7476b3481d" association-name="PersonHasRole">
+            <orm:sharedfield name="roleId" target-class="CelloStore.Data.Role" target-field="id" />
+            <orm:constraint name="FK_Person_Role" delete-action="dbdefaultrule" destination-table="Role" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="orders" property="Orders" behavior="readwrite" uniqueId="8cba37ba-933c-4e3c-9ba4-81a631de5f53" type="CelloStore.Data.Order">
+          <orm:collection element-class="CelloStore.Data.Order" inverse-field="person" order-by="" uniqueId="212d0665-a2f1-4c7c-bcdf-e4fa6a7081ce" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="PaymentMethod" uniqueId="d37cc9ff-ead1-4091-b83c-62f182124b5d">
+        <orm:table name="PaymentMethod" />
+        <orm:identity>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="3afdacad-5156-4df1-bdf1-b241c341d875" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="7001f555-8d7e-4800-a351-d29403334923" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="accountNumber" property="AccountNumber" behavior="readwrite" uniqueId="68825420-a1b9-4917-bc36-7a7eeeef6787" type="System.String">
+          <orm:column name="AccountNumber" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="accountName" property="AccountName" behavior="readwrite" uniqueId="e7601bc7-9806-45ce-9ea8-327eb4968e3d" type="System.String">
+          <orm:column name="AccountName" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="notes" property="Notes" behavior="readwrite" uniqueId="359962f2-2ab8-4a99-8871-2ffa8815c3e6" type="System.String">
+          <orm:column name="Notes" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="30890ca5-b60d-4cda-b29a-1bdfafd38df9" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="a68bb0cc-2544-460c-b5fd-28a175ef29a4" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="5df98ccb-3e22-4615-b08c-0846ea727b66" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="2278c112-b129-4e3b-bbf6-88cb2ae7b30c" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="orders" property="Orders" behavior="readwrite" uniqueId="7ba91cb6-8c06-451e-858c-6f3c3fc0efa4" type="CelloStore.Data.Order">
+          <orm:collection element-class="CelloStore.Data.Order" inverse-field="paymentMethod" order-by="" uniqueId="901a780e-9fdc-4e4c-9547-f5080c957176" />
+        </orm:field>
+        <orm:field name="paymentConfirmations" property="PaymentConfirmations" behavior="readwrite" uniqueId="0261ce18-6574-4a1d-a3c2-5310df9a4577" type="CelloStore.Data.PaymentConfirmation">
+          <orm:collection element-class="CelloStore.Data.PaymentConfirmation" inverse-field="paymentMethod" order-by="" uniqueId="fd2119e0-5772-431c-9240-125be99b5586" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="OrderStatusHistory" uniqueId="c6376c28-0dfd-45c2-ac5b-337e6ca17ac8">
+        <orm:table name="OrderStatusHistory" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="c6d69bdb-5a59-4afc-a446-9ae7147435f8" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="orderId" property="OrderId" behavior="readwrite" uniqueId="baac2873-ab1f-4904-8d14-9787ed4adbc8" type="System.Int32">
+          <orm:column name="OrderId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="effectiveDate" property="EffectiveDate" behavior="readwrite" uniqueId="657ff682-5d73-46c1-ac3d-df856e6ad2c8" type="System.DateTime">
+          <orm:column name="EffectiveDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="orderStatusId" property="OrderStatusId" behavior="readwrite" uniqueId="4d934210-ee1d-4233-bca7-90aadf47a294" type="System.Int32">
+          <orm:column name="OrderStatusId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="notes" property="Notes" behavior="readwrite" uniqueId="505fc808-5ce5-4dc3-a612-6b2fa91c04a8" type="System.String">
+          <orm:column name="Notes" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="isActive" property="IsActive" behavior="readwrite" uniqueId="baad0652-de48-4c13-a36b-e30ee4e86347" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="97a723f8-aa94-4462-b36f-9cba09500173" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="createdDate" property="CreatedDate" behavior="readwrite" uniqueId="0043ba98-a0a2-4fe9-9379-16ea76ee0377" type="System.DateTime">
+          <orm:column name="CreatedDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="sendMail" property="SendMail" behavior="readwrite" uniqueId="20f695ec-3ff7-4027-94c6-c299886ef17e" type="System.Boolean">
+          <orm:column name="SendMail" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="order" property="Order" behavior="readwrite" uniqueId="c16a7fc7-284f-4202-9f35-a951e8d4e273" type="CelloStore.Data.Order">
+          <orm:reference uniqueId="f53c9488-cc1f-46a8-8d78-3689d0c95f29" association-name="OrderStatusHistoryHasOrder">
+            <orm:sharedfield name="orderId" target-class="CelloStore.Data.Order" target-field="id" />
+            <orm:constraint name="FK_OrderStatusHistory_Order" delete-action="dbdefaultrule" destination-table="Order" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="OrderDetail" uniqueId="effef881-4ff1-4c7b-b92e-ee87c600ddca">
+        <orm:table name="OrderDetail" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="7ad4dad6-cbdf-41df-98ab-22ef190de2e9" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="orderId" property="OrderId" behavior="readwrite" uniqueId="ee221d86-2d14-46b4-8f42-d0a4c0a73f2f" type="System.Int32">
+          <orm:column name="OrderId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="productId" property="ProductId" behavior="readwrite" uniqueId="15ffdec8-9aff-4110-a791-2506b440ba80" type="System.Int32">
+          <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="qty" property="Qty" behavior="readwrite" uniqueId="3c7078f0-9aef-4f8a-ad6a-644b49af81a7" type="System.Int32">
+          <orm:column name="Qty" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="unitPrice" property="UnitPrice" behavior="readwrite" uniqueId="9b31fa80-a258-44cb-8f2d-b6aed23518cf" type="System.Decimal">
+          <orm:column name="UnitPrice" sql-type="money" nullable="false" length="0" scale="0" ado-type="Currency" />
+        </orm:field>
+        <orm:field name="discValue" property="DiscValue" behavior="readwrite" uniqueId="893e0e84-565b-4102-b174-5c4528459f6e" type="System.Decimal">
+          <orm:column name="DiscValue" sql-type="money" nullable="false" length="0" scale="0" ado-type="Currency" />
+        </orm:field>
+        <orm:field name="product" property="Product" behavior="readwrite" uniqueId="32cab7d2-9be2-4732-8e30-441b69dfb730" type="CelloStore.Data.Product">
+          <orm:reference uniqueId="502de0f0-57c9-4b34-bc67-944d818d2ea0" association-name="OrderDetailHasProduct">
+            <orm:sharedfield name="productId" target-class="CelloStore.Data.Product" target-field="id" />
+            <orm:constraint name="FK_OrderDetail_Product" delete-action="dbdefaultrule" destination-table="Product" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="order" property="Order" behavior="readwrite" uniqueId="0755b530-2520-4e07-a2f1-c5ad127ec1cb" type="CelloStore.Data.Order">
+          <orm:reference uniqueId="afcb3419-a58c-4dec-b818-2c5250238e87" association-name="OrderDetailHasOrder">
+            <orm:sharedfield name="orderId" target-class="CelloStore.Data.Order" target-field="id" />
+            <orm:constraint name="FK_OrderDetail_Order" delete-action="dbdefaultrule" destination-table="Order" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="Order" uniqueId="0243dc89-4656-4881-a490-4875e8839716">
+        <orm:table name="Order" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="88e38437-087e-49e3-b441-9e4c186f6cda" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="orderNo" property="OrderNo" behavior="readwrite" uniqueId="33ae669a-0ef4-4759-9492-1481196926bf" type="System.String">
+          <orm:column name="OrderNo" sql-type="varchar" nullable="false" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="orderDate" property="OrderDate" behavior="readwrite" uniqueId="a018a967-b17d-41ad-b8fc-174de943801a" type="System.DateTime">
+          <orm:column name="OrderDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="personId" property="PersonId" behavior="readwrite" uniqueId="75b8be84-a103-4c60-a4d6-4b3e0608ef55" type="System.Int32">
+          <orm:column name="PersonId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="secretSenderName" property="SecretSenderName" behavior="readwrite" uniqueId="5bfb8913-cdc0-4a89-b3b3-54a1cf90ed91" type="System.Boolean">
+          <orm:column name="SecretSenderName" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="callRecipientFirst" property="CallRecipientFirst" behavior="readwrite" uniqueId="a8212b62-fba9-4116-8cde-6b96a2498770" type="System.Boolean">
+          <orm:column name="CallRecipientFirst" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="recipientName" property="RecipientName" behavior="readwrite" uniqueId="cfb00471-b1b9-4f30-b119-062a66e4af9b" type="System.String">
+          <orm:column name="RecipientName" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="recipientEmail" property="RecipientEmail" behavior="readwrite" uniqueId="b9cbaaef-2cf4-44a5-a006-a1dc11042dd1" type="System.String">
+          <orm:column name="RecipientEmail" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="recipientCompanyName" property="RecipientCompanyName" behavior="readwrite" uniqueId="5c2dd4cb-3747-49f8-a06c-ffcc461bedaf" type="System.String">
+          <orm:column name="RecipientCompanyName" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="recipientLocationTypeId" property="RecipientLocationTypeId" behavior="readwrite" uniqueId="faab600c-7106-4b00-bac6-77259fe98e05" type="System.Int32">
+          <orm:column name="RecipientLocationTypeId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="recipientAddress" property="RecipientAddress" behavior="readwrite" uniqueId="639a73d2-fb23-4a4a-b2ae-ad34ae0d180a" type="System.String">
+          <orm:column name="RecipientAddress" sql-type="varchar" nullable="false" length="2000" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="recipientPhoneNumber" property="RecipientPhoneNumber" behavior="readwrite" uniqueId="97ef2afe-16c6-475b-a97e-79e5b4638d7a" type="System.String">
+          <orm:column name="RecipientPhoneNumber" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="deliveryDate" property="DeliveryDate" behavior="readwrite" uniqueId="6c71231c-abce-485f-ba7b-16c1ce50e2a5" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="DeliveryDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="deliveryTime" property="DeliveryTime" behavior="readwrite" uniqueId="bcd0e39f-e0ce-437d-882c-c1517b2312b5" type="System.Byte">
+          <orm:column name="DeliveryTime" sql-type="tinyint" nullable="false" length="0" scale="0" ado-type="Byte" />
+        </orm:field>
+        <orm:field name="voucherCode" property="VoucherCode" behavior="readwrite" uniqueId="40557f6e-da6f-4ee5-98dc-72f282049449" type="System.String">
+          <orm:column name="VoucherCode" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="toCardMessage" property="ToCardMessage" behavior="readwrite" uniqueId="81d6fc2a-cf72-4c0a-a641-90494bc69204" type="System.String">
+          <orm:column name="ToCardMessage" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="fromCardMessage" property="FromCardMessage" behavior="readwrite" uniqueId="c301b9d3-c588-4d71-b19d-9e6d8546a6a0" type="System.String">
+          <orm:column name="FromCardMessage" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="cardMessage" property="CardMessage" behavior="readwrite" uniqueId="b090f90d-8ff3-43f5-a817-5f8c2ca8f5f8" type="System.String">
+          <orm:column name="CardMessage" sql-type="varchar" nullable="true" length="1000" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="paymentMethodId" property="PaymentMethodId" behavior="readwrite" uniqueId="df717c57-3f57-4907-8df5-b71696cf0bc9" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="PaymentMethodId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="notes" property="Notes" behavior="readwrite" uniqueId="8779b083-f3bd-4a05-aee7-c0f1dee9040d" type="System.String">
+          <orm:column name="Notes" sql-type="varchar" nullable="true" length="2000" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="uniquePayment" property="UniquePayment" behavior="readwrite" uniqueId="1e72e4c6-8747-48a8-a805-fa60df0cd91f" type="System.Byte">
+          <orm:column name="UniquePayment" sql-type="tinyint" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Byte" />
+        </orm:field>
+        <orm:field name="orderStatusId" property="OrderStatusId" behavior="readwrite" uniqueId="a2d08be1-820e-4397-a9f2-a668dd753d56" type="System.Int32">
+          <orm:column name="OrderStatusId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="f333055b-b6aa-4981-92d0-7c8b5f3d702e" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="f2c10a70-6ea2-4964-9186-af603e7e7715" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="02b91353-0cfa-4712-be83-4546dd75cd7d" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="5fd171e7-4078-4bd0-a4b3-1e13832f157d" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="orderAreaId" property="OrderAreaId" behavior="readwrite" uniqueId="f1640c2e-5568-41e8-bdef-7576d1871d7f" type="System.Int32">
+          <orm:column name="OrderAreaId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="recipientState" property="RecipientState" behavior="readwrite" uniqueId="91ac404a-b536-4bfa-900a-65093df83a6d" type="System.String">
+          <orm:column name="RecipientState" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="recipientCity" property="RecipientCity" behavior="readwrite" uniqueId="cb9be374-d2ef-4a92-8ce7-cba35622db48" type="System.String">
+          <orm:column name="RecipientCity" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="person" property="Person" behavior="readwrite" uniqueId="53225c54-7307-4774-9ff5-5f17cf37cd63" type="CelloStore.Data.Person">
+          <orm:reference uniqueId="212d0665-a2f1-4c7c-bcdf-e4fa6a7081ce" association-name="OrderHasPerson">
+            <orm:sharedfield name="personId" target-class="CelloStore.Data.Person" target-field="id" />
+            <orm:constraint name="FK_Order_Person" delete-action="dbdefaultrule" destination-table="Person" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="paymentMethod" property="PaymentMethod" behavior="readwrite" uniqueId="ee0355ce-8d31-44a2-a728-0c41901a6953" type="CelloStore.Data.PaymentMethod">
+          <orm:reference uniqueId="901a780e-9fdc-4e4c-9547-f5080c957176" association-name="OrderHasPaymentMethod">
+            <orm:sharedfield name="paymentMethodId" target-class="CelloStore.Data.PaymentMethod" target-field="id" />
+            <orm:constraint name="FK_Order_PaymentMethod" delete-action="dbdefaultrule" destination-table="PaymentMethod" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="addressType" property="AddressType" behavior="readwrite" uniqueId="d63024c4-8af2-48ee-af6c-7c61ddb82686" type="CelloStore.Data.AddressType">
+          <orm:reference uniqueId="bb645ecf-2cec-459d-af73-a952be76d1cf" association-name="OrderHasAddressType">
+            <orm:sharedfield name="recipientLocationTypeId" target-class="CelloStore.Data.AddressType" target-field="id" />
+            <orm:constraint name="FK_Order_AddressType" delete-action="dbdefaultrule" destination-table="AddressType" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="area" property="Area" behavior="readwrite" uniqueId="ab496a22-803b-4e3b-9ca5-f2f5e683c99e" type="CelloStore.Data.Area">
+          <orm:reference uniqueId="248bc049-f356-4a1b-a3e3-2e2c46cf54ef" association-name="OrderHasArea">
+            <orm:sharedfield name="orderAreaId" target-class="CelloStore.Data.Area" target-field="id" />
+            <orm:constraint name="FK_Order_Area" delete-action="dbdefaultrule" destination-table="Area" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="orderStatusHistories" property="OrderStatusHistories" behavior="readwrite" uniqueId="5ebcb5a3-8655-48fd-bfd0-21fca5781b0d" type="CelloStore.Data.OrderStatusHistory">
+          <orm:collection element-class="CelloStore.Data.OrderStatusHistory" inverse-field="order" order-by="" uniqueId="f53c9488-cc1f-46a8-8d78-3689d0c95f29" />
+        </orm:field>
+        <orm:field name="orderDetails" property="OrderDetails" behavior="readwrite" uniqueId="0de2711c-1b60-4541-9f89-78cfebadd3d9" type="CelloStore.Data.OrderDetail">
+          <orm:collection element-class="CelloStore.Data.OrderDetail" inverse-field="order" order-by="" uniqueId="afcb3419-a58c-4dec-b818-2c5250238e87" />
+        </orm:field>
+        <orm:field name="paymentConfirmations" property="PaymentConfirmations" behavior="readwrite" uniqueId="240c47ba-eda4-4f40-9023-49e143213862" type="CelloStore.Data.PaymentConfirmation">
+          <orm:collection element-class="CelloStore.Data.PaymentConfirmation" inverse-field="order" order-by="" uniqueId="b85faf31-85e7-4771-be7f-0ad915401b3a" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Configuration" uniqueId="fd54041f-3202-414f-9482-c0e21036b16d">
+        <orm:table name="Configuration" />
+        <orm:identity>
+          <orm:single-field field-name="key" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="key" property="Key" behavior="readwrite" uniqueId="9dbb9989-6089-4761-ba2b-4a81f9e2f6b3" type="System.String">
+          <orm:column name="Key" sql-type="varchar" nullable="false" length="50" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="value" property="Value" behavior="readwrite" uniqueId="d69bb4b6-a024-42a3-a497-3111b983ae11" type="System.String">
+          <orm:column name="Value" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="0e9c7222-6a69-45c9-9f14-71fbe085cbda" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedWho" property="ChangedWho" behavior="readwrite" uniqueId="3b405ece-f959-4734-aab9-e1cbd3f9b2a8" type="System.String">
+          <orm:column name="ChangedWho" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Category" uniqueId="410e3a23-8c6b-4ebc-b8a3-95b6281bea6e">
+        <orm:table name="Category" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="cbab16ac-6e2a-4b02-b9e5-3727a67be91f" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="87472f41-6b6b-44d0-bf22-16c8dc69dcd0" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="parentCategoryId" property="ParentCategoryId" behavior="readwrite" uniqueId="06671ed8-f1c1-4cef-962e-0729cba1ca1a" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ParentCategoryId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="0b02836c-4262-4ad8-b5bf-af542f48bdc4" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="71785e93-c3ca-4441-96b1-e6afd468f933" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="8d8f4bec-67aa-4081-a596-efee1f18ebc3" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="6f8d38c6-d84d-4f2a-af00-988c2b6bd6e1" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="isActive" property="IsActive" behavior="readwrite" uniqueId="df466bce-9677-41c9-92fc-d7021c5a136b" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="products" property="Products" behavior="readwrite" uniqueId="e0a5e6ff-4193-43c7-8b11-f82d38752ed5" type="CelloStore.Data.Product">
+          <orm:collection element-class="CelloStore.Data.Product" inverse-field="categories" order-by="" uniqueId="c6911f8d-98d0-4773-af21-33cf24a54adb" />
+        </orm:field>
+        <orm:index name="UQ_Category" unique="true">
+          <orm:columnMapping>
+            <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="Article" uniqueId="e0f69a80-8684-4d49-826a-6c2c530d6e3b">
+        <orm:table name="Article" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="57768e80-4dd1-4c7b-94b8-ce87bb076805" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="urlToken" property="UrlToken" behavior="readwrite" uniqueId="096f4927-d113-4b29-b4d1-414e7d104218" type="System.String">
+          <orm:column name="UrlToken" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="subject" property="Subject" behavior="readwrite" uniqueId="d62da892-c0c8-4c94-af01-9a299413c929" type="System.String">
+          <orm:column name="Subject" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="content" property="Content" behavior="readwrite" uniqueId="6e1164dc-25f8-4948-a52d-7a1904853b9e" type="System.String">
+          <orm:column name="Content" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="isPublished" property="IsPublished" behavior="readwrite" uniqueId="c8d0dda6-b5b9-46fa-934b-cf43859e0b89" type="System.Boolean">
+          <orm:column name="IsPublished" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="66594b00-1353-4523-8610-31fb8c7c4557" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="6cc3e12f-f191-4538-8a2c-2573f6b5d08c" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="e69572be-6724-41f4-9258-5c6858799d8f" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="a1743756-c2b2-4042-8ffe-ee6e6cc63bbe" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:index name="UQ_Article" unique="true">
+          <orm:columnMapping>
+            <orm:column name="UrlToken" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="Area" uniqueId="b3b5d9f0-6ef2-4b5b-8afd-b062fb1b7159">
+        <orm:table name="Area" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="98aa5314-62ab-4940-b76e-bb4a883a0600" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="d055d9fa-0b7f-4944-b09d-c410454fd7f0" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="80fbe55c-dc81-492a-bff1-f320004e5f27" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="862675c6-1fcb-4bd5-91eb-de488806fbf7" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="edafa106-999f-4cff-83ff-fd3370e0600f" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="d45db66c-8449-44af-88c9-c17466889894" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="isActive" property="IsActive" behavior="readwrite" uniqueId="bf8297a3-12e3-412e-9d53-24ea7c2c56ed" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="products" property="Products" behavior="readwrite" uniqueId="17321f10-c0bb-4760-958e-a08821b384c2" type="CelloStore.Data.Product">
+          <orm:collection element-class="CelloStore.Data.Product" inverse-field="areas" order-by="" uniqueId="699e6f59-96ab-44b4-b54f-590e6ae8fcf3" />
+        </orm:field>
+        <orm:field name="orders" property="Orders" behavior="readwrite" uniqueId="3da13395-0cf3-4657-8562-516e09d5ea5f" type="CelloStore.Data.Order">
+          <orm:collection element-class="CelloStore.Data.Order" inverse-field="area" order-by="" uniqueId="248bc049-f356-4a1b-a3e3-2e2c46cf54ef" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="AddressType" uniqueId="37464b57-d4d3-4158-bd21-9e24d469fd1b">
+        <orm:table name="AddressType" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="937b6f4f-8e94-4203-ae1d-cbb0530ea233" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="f3724630-38e6-4d02-9668-50bb1384762d" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="41a6bd24-53a5-4200-89ed-df4f3c68d655" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="2a280746-271b-48e0-af8e-481f66c2675f" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="f9708289-073b-42c8-8457-3bc6252432bc" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="2414a54a-8938-4829-af6b-9af26c155c6d" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="isActive" property="IsActive" behavior="readwrite" uniqueId="cc758c77-21c4-4f17-8797-3d161ae03614" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="orders" property="Orders" behavior="readwrite" uniqueId="cc30afdd-34db-4bcf-ab82-3f2b651d90c9" type="CelloStore.Data.Order">
+          <orm:collection element-class="CelloStore.Data.Order" inverse-field="addressType" order-by="" uniqueId="bb645ecf-2cec-459d-af73-a952be76d1cf" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Showcase" uniqueId="a30df3d3-8d04-4f29-83fd-780a7048f24a">
+        <orm:table name="Showcase" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="6632a866-ce80-43a0-a61b-9c52fa364503" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="title" property="Title" behavior="readwrite" uniqueId="0e618b75-fdb7-44fe-aa54-258b66ffbd36" type="System.String">
+          <orm:column name="Title" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="description" property="Description" behavior="readwrite" uniqueId="e32aea94-ef13-4b6f-abcb-3e4fdacff434" type="System.String">
+          <orm:column name="Description" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="imagePath" property="ImagePath" behavior="readwrite" uniqueId="b23832d7-b09b-40b2-bf4c-526b3958751c" type="System.String">
+          <orm:column name="ImagePath" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="priceImagePath" property="PriceImagePath" behavior="readwrite" uniqueId="f799dc69-fad5-44ed-b298-f6d3b274b845" type="System.String">
+          <orm:column name="PriceImagePath" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="fromDate" property="FromDate" behavior="readwrite" uniqueId="0a8d9fb5-46ee-45b0-b51d-8eee1b1fefe5" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="FromDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="toDate" property="ToDate" behavior="readwrite" uniqueId="cfb5c2a7-bae0-4dd1-95e6-4e89d19cc185" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ToDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="first" property="First" behavior="readwrite" uniqueId="b553273c-e17d-4095-8081-e1954f3e04d5" type="System.Boolean">
+          <orm:column name="First" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="isActive" property="IsActive" behavior="readwrite" uniqueId="4b36c02a-e7c0-4ca7-8d35-29d8c5c1468f" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="url" property="Url" behavior="readwrite" uniqueId="93184e08-7522-4002-a73c-28c8de59db40" type="System.String">
+          <orm:column name="Url" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="c7f49484-0819-4c2a-9ed1-bb173c74ba12" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="e81a5828-5b43-4690-8071-8d5e672ecd76" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="9ebaaea5-0b5a-46dd-9c5b-d841102cf383" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="15744c48-e885-4a13-a6d7-9f510fa0ec9e" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="extLinkType" property="ExtLinkType" behavior="readwrite" uniqueId="a2d43bbe-9786-495e-bd1a-8c23ca899baa" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ExtLinkType" sql-type="int" nullable="true" length="0" scale="0" has-default-value="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="articleId" property="ArticleId" behavior="readwrite" uniqueId="f80ed10f-9082-45d0-84da-45ba653c42d6" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ArticleId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="AutoNumber" uniqueId="68c25fed-02ba-42af-b4f9-506d01b977e1">
+        <orm:table name="AutoNumber" />
+        <orm:identity>
+          <orm:multiple-field>
+            <orm:single-field field-name="formCode" />
+            <orm:single-field field-name="year" />
+          </orm:multiple-field>
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="formCode" property="FormCode" behavior="readwrite" uniqueId="ce3bb192-df49-4d3e-8bf3-3ea2c2fb6dcd" type="System.String">
+          <orm:column name="FormCode" sql-type="varchar" nullable="false" length="5" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="year" property="Year" behavior="readwrite" uniqueId="d23a10be-e858-4d70-be4f-4e4e07b40b5a" type="System.Int32">
+          <orm:column name="Year" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="lastNumber" property="LastNumber" behavior="readwrite" uniqueId="5e96161e-6ca2-4de5-a67c-25e4939b6138" type="System.Int32">
+          <orm:column name="LastNumber" sql-type="int" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Int32" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="OrderStatus" uniqueId="2f4a8c8b-79fe-4ed6-873a-8a632585c795">
+        <orm:table name="OrderStatus" />
+        <orm:identity>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="a8e83ddd-3fe6-424e-96c5-b788a947e6ec" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="8aeb560c-30b6-4453-8977-ff380d424a94" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="emailTemplate" property="EmailTemplate" behavior="readwrite" uniqueId="3378bfa5-a644-417a-834f-5634b573ec72" type="System.String">
+          <orm:column name="EmailTemplate" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="c3b1d032-a396-48c3-b623-277375a882d2" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="72939da9-0d97-4a92-902f-43d4f1d6f75a" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="sendMail" property="SendMail" behavior="readwrite" uniqueId="ad4e6fd1-1d2f-4c4f-8700-323488dac765" type="System.Nullable`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="SendMail" sql-type="bit" nullable="true" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="DeliveryTime" uniqueId="8b147c06-d7f7-46ea-b58a-23bd15396015">
+        <orm:table name="DeliveryTime" />
+        <orm:identity>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="fc667eb1-7b3e-4135-947f-fbd9ceea1d78" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="675542e6-a9ba-484f-8db4-b79560750faf" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="isActive" property="IsActive" behavior="readwrite" uniqueId="7df9229c-e283-46f7-910f-6a4cd53cb2f1" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="134bc3bd-fec0-475f-a5a2-28bf16c9901c" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="631d2751-d086-4790-90c4-1ddcc0dfb8a4" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="386bd4cb-d51f-41c2-a2e3-a8a19ae0e8bf" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="ea5f41de-e3ec-47fc-b706-087fc7b5b06d" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:index name="UQ_DeliveryTime" unique="true">
+          <orm:columnMapping>
+            <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="EmailTemplate" uniqueId="4bebe776-1279-47fb-9c59-673883f56cbd">
+        <orm:table name="EmailTemplate" />
+        <orm:identity>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="f99a0867-99b3-4e13-b087-5be0ca415ff4" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="1187b2ed-ff0e-484f-bce4-7c254cd1cc8a" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="content" property="Content" behavior="readwrite" uniqueId="c1b4dbbb-b6b4-41c2-9e81-8e738828600e" type="System.String">
+          <orm:column name="Content" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="bcc" property="Bcc" behavior="readwrite" uniqueId="c72769ff-f5aa-4286-899d-1f7c66e5e0d0" type="System.String">
+          <orm:column name="Bcc" sql-type="varchar" nullable="true" length="500" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="0be12203-6353-436b-90a4-b4469de7562e" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="3bd46fb3-c17b-43a9-b118-cd13c1388532" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="f6d2c766-9546-40a1-a1dd-91f20eff239f" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="7ffba965-53f0-4e17-9a8e-5b7814f20474" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="subject" property="Subject" behavior="readwrite" uniqueId="c2a16dec-cca1-4ad6-bb7a-e986c65dc658" type="System.String">
+          <orm:column name="Subject" sql-type="varchar" nullable="true" length="2000" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="tokens" property="Tokens" behavior="readwrite" uniqueId="e277e930-d4f5-4801-8827-e0105f59e914" type="System.String">
+          <orm:column name="Tokens" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="PaymentConfirmation" uniqueId="119d148d-63a5-4906-a43f-88c731c844d3">
+        <orm:table name="PaymentConfirmation" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="baf15feb-ca69-4734-be3a-9d4002f37274" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="orderId" property="OrderId" behavior="readwrite" uniqueId="332b786c-e574-47b1-86f7-628acf5c9709" type="System.Int32">
+          <orm:column name="OrderId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="paymentMethodId" property="PaymentMethodId" behavior="readwrite" uniqueId="894ec241-6e3a-4541-ac9e-789f19345783" type="System.Int32">
+          <orm:column name="PaymentMethodId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="bankId" property="BankId" behavior="readwrite" uniqueId="f70565b6-603b-49bd-9d84-f72053b3b62e" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="BankId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="amount" property="Amount" behavior="readwrite" uniqueId="2d46ca9b-c17b-4fcb-9060-df06f57d4888" type="System.Decimal">
+          <orm:column name="Amount" sql-type="decimal" nullable="false" length="20" scale="2" ado-type="Decimal" />
+        </orm:field>
+        <orm:field name="notes" property="Notes" behavior="readwrite" uniqueId="83e14889-0bb0-4064-90fd-b4738919f40b" type="System.String">
+          <orm:column name="Notes" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        </orm:field>
+        <orm:field name="verifiedWhen" property="VerifiedWhen" behavior="readwrite" uniqueId="82d679cc-1fea-4d89-9331-78d33cb6ec14" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="VerifiedWhen" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="verifiedByPersonId" property="VerifiedByPersonId" behavior="readwrite" uniqueId="a40d6032-bfc4-4c78-910f-d888a9ef7fe1" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="VerifiedByPersonId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="40069a2a-08ff-456f-aa46-a457517624da" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="89eab445-9165-4074-a218-b867d6587f8a" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="2f36630c-cc21-457b-96bd-17e2fc14acce" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="f657b4a4-14d0-40cf-94bf-b6734d614581" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="date" property="Date" behavior="readwrite" uniqueId="2fd28d7c-bc67-4bb6-ade1-5b7ae36fa7c6" type="System.DateTime">
+          <orm:column name="Date" sql-type="date" nullable="false" length="0" scale="0" ado-type="Date" />
+        </orm:field>
+        <orm:field name="paymentMethod" property="PaymentMethod" behavior="readwrite" uniqueId="56bea055-b7d5-4a52-badf-6df3d1666c6b" type="CelloStore.Data.PaymentMethod">
+          <orm:reference uniqueId="fd2119e0-5772-431c-9240-125be99b5586" association-name="PaymentConfirmationHasPaymentMethod">
+            <orm:sharedfield name="paymentMethodId" target-class="CelloStore.Data.PaymentMethod" target-field="id" />
+            <orm:constraint name="FK_PaymentConfirmation_PaymentMethod" delete-action="dbdefaultrule" destination-table="PaymentMethod" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="order" property="Order" behavior="readwrite" uniqueId="f838b406-a249-4112-99eb-8f65906e5579" type="CelloStore.Data.Order">
+          <orm:reference uniqueId="b85faf31-85e7-4771-be7f-0ad915401b3a" association-name="PaymentConfirmationHasOrder">
+            <orm:sharedfield name="orderId" target-class="CelloStore.Data.Order" target-field="id" />
+            <orm:constraint name="FK_PaymentConfirmation_Order" delete-action="dbdefaultrule" destination-table="Order" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="bank" property="Bank" behavior="readwrite" uniqueId="e3d17be4-869c-436e-a766-e15866a4cab4" type="CelloStore.Data.Bank">
+          <orm:reference uniqueId="a51d1f62-a8a8-4d3d-9d13-6c91afeb27da" association-name="PaymentConfirmationHasBank">
+            <orm:sharedfield name="bankId" target-class="CelloStore.Data.Bank" target-field="id" />
+            <orm:constraint name="FK_PaymentConfirmation_Bank" delete-action="dbdefaultrule" destination-table="Bank" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="Bank" uniqueId="e30ea231-452a-461a-9844-2bd3389d02cb">
+        <orm:table name="Bank" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="id" property="Id" behavior="readwrite" uniqueId="1cd2dd5e-40cf-4865-b7fa-3d1bb1a62ec5" type="System.Int32">
+          <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="name" property="Name" behavior="readwrite" uniqueId="eb3af5fb-9a77-40bf-b179-94b9cd92f388" type="System.String">
+          <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="accountNumber" property="AccountNumber" behavior="readwrite" uniqueId="068f91d2-d8a8-4cf3-b41f-f4f384ac34a9" type="System.String">
+          <orm:column name="AccountNumber" sql-type="varchar" nullable="false" length="30" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="isActive" property="IsActive" behavior="readwrite" uniqueId="35cf0979-a4ef-4546-ab47-61bdd6a3c244" type="System.Boolean">
+          <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="createdWhen" property="CreatedWhen" behavior="readwrite" uniqueId="666e839c-b51a-4a4d-b8d6-f152b88136df" type="System.DateTime">
+          <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="createdBy" property="CreatedBy" behavior="readwrite" uniqueId="b1566793-01a5-42ce-ad8e-4e37095c719c" type="System.String">
+          <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="changedWhen" property="ChangedWhen" behavior="readwrite" uniqueId="060cbfce-6b82-4f51-94a2-69b44ac3511c" type="System.DateTime">
+          <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="changedBy" property="ChangedBy" behavior="readwrite" uniqueId="8d3c31b0-d9e2-4df6-8420-696e32956c06" type="System.String">
+          <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="paymentConfirmations" property="PaymentConfirmations" behavior="readwrite" uniqueId="19b53015-2fab-475c-b080-4a6d39182d28" type="CelloStore.Data.PaymentConfirmation">
+          <orm:collection element-class="CelloStore.Data.PaymentConfirmation" inverse-field="bank" order-by="" uniqueId="a51d1f62-a8a8-4d3d-9d13-6c91afeb27da" />
+        </orm:field>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="Tag">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+      <orm:table name="Role">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="IsSystemRole" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+      <orm:table name="ProductTag" join-table="true">
+        <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="TagId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:constraint name="FK_ProductTag_Tag" delete-action="dbdefaultrule" destination-table="Tag">
+          <orm:column name="TagId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_ProductTag_Product" delete-action="dbdefaultrule" destination-table="Product">
+          <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="ProductArea" join-table="true">
+        <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="AreaId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:constraint name="FK_ProductArea_Product" delete-action="dbdefaultrule" destination-table="Product">
+          <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_ProductArea_Area" delete-action="dbdefaultrule" destination-table="Area">
+          <orm:column name="AreaId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="Product">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Code" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="UnitPrice" sql-type="money" nullable="false" length="0" scale="0" ado-type="Currency" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="Photo" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Description" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="IsFeatured" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+      </orm:table>
+      <orm:table name="Person">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Email" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="PhoneNumber" sql-type="varchar" nullable="true" length="15" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Password" sql-type="varchar" nullable="false" length="200" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Address" sql-type="varchar" nullable="true" length="500" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="City" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="State" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="PostalCode" sql-type="varchar" nullable="true" length="10" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Gender" sql-type="varchar" nullable="true" length="1" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="BirthDate" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="IsVerified" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="RoleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="ChallangeCode" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="LastIpAddress" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="LastLogOn" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ActivatedWhen" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChallangedWhen" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="LastChangePassword" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="LastName" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="FirstName" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:constraint name="FK_Person_Role" delete-action="dbdefaultrule" destination-table="Role">
+          <orm:column name="RoleId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="PaymentMethod">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="AccountNumber" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="AccountName" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Notes" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+      <orm:table name="OrderStatusHistory">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="OrderId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="EffectiveDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="OrderStatusId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Notes" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="CreatedDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="SendMail" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:constraint name="FK_OrderStatusHistory_Order" delete-action="dbdefaultrule" destination-table="Order">
+          <orm:column name="OrderId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="OrderDetail">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="OrderId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Qty" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="UnitPrice" sql-type="money" nullable="false" length="0" scale="0" ado-type="Currency" />
+        <orm:column name="DiscValue" sql-type="money" nullable="false" length="0" scale="0" ado-type="Currency" />
+        <orm:constraint name="FK_OrderDetail_Product" delete-action="dbdefaultrule" destination-table="Product">
+          <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_OrderDetail_Order" delete-action="dbdefaultrule" destination-table="Order">
+          <orm:column name="OrderId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="Order">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="OrderNo" sql-type="varchar" nullable="false" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="OrderDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="PersonId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="SecretSenderName" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="CallRecipientFirst" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="RecipientName" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="RecipientEmail" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="RecipientCompanyName" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="RecipientLocationTypeId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="RecipientAddress" sql-type="varchar" nullable="false" length="2000" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="RecipientPhoneNumber" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="DeliveryDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="DeliveryTime" sql-type="tinyint" nullable="false" length="0" scale="0" ado-type="Byte" />
+        <orm:column name="VoucherCode" sql-type="varchar" nullable="true" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ToCardMessage" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="FromCardMessage" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="CardMessage" sql-type="varchar" nullable="true" length="1000" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="PaymentMethodId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Notes" sql-type="varchar" nullable="true" length="2000" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="UniquePayment" sql-type="tinyint" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Byte" />
+        <orm:column name="OrderStatusId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="OrderAreaId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="RecipientState" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="RecipientCity" sql-type="varchar" nullable="true" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:constraint name="FK_Order_Person" delete-action="dbdefaultrule" destination-table="Person">
+          <orm:column name="PersonId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_Order_PaymentMethod" delete-action="dbdefaultrule" destination-table="PaymentMethod">
+          <orm:column name="PaymentMethodId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_Order_AddressType" delete-action="dbdefaultrule" destination-table="AddressType">
+          <orm:column name="RecipientLocationTypeId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_Order_Area" delete-action="dbdefaultrule" destination-table="Area">
+          <orm:column name="OrderAreaId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="Configuration">
+        <orm:column name="Key" sql-type="varchar" nullable="false" length="50" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="Value" sql-type="varchar" nullable="false" length="100" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedWho" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+      <orm:table name="Category">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ParentCategoryId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:index name="UQ_Category" unique="true">
+          <orm:columnMapping>
+            <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
+      <orm:table name="Article">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="UrlToken" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Subject" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Content" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="IsPublished" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:index name="UQ_Article" unique="true">
+          <orm:columnMapping>
+            <orm:column name="UrlToken" sql-type="varchar" nullable="false" length="20" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
+      <orm:table name="Area">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+      </orm:table>
+      <orm:table name="AddressType">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+      </orm:table>
+      <orm:table name="Showcase">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Title" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Description" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ImagePath" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="PriceImagePath" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="FromDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ToDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="First" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="Url" sql-type="varchar" nullable="true" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ExtLinkType" sql-type="int" nullable="true" length="0" scale="0" has-default-value="true" ado-type="Int32" />
+        <orm:column name="ArticleId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+      </orm:table>
+      <orm:table name="ProductCategory" join-table="true">
+        <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="CategoryId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:constraint name="FK_ProductCategory_Product" delete-action="dbdefaultrule" destination-table="Product">
+          <orm:column name="ProductId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_ProductCategory_Category" delete-action="dbdefaultrule" destination-table="Category">
+          <orm:column name="CategoryId" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="AutoNumber">
+        <orm:column name="FormCode" sql-type="varchar" nullable="false" length="5" scale="0" primary-key="true" ado-type="StringVariableLength" />
+        <orm:column name="Year" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="LastNumber" sql-type="int" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Int32" />
+      </orm:table>
+      <orm:table name="OrderStatus">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="EmailTemplate" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="SendMail" sql-type="bit" nullable="true" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+      </orm:table>
+      <orm:table name="DeliveryTime">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:index name="UQ_DeliveryTime" unique="true">
+          <orm:columnMapping>
+            <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
+      <orm:table name="EmailTemplate">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Content" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="Bcc" sql-type="varchar" nullable="true" length="500" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Subject" sql-type="varchar" nullable="true" length="2000" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Tokens" sql-type="varchar(max)" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+      </orm:table>
+      <orm:table name="PaymentConfirmation">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="OrderId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="PaymentMethodId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="BankId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="Amount" sql-type="decimal" nullable="false" length="20" scale="2" ado-type="Decimal" />
+        <orm:column name="Notes" sql-type="text" nullable="true" length="0" scale="0" ado-type="StringInfiniteLength" />
+        <orm:column name="VerifiedWhen" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="VerifiedByPersonId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Date" sql-type="date" nullable="false" length="0" scale="0" ado-type="Date" />
+        <orm:constraint name="FK_PaymentConfirmation_PaymentMethod" delete-action="dbdefaultrule" destination-table="PaymentMethod">
+          <orm:column name="PaymentMethodId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_PaymentConfirmation_Order" delete-action="dbdefaultrule" destination-table="Order">
+          <orm:column name="OrderId" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_PaymentConfirmation_Bank" delete-action="dbdefaultrule" destination-table="Bank">
+          <orm:column name="BankId" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="Bank">
+        <orm:column name="Id" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="AccountNumber" sql-type="varchar" nullable="false" length="30" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="IsActive" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="CreatedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="CreatedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="ChangedWhen" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ChangedBy" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:source-strategy>Property</orm:source-strategy>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>CelloStoreConnection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>data source=.\sqlexpress;initial catalog=BelanjaBunga;persist security info=True;user id=sa;password=indocyber</AppConfigConnectionString>
+    <InitialCatalog>CelloStore</InitialCatalog>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+      </ClassRules>
+      <FieldRules>
+        <CaseMode>CamelCase</CaseMode>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+      </PropertyRules>
+      <NavigationPropertyRules>
+        <IsPrefixSuffixEnabled>false</IsPrefixSuffixEnabled>
+      </NavigationPropertyRules>
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings />
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>MsSql</Backend>
+        <ProviderName>System.Data.SqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="13e968f5-8405-427b-946a-04db6ecfdd57" name="Tag" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="140275a5-82c7-4c18-8517-4d5d5d547148" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="61fce0cd-dd7b-4536-a513-1793b292df94" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="abcc6f44-5fd6-4591-8545-8a08065cf41e" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="7afb1e2b-a936-4d01-9624-9b466d491e3f" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="207bb8f2-f2ae-49ad-adcb-3f09fff3257b" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="5ed58543-cfc7-445d-93ca-d0f4cfa1be4e" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <AssociationTargets>
+        <Association Id="969a1f15-155f-40a6-a1ba-46a468f8fa2e" name="TagsHaveProducts">
+          <DomainClassMoniker name="/EntitiesModel/Product" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="ca7badc5-893f-4cda-96cd-7a084a93460d">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Product/Tags" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="c0184ffa-4d27-4da3-8cb5-3e3bdce2c863">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Tag/Products" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="009a098c-0eb7-494d-9289-c19806446dcd">
+          <NavigationalProperty Id="5f80b70b-5771-4906-944a-3dd2284afb94" name="Products" type="IList&lt;Product&gt;" label="Products : IList&lt;Product&gt;" nullable="true" kind="Persistent" fieldName="products" isDependent="false" isManaged="true" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="b3174df7-5925-4292-b916-467f3898f003" name="Role" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="2da3005e-ce7e-4005-829f-aafc8b03bddc" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="89f1230c-3f38-450e-90e4-2a8126b60d98" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="ff225b79-7df3-4c58-916c-364515cecf1a" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="b744c08f-7a12-4c83-8b45-4fc505aa3f48" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="5db7ae2d-ba90-4e0e-a853-e2a886419103" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="c083914d-b5b8-45a6-8723-a6d82ed83aa6" name="IsSystemRole" type="Boolean" label="IsSystemRole : Boolean" kind="Persistent" fieldName="isSystemRole" />
+      <Property Id="390e5887-47f1-4ddd-af6a-4c79805b08c6" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="da87903c-996d-40b1-8875-2bc27a9972d8">
+          <NavigationalProperty Id="c21e9511-47ea-4c0b-8451-974e126c021a" name="People" type="IList&lt;Person&gt;" label="People : IList&lt;Person&gt;" nullable="true" kind="Persistent" fieldName="people" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="9877391b-944f-4820-9190-e0a6d07996a5" name="Product" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="ac6c97c2-3c12-4284-b965-801280ad64a0" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="f9ea8a08-3227-4388-8a9e-4bcde8175d98" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="7cfbeebc-d0b0-429e-80b6-b69a9e921a1f" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="d7ac91a2-fa3d-4ba8-9867-24f05eec70fe" name="Code" label="Code : String" kind="Persistent" fieldName="code" />
+      <Property Id="8d5dda97-9f1c-4245-93d3-73cf4fa58929" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="581eca89-b2e1-46b9-9e23-f859a11e879e" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="c6de581c-94e5-48d3-8348-7681443293ac" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="isActive" />
+      <Property Id="9ec3ed81-f8e0-4b14-8a0f-839503f34259" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <Property Id="30c9be0f-fd1a-4581-878e-74acbc6460fe" name="Photo" label="Photo : String" kind="Persistent" fieldName="photo" />
+      <Property Id="2b17c81c-e4c3-4696-9463-704541a666a7" name="UnitPrice" type="Decimal" label="UnitPrice : Decimal" kind="Persistent" fieldName="unitPrice" />
+      <Property Id="2d0f4c23-dd0e-431d-a377-6cd8fc732393" name="Description" label="Description : String" kind="Persistent" fieldName="description" />
+      <Property Id="9ed7e702-4c76-40f1-8c71-7bde931175e0" name="IsFeatured" type="Boolean" label="IsFeatured : Boolean" kind="Persistent" fieldName="isFeatured" />
+      <AssociationTargets>
+        <Association Id="699e6f59-96ab-44b4-b54f-590e6ae8fcf3" name="ProductsHaveAreas">
+          <DomainClassMoniker name="/EntitiesModel/Area" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="f166168f-ee36-4b40-b1fd-6bc305907299">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Area/Products" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="12b448f0-c22b-4464-bf28-37b124b83486">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Product/Areas" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="c6911f8d-98d0-4773-af21-33cf24a54adb" name="ProductsHaveCategories">
+          <DomainClassMoniker name="/EntitiesModel/Category" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="c90b1c1b-fade-4d36-a2f0-7528261a97a1">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Category/Products" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="ec4d370b-0291-4e4c-9038-01cfd83d521b">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Product/Categories" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="b8f4df65-a0ee-42f0-bfff-375e480486ba">
+          <NavigationalProperty Id="261c71d7-6202-445f-880d-7da11ef862af" name="OrderDetails" type="IList&lt;OrderDetail&gt;" label="OrderDetails : IList&lt;OrderDetail&gt;" nullable="true" kind="Persistent" fieldName="orderDetails" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="c9f3b4a4-364c-4481-9781-c948c1bf56d3">
+          <NavigationalProperty Id="725ca25b-c703-4f86-947e-60c98deddfd0" name="Tags" type="IList&lt;Tag&gt;" label="Tags : IList&lt;Tag&gt;" nullable="true" kind="Persistent" fieldName="tags" isDependent="false" isManaged="true" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="3df2f9b0-b6e7-4f27-a2e5-6671998e1c69">
+          <NavigationalProperty Id="ef06fb59-4dfe-430d-ab2f-b7c87689d06f" name="Areas" type="IList&lt;Area&gt;" label="Areas : IList&lt;Area&gt;" nullable="true" kind="Persistent" fieldName="areas" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="84804281-3892-4b4f-bf6d-25264500d5f6">
+          <NavigationalProperty Id="10ca0cf8-a1a5-47c1-a033-859d712a02d6" name="Categories" type="IList&lt;Category&gt;" label="Categories : IList&lt;Category&gt;" nullable="true" kind="Persistent" fieldName="categories" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="e824d5b0-8924-4168-88f9-7c128d727864" name="Person" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="5904514a-1e10-43ae-98ab-fec889db7bb8" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="f3841fcb-b885-4cab-bcb3-eeb91be95a27" name="Address" label="Address : String" kind="Persistent" fieldName="address" />
+      <Property Id="4c97e95a-cfdf-4a2b-9369-b20a04b64c0a" name="BirthDate" type="DateTime" label="BirthDate : DateTime" nullable="true" kind="Persistent" fieldName="birthDate" />
+      <Property Id="a278dd51-29eb-4eb7-b385-f129167cbed5" name="ChallangeCode" label="ChallangeCode : String" kind="Persistent" fieldName="challangeCode" />
+      <Property Id="d05170ec-179c-4845-b77d-ec232136ebee" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="2a9b45d1-83eb-4c3d-84c1-752b4f2ebe63" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="00eef18a-aa7d-4b90-802f-2e53c4231389" name="City" label="City : String" kind="Persistent" fieldName="city" />
+      <Property Id="ebaad8cf-1115-4955-bf28-42f17ecf3c90" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="7764130a-4222-4953-9052-b757f22913b7" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="970e9708-3fba-486f-9a6a-fdc78a6ee5d2" name="Email" label="Email : String" kind="Persistent" fieldName="email" />
+      <Property Id="1c2b2ddf-41b5-4536-b948-480203493147" name="Gender" type="Char" label="Gender : Char" nullable="true" kind="Persistent" fieldName="gender" />
+      <Property Id="e1c05f75-3ef9-4da8-9bae-4342fc1ba6fd" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="isActive" />
+      <Property Id="47bd31a3-2929-4fcf-b750-97deac8c1d47" name="IsVerified" type="Boolean" label="IsVerified : Boolean" kind="Persistent" fieldName="isVerified" />
+      <Property Id="bc07025c-2c5c-4a34-aeed-e24fcb38a49d" name="LastIpAddress" label="LastIpAddress : String" kind="Persistent" fieldName="lastIpAddress" />
+      <Property Id="a2ea74c5-3369-410f-bab8-a3e1d51ed698" name="LastLogOn" type="DateTime" label="LastLogOn : DateTime" nullable="true" kind="Persistent" fieldName="lastLogOn" />
+      <Property Id="7041ca1c-d200-4a5d-a6b3-85ca88f000dd" name="Password" label="Password : String" kind="Persistent" fieldName="password" />
+      <Property Id="d023eb2e-a8d4-4055-8859-594db1e46a13" name="PhoneNumber" label="PhoneNumber : String" kind="Persistent" fieldName="phoneNumber" />
+      <Property Id="dacc0808-9ae4-49e6-aa3b-32abf5870a46" name="PostalCode" label="PostalCode : String" kind="Persistent" fieldName="postalCode" />
+      <Property Id="964b0343-e6f1-4053-b7ed-6b4b3470b39c" name="RoleId" type="Int32" label="RoleId : Int32" kind="Persistent" fieldName="roleId" />
+      <Property Id="1ef7b2b6-4cbe-4b89-926a-fe34021250ce" name="State" label="State : String" kind="Persistent" fieldName="state" />
+      <Property Id="a6e2666b-3644-4a4c-9b57-29679993ed77" name="ActivatedWhen" type="DateTime" label="ActivatedWhen : DateTime" nullable="true" kind="Persistent" fieldName="activatedWhen" />
+      <Property Id="96490b54-1bc4-4c45-b812-64cfa42e397f" name="ChallangedWhen" type="DateTime" label="ChallangedWhen : DateTime" nullable="true" kind="Persistent" fieldName="challangedWhen" />
+      <Property Id="67a43a06-d388-410a-8ebd-d7f6bc1d3776" name="LastChangePassword" type="DateTime" label="LastChangePassword : DateTime" nullable="true" kind="Persistent" fieldName="lastChangePassword" />
+      <Property Id="6b870e81-050b-4add-9b33-2839c5951957" name="LastName" label="LastName : String" kind="Persistent" fieldName="lastName" />
+      <Property Id="46e9373e-2423-4060-95b5-deacc0fea42e" name="FirstName" label="FirstName : String" kind="Persistent" fieldName="firstName" />
+      <AssociationTargets>
+        <Association Id="43c01ed9-cea5-44e3-a5ab-0c7476b3481d" SourceMultiplicity="One" name="PersonHasRole">
+          <DomainClassMoniker name="/EntitiesModel/Role" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="e1f98467-8595-4ecd-bf47-1f6df0e3ff49">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Role/People" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="c8b11c1a-b76e-4970-8f47-162740886b4b">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Person/Role" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="2ca99e42-4cc2-4c87-9035-8a1865b21075">
+          <NavigationalProperty Id="353ab814-9ace-40fc-a8ae-8fc5def8b98b" name="Role" type="Role" label="Role : Role" nullable="true" kind="Persistent" fieldName="role" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="50e55534-5861-465b-bc4d-2183ca0fd3a5">
+          <NavigationalProperty Id="8cba37ba-933c-4e3c-9ba4-81a631de5f53" name="Orders" type="IList&lt;Order&gt;" label="Orders : IList&lt;Order&gt;" nullable="true" kind="Persistent" fieldName="orders" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="d37cc9ff-ead1-4091-b83c-62f182124b5d" name="PaymentMethod" namespace="CelloStore.Data" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="3afdacad-5156-4df1-bdf1-b241c341d875" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="e7601bc7-9806-45ce-9ea8-327eb4968e3d" name="AccountName" label="AccountName : String" kind="Persistent" fieldName="accountName" />
+      <Property Id="68825420-a1b9-4917-bc36-7a7eeeef6787" name="AccountNumber" label="AccountNumber : String" kind="Persistent" fieldName="accountNumber" />
+      <Property Id="2278c112-b129-4e3b-bbf6-88cb2ae7b30c" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="5df98ccb-3e22-4615-b08c-0846ea727b66" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="a68bb0cc-2544-460c-b5fd-28a175ef29a4" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="30890ca5-b60d-4cda-b29a-1bdfafd38df9" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="7001f555-8d7e-4800-a351-d29403334923" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <Property Id="359962f2-2ab8-4a99-8871-2ffa8815c3e6" name="Notes" label="Notes : String" kind="Persistent" fieldName="notes" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="0e5a344c-fad8-4f5f-95aa-150cb11c016d">
+          <NavigationalProperty Id="7ba91cb6-8c06-451e-858c-6f3c3fc0efa4" name="Orders" type="IList&lt;Order&gt;" label="Orders : IList&lt;Order&gt;" nullable="true" kind="Persistent" fieldName="orders" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="d5272199-14d6-4aec-bddf-38d7c6132b91">
+          <NavigationalProperty Id="0261ce18-6574-4a1d-a3c2-5310df9a4577" name="PaymentConfirmations" type="IList&lt;PaymentConfirmation&gt;" label="PaymentConfirmations : IList&lt;PaymentConfirmation&gt;" nullable="true" kind="Persistent" fieldName="paymentConfirmations" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="c6376c28-0dfd-45c2-ac5b-337e6ca17ac8" name="OrderStatusHistory" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="c6d69bdb-5a59-4afc-a446-9ae7147435f8" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="97a723f8-aa94-4462-b36f-9cba09500173" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="657ff682-5d73-46c1-ac3d-df856e6ad2c8" name="EffectiveDate" type="DateTime" label="EffectiveDate : DateTime" kind="Persistent" fieldName="effectiveDate" />
+      <Property Id="baad0652-de48-4c13-a36b-e30ee4e86347" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="isActive" />
+      <Property Id="505fc808-5ce5-4dc3-a612-6b2fa91c04a8" name="Notes" label="Notes : String" kind="Persistent" fieldName="notes" />
+      <Property Id="baac2873-ab1f-4904-8d14-9787ed4adbc8" name="OrderId" type="Int32" label="OrderId : Int32" kind="Persistent" fieldName="orderId" />
+      <Property Id="4d934210-ee1d-4233-bca7-90aadf47a294" name="OrderStatusId" type="Int32" label="OrderStatusId : Int32" kind="Persistent" fieldName="orderStatusId" />
+      <Property Id="0043ba98-a0a2-4fe9-9379-16ea76ee0377" name="CreatedDate" type="DateTime" label="CreatedDate : DateTime" kind="Persistent" fieldName="createdDate" />
+      <Property Id="20f695ec-3ff7-4027-94c6-c299886ef17e" name="SendMail" type="Boolean" label="SendMail : Boolean" kind="Persistent" fieldName="sendMail" />
+      <AssociationTargets>
+        <Association Id="f53c9488-cc1f-46a8-8d78-3689d0c95f29" SourceMultiplicity="One" name="OrderStatusHistoryHasOrder">
+          <DomainClassMoniker name="/EntitiesModel/Order" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="c7a6bc07-4335-4c39-89ec-0d88eee14ab0">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Order/OrderStatusHistories" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="189c53ca-3359-49b5-a8cb-33912adfbb56">
+              <NavigationalPropertyMoniker name="/EntitiesModel/OrderStatusHistory/Order" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="084684d2-8a36-432d-a9d8-549be11159af">
+          <NavigationalProperty Id="c16a7fc7-284f-4202-9f35-a951e8d4e273" name="Order" type="Order" label="Order : Order" nullable="true" kind="Persistent" fieldName="order" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="effef881-4ff1-4c7b-b92e-ee87c600ddca" name="OrderDetail" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="7ad4dad6-cbdf-41df-98ab-22ef190de2e9" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="893e0e84-565b-4102-b174-5c4528459f6e" name="DiscValue" type="Decimal" label="DiscValue : Decimal" kind="Persistent" fieldName="discValue" />
+      <Property Id="ee221d86-2d14-46b4-8f42-d0a4c0a73f2f" name="OrderId" type="Int32" label="OrderId : Int32" kind="Persistent" fieldName="orderId" />
+      <Property Id="15ffdec8-9aff-4110-a791-2506b440ba80" name="ProductId" type="Int32" label="ProductId : Int32" kind="Persistent" fieldName="productId" />
+      <Property Id="3c7078f0-9aef-4f8a-ad6a-644b49af81a7" name="Qty" type="Int32" label="Qty : Int32" kind="Persistent" fieldName="qty" />
+      <Property Id="9b31fa80-a258-44cb-8f2d-b6aed23518cf" name="UnitPrice" type="Decimal" label="UnitPrice : Decimal" kind="Persistent" fieldName="unitPrice" />
+      <AssociationTargets>
+        <Association Id="502de0f0-57c9-4b34-bc67-944d818d2ea0" SourceMultiplicity="One" name="OrderDetailHasProduct">
+          <DomainClassMoniker name="/EntitiesModel/Product" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="04996883-1806-46fc-8758-795463e41b43">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Product/OrderDetails" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="22f13ed0-9e06-4f23-8716-2ca3328906c9">
+              <NavigationalPropertyMoniker name="/EntitiesModel/OrderDetail/Product" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="afcb3419-a58c-4dec-b818-2c5250238e87" SourceMultiplicity="One" name="OrderDetailHasOrder">
+          <DomainClassMoniker name="/EntitiesModel/Order" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="1734389a-c0f4-436c-97b4-3a1f64114660">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Order/OrderDetails" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="fdb45b54-6706-4283-9266-e5df33b1758a">
+              <NavigationalPropertyMoniker name="/EntitiesModel/OrderDetail/Order" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="a5f0a6b7-5675-4335-b2c0-6330c6af704f">
+          <NavigationalProperty Id="32cab7d2-9be2-4732-8e30-441b69dfb730" name="Product" type="Product" label="Product : Product" nullable="true" kind="Persistent" fieldName="product" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="7973819e-8a65-4fe2-adcb-3707a6494d3a">
+          <NavigationalProperty Id="0755b530-2520-4e07-a2f1-c5ad127ec1cb" name="Order" type="Order" label="Order : Order" nullable="true" kind="Persistent" fieldName="order" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="0243dc89-4656-4881-a490-4875e8839716" name="Order" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="88e38437-087e-49e3-b441-9e4c186f6cda" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="a8212b62-fba9-4116-8cde-6b96a2498770" name="CallRecipientFirst" type="Boolean" label="CallRecipientFirst : Boolean" kind="Persistent" fieldName="callRecipientFirst" />
+      <Property Id="b090f90d-8ff3-43f5-a817-5f8c2ca8f5f8" name="CardMessage" label="CardMessage : String" kind="Persistent" fieldName="cardMessage" />
+      <Property Id="5fd171e7-4078-4bd0-a4b3-1e13832f157d" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="02b91353-0cfa-4712-be83-4546dd75cd7d" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="f2c10a70-6ea2-4964-9186-af603e7e7715" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="f333055b-b6aa-4981-92d0-7c8b5f3d702e" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="6c71231c-abce-485f-ba7b-16c1ce50e2a5" name="DeliveryDate" type="DateTime" label="DeliveryDate : DateTime" nullable="true" kind="Persistent" fieldName="deliveryDate" />
+      <Property Id="bcd0e39f-e0ce-437d-882c-c1517b2312b5" name="DeliveryTime" type="Byte" label="DeliveryTime : Byte" kind="Persistent" fieldName="deliveryTime" />
+      <Property Id="c301b9d3-c588-4d71-b19d-9e6d8546a6a0" name="FromCardMessage" label="FromCardMessage : String" kind="Persistent" fieldName="fromCardMessage" />
+      <Property Id="8779b083-f3bd-4a05-aee7-c0f1dee9040d" name="Notes" label="Notes : String" kind="Persistent" fieldName="notes" />
+      <Property Id="a018a967-b17d-41ad-b8fc-174de943801a" name="OrderDate" type="DateTime" label="OrderDate : DateTime" kind="Persistent" fieldName="orderDate" />
+      <Property Id="33ae669a-0ef4-4759-9492-1481196926bf" name="OrderNo" label="OrderNo : String" kind="Persistent" fieldName="orderNo" />
+      <Property Id="a2d08be1-820e-4397-a9f2-a668dd753d56" name="OrderStatusId" type="Int32" label="OrderStatusId : Int32" kind="Persistent" fieldName="orderStatusId" />
+      <Property Id="df717c57-3f57-4907-8df5-b71696cf0bc9" name="PaymentMethodId" type="Int32" label="PaymentMethodId : Int32" nullable="true" kind="Persistent" fieldName="paymentMethodId" />
+      <Property Id="75b8be84-a103-4c60-a4d6-4b3e0608ef55" name="PersonId" type="Int32" label="PersonId : Int32" kind="Persistent" fieldName="personId" />
+      <Property Id="639a73d2-fb23-4a4a-b2ae-ad34ae0d180a" name="RecipientAddress" label="RecipientAddress : String" kind="Persistent" fieldName="recipientAddress" />
+      <Property Id="5c2dd4cb-3747-49f8-a06c-ffcc461bedaf" name="RecipientCompanyName" label="RecipientCompanyName : String" kind="Persistent" fieldName="recipientCompanyName" />
+      <Property Id="b9cbaaef-2cf4-44a5-a006-a1dc11042dd1" name="RecipientEmail" label="RecipientEmail : String" kind="Persistent" fieldName="recipientEmail" />
+      <Property Id="faab600c-7106-4b00-bac6-77259fe98e05" name="RecipientLocationTypeId" type="Int32" label="RecipientLocationTypeId : Int32" kind="Persistent" fieldName="recipientLocationTypeId" />
+      <Property Id="cfb00471-b1b9-4f30-b119-062a66e4af9b" name="RecipientName" label="RecipientName : String" kind="Persistent" fieldName="recipientName" />
+      <Property Id="97ef2afe-16c6-475b-a97e-79e5b4638d7a" name="RecipientPhoneNumber" label="RecipientPhoneNumber : String" kind="Persistent" fieldName="recipientPhoneNumber" />
+      <Property Id="5bfb8913-cdc0-4a89-b3b3-54a1cf90ed91" name="SecretSenderName" type="Boolean" label="SecretSenderName : Boolean" kind="Persistent" fieldName="secretSenderName" />
+      <Property Id="81d6fc2a-cf72-4c0a-a641-90494bc69204" name="ToCardMessage" label="ToCardMessage : String" kind="Persistent" fieldName="toCardMessage" />
+      <Property Id="1e72e4c6-8747-48a8-a805-fa60df0cd91f" name="UniquePayment" type="Byte" label="UniquePayment : Byte" kind="Persistent" fieldName="uniquePayment" />
+      <Property Id="40557f6e-da6f-4ee5-98dc-72f282049449" name="VoucherCode" label="VoucherCode : String" kind="Persistent" fieldName="voucherCode" />
+      <Property Id="f1640c2e-5568-41e8-bdef-7576d1871d7f" name="OrderAreaId" type="Int32" label="OrderAreaId : Int32" kind="Persistent" fieldName="orderAreaId" />
+      <Property Id="91ac404a-b536-4bfa-900a-65093df83a6d" name="RecipientState" label="RecipientState : String" kind="Persistent" fieldName="recipientState" />
+      <Property Id="cb9be374-d2ef-4a92-8ce7-cba35622db48" name="RecipientCity" label="RecipientCity : String" kind="Persistent" fieldName="recipientCity" />
+      <AssociationTargets>
+        <Association Id="212d0665-a2f1-4c7c-bcdf-e4fa6a7081ce" SourceMultiplicity="One" name="OrderHasPerson">
+          <DomainClassMoniker name="/EntitiesModel/Person" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="1674bcab-9e7c-4c50-af5e-7b1ff3cd59ac">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Person/Orders" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="23d57a29-eb81-45f5-9211-87770e0bcc60">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Order/Person" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="901a780e-9fdc-4e4c-9547-f5080c957176" SourceMultiplicity="ZeroOne" name="OrderHasPaymentMethod">
+          <DomainClassMoniker name="/EntitiesModel/PaymentMethod" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="9d3de81c-a6b4-4ce3-b963-3255e731d7d5">
+              <NavigationalPropertyMoniker name="/EntitiesModel/PaymentMethod/Orders" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="534c22ec-d03e-4f38-af2b-dfa2b51b4fd7">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Order/PaymentMethod" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="bb645ecf-2cec-459d-af73-a952be76d1cf" SourceMultiplicity="One" name="OrderHasAddressType">
+          <DomainClassMoniker name="/EntitiesModel/AddressType" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="5f70cc49-3d89-4471-8baa-392c71ad3816">
+              <NavigationalPropertyMoniker name="/EntitiesModel/AddressType/Orders" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="17832f15-a944-47c4-b6c5-0bee1d89e925">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Order/AddressType" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="248bc049-f356-4a1b-a3e3-2e2c46cf54ef" SourceMultiplicity="One" name="OrderHasArea">
+          <DomainClassMoniker name="/EntitiesModel/Area" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="e4665472-b9f3-467c-8317-8f3652cfa409">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Area/Orders" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="a355455c-0f0b-404e-b2f5-cc1cf9cb0fb1">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Order/Area" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="1c554d23-5a90-49c4-acdd-0f370134fb8d">
+          <NavigationalProperty Id="5ebcb5a3-8655-48fd-bfd0-21fca5781b0d" name="OrderStatusHistories" type="IList&lt;OrderStatusHistory&gt;" label="OrderStatusHistories : IList&lt;OrderStatusHistory&gt;" nullable="true" kind="Persistent" fieldName="orderStatusHistories" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="7aaaf35d-523b-4e9f-985a-ded17327ef29">
+          <NavigationalProperty Id="0de2711c-1b60-4541-9f89-78cfebadd3d9" name="OrderDetails" type="IList&lt;OrderDetail&gt;" label="OrderDetails : IList&lt;OrderDetail&gt;" nullable="true" kind="Persistent" fieldName="orderDetails" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="8d8c2a9a-0891-4fd6-a9bd-3ff76bc643c3">
+          <NavigationalProperty Id="53225c54-7307-4774-9ff5-5f17cf37cd63" name="Person" type="Person" label="Person : Person" nullable="true" kind="Persistent" fieldName="person" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="b421c2ec-4085-47ae-9ff9-9d8f0aad9c60">
+          <NavigationalProperty Id="ee0355ce-8d31-44a2-a728-0c41901a6953" name="PaymentMethod" type="PaymentMethod" label="PaymentMethod : PaymentMethod" nullable="true" kind="Persistent" fieldName="paymentMethod" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="9a5f83ca-59c4-4e2e-b2c6-4831c0477bfe">
+          <NavigationalProperty Id="d63024c4-8af2-48ee-af6c-7c61ddb82686" name="AddressType" type="AddressType" label="AddressType : AddressType" nullable="true" kind="Persistent" fieldName="addressType" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="5c3c6b21-5857-49cc-9726-1f8d4b89140e">
+          <NavigationalProperty Id="ab496a22-803b-4e3b-9ca5-f2f5e683c99e" name="Area" type="Area" label="Area : Area" nullable="true" kind="Persistent" fieldName="area" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="7810592f-7643-4f13-a837-92224295f5ad">
+          <NavigationalProperty Id="240c47ba-eda4-4f40-9023-49e143213862" name="PaymentConfirmations" type="IList&lt;PaymentConfirmation&gt;" label="PaymentConfirmations : IList&lt;PaymentConfirmation&gt;" nullable="true" kind="Persistent" fieldName="paymentConfirmations" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="fd54041f-3202-414f-9482-c0e21036b16d" name="Configuration" namespace="CelloStore.Data" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="9dbb9989-6089-4761-ba2b-4a81f9e2f6b3" name="Key" label="Key : String" kind="Persistent" identity="true" fieldName="key" />
+      <Property Id="0e9c7222-6a69-45c9-9f14-71fbe085cbda" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="3b405ece-f959-4734-aab9-e1cbd3f9b2a8" name="ChangedWho" label="ChangedWho : String" kind="Persistent" fieldName="changedWho" />
+      <Property Id="d69bb4b6-a024-42a3-a497-3111b983ae11" name="Value" label="Value : String" kind="Persistent" fieldName="value" />
+    </DomainClass>
+    <DomainClass Id="410e3a23-8c6b-4ebc-b8a3-95b6281bea6e" name="Category" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="cbab16ac-6e2a-4b02-b9e5-3727a67be91f" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="6f8d38c6-d84d-4f2a-af00-988c2b6bd6e1" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="8d8f4bec-67aa-4081-a596-efee1f18ebc3" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="71785e93-c3ca-4441-96b1-e6afd468f933" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="0b02836c-4262-4ad8-b5bf-af542f48bdc4" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="87472f41-6b6b-44d0-bf22-16c8dc69dcd0" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <Property Id="06671ed8-f1c1-4cef-962e-0729cba1ca1a" name="ParentCategoryId" type="Int32" label="ParentCategoryId : Int32" nullable="true" kind="Persistent" fieldName="parentCategoryId" />
+      <Property Id="df466bce-9677-41c9-92fc-d7021c5a136b" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="isActive" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="33e6c8f7-87b5-499e-9220-98b2a7cf62b9">
+          <NavigationalProperty Id="e0a5e6ff-4193-43c7-8b11-f82d38752ed5" name="Products" type="IList&lt;Product&gt;" label="Products : IList&lt;Product&gt;" nullable="true" kind="Persistent" fieldName="products" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="e0f69a80-8684-4d49-826a-6c2c530d6e3b" name="Article" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="57768e80-4dd1-4c7b-94b8-ce87bb076805" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="a1743756-c2b2-4042-8ffe-ee6e6cc63bbe" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="e69572be-6724-41f4-9258-5c6858799d8f" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="6e1164dc-25f8-4948-a52d-7a1904853b9e" name="Content" label="Content : String" kind="Persistent" fieldName="content" />
+      <Property Id="6cc3e12f-f191-4538-8a2c-2573f6b5d08c" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="66594b00-1353-4523-8610-31fb8c7c4557" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="c8d0dda6-b5b9-46fa-934b-cf43859e0b89" name="IsPublished" type="Boolean" label="IsPublished : Boolean" kind="Persistent" fieldName="isPublished" />
+      <Property Id="d62da892-c0c8-4c94-af01-9a299413c929" name="Subject" label="Subject : String" kind="Persistent" fieldName="subject" />
+      <Property Id="096f4927-d113-4b29-b4d1-414e7d104218" name="UrlToken" label="UrlToken : String" kind="Persistent" fieldName="urlToken" />
+    </DomainClass>
+    <DomainClass Id="b3b5d9f0-6ef2-4b5b-8afd-b062fb1b7159" name="Area" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="98aa5314-62ab-4940-b76e-bb4a883a0600" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="d45db66c-8449-44af-88c9-c17466889894" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="edafa106-999f-4cff-83ff-fd3370e0600f" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="862675c6-1fcb-4bd5-91eb-de488806fbf7" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="80fbe55c-dc81-492a-bff1-f320004e5f27" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="d055d9fa-0b7f-4944-b09d-c410454fd7f0" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <Property Id="bf8297a3-12e3-412e-9d53-24ea7c2c56ed" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="isActive" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="25e3ab87-6044-404e-b5fa-8324a8e52fec">
+          <NavigationalProperty Id="17321f10-c0bb-4760-958e-a08821b384c2" name="Products" type="IList&lt;Product&gt;" label="Products : IList&lt;Product&gt;" nullable="true" kind="Persistent" fieldName="products" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="038d82e6-daa4-415f-a3ea-aac79f56b83d">
+          <NavigationalProperty Id="3da13395-0cf3-4657-8562-516e09d5ea5f" name="Orders" type="IList&lt;Order&gt;" label="Orders : IList&lt;Order&gt;" nullable="true" kind="Persistent" fieldName="orders" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="37464b57-d4d3-4158-bd21-9e24d469fd1b" name="AddressType" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="937b6f4f-8e94-4203-ae1d-cbb0530ea233" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="2414a54a-8938-4829-af6b-9af26c155c6d" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="f9708289-073b-42c8-8457-3bc6252432bc" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="2a280746-271b-48e0-af8e-481f66c2675f" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="41a6bd24-53a5-4200-89ed-df4f3c68d655" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="f3724630-38e6-4d02-9668-50bb1384762d" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <Property Id="cc758c77-21c4-4f17-8797-3d161ae03614" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="isActive" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="93dd0741-fbcd-4e64-8ec8-e790cad6f88a">
+          <NavigationalProperty Id="cc30afdd-34db-4bcf-ab82-3f2b651d90c9" name="Orders" type="IList&lt;Order&gt;" label="Orders : IList&lt;Order&gt;" nullable="true" kind="Persistent" fieldName="orders" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="a30df3d3-8d04-4f29-83fd-780a7048f24a" name="Showcase" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="6632a866-ce80-43a0-a61b-9c52fa364503" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="15744c48-e885-4a13-a6d7-9f510fa0ec9e" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="9ebaaea5-0b5a-46dd-9c5b-d841102cf383" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="e81a5828-5b43-4690-8071-8d5e672ecd76" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="c7f49484-0819-4c2a-9ed1-bb173c74ba12" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="e32aea94-ef13-4b6f-abcb-3e4fdacff434" name="Description" label="Description : String" kind="Persistent" fieldName="description" />
+      <Property Id="b553273c-e17d-4095-8081-e1954f3e04d5" name="First" type="Boolean" label="First : Boolean" kind="Persistent" fieldName="first" />
+      <Property Id="0a8d9fb5-46ee-45b0-b51d-8eee1b1fefe5" name="FromDate" type="DateTime" label="FromDate : DateTime" nullable="true" kind="Persistent" fieldName="fromDate" />
+      <Property Id="b23832d7-b09b-40b2-bf4c-526b3958751c" name="ImagePath" label="ImagePath : String" kind="Persistent" fieldName="imagePath" />
+      <Property Id="4b36c02a-e7c0-4ca7-8d35-29d8c5c1468f" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="isActive" />
+      <Property Id="f799dc69-fad5-44ed-b298-f6d3b274b845" name="PriceImagePath" label="PriceImagePath : String" kind="Persistent" fieldName="priceImagePath" />
+      <Property Id="0e618b75-fdb7-44fe-aa54-258b66ffbd36" name="Title" label="Title : String" kind="Persistent" fieldName="title" />
+      <Property Id="cfb5c2a7-bae0-4dd1-95e6-4e89d19cc185" name="ToDate" type="DateTime" label="ToDate : DateTime" nullable="true" kind="Persistent" fieldName="toDate" />
+      <Property Id="93184e08-7522-4002-a73c-28c8de59db40" name="Url" label="Url : String" kind="Persistent" fieldName="url" />
+      <Property Id="a2d43bbe-9786-495e-bd1a-8c23ca899baa" name="ExtLinkType" type="Int32" label="ExtLinkType : Int32" nullable="true" kind="Persistent" fieldName="extLinkType" />
+      <Property Id="f80ed10f-9082-45d0-84da-45ba653c42d6" name="ArticleId" type="Int32" label="ArticleId : Int32" nullable="true" kind="Persistent" fieldName="articleId" />
+    </DomainClass>
+    <DomainClass Id="68c25fed-02ba-42af-b4f9-506d01b977e1" name="AutoNumber" namespace="CelloStore.Data" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="ce3bb192-df49-4d3e-8bf3-3ea2c2fb6dcd" name="FormCode" label="FormCode : String" kind="Persistent" identity="true" fieldName="formCode" />
+      <Property Id="d23a10be-e858-4d70-be4f-4e4e07b40b5a" name="Year" type="Int32" label="Year : Int32" kind="Persistent" identity="true" fieldName="year" />
+      <Property Id="5e96161e-6ca2-4de5-a67c-25e4939b6138" name="LastNumber" type="Int32" label="LastNumber : Int32" kind="Persistent" fieldName="lastNumber" />
+    </DomainClass>
+    <DomainClass Id="2f4a8c8b-79fe-4ed6-873a-8a632585c795" name="OrderStatus" namespace="CelloStore.Data" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="a8e83ddd-3fe6-424e-96c5-b788a947e6ec" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="72939da9-0d97-4a92-902f-43d4f1d6f75a" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="c3b1d032-a396-48c3-b623-277375a882d2" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="3378bfa5-a644-417a-834f-5634b573ec72" name="EmailTemplate" label="EmailTemplate : String" kind="Persistent" fieldName="emailTemplate" />
+      <Property Id="8aeb560c-30b6-4453-8977-ff380d424a94" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <Property Id="ad4e6fd1-1d2f-4c4f-8700-323488dac765" name="SendMail" type="Boolean" label="SendMail : Boolean" nullable="true" kind="Persistent" fieldName="sendMail" />
+    </DomainClass>
+    <DomainClass Id="8b147c06-d7f7-46ea-b58a-23bd15396015" name="DeliveryTime" namespace="CelloStore.Data" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="fc667eb1-7b3e-4135-947f-fbd9ceea1d78" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="ea5f41de-e3ec-47fc-b706-087fc7b5b06d" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="386bd4cb-d51f-41c2-a2e3-a8a19ae0e8bf" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="631d2751-d086-4790-90c4-1ddcc0dfb8a4" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="134bc3bd-fec0-475f-a5a2-28bf16c9901c" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="7df9229c-e283-46f7-910f-6a4cd53cb2f1" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="isActive" />
+      <Property Id="675542e6-a9ba-484f-8db4-b79560750faf" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+    </DomainClass>
+    <DomainClass Id="4bebe776-1279-47fb-9c59-673883f56cbd" name="EmailTemplate" namespace="CelloStore.Data" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="f99a0867-99b3-4e13-b087-5be0ca415ff4" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="c72769ff-f5aa-4286-899d-1f7c66e5e0d0" name="Bcc" label="Bcc : String" kind="Persistent" fieldName="bcc" />
+      <Property Id="7ffba965-53f0-4e17-9a8e-5b7814f20474" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="f6d2c766-9546-40a1-a1dd-91f20eff239f" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="c1b4dbbb-b6b4-41c2-9e81-8e738828600e" name="Content" label="Content : String" kind="Persistent" fieldName="content" />
+      <Property Id="3bd46fb3-c17b-43a9-b118-cd13c1388532" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="0be12203-6353-436b-90a4-b4469de7562e" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="1187b2ed-ff0e-484f-bce4-7c254cd1cc8a" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <Property Id="c2a16dec-cca1-4ad6-bb7a-e986c65dc658" name="Subject" label="Subject : String" kind="Persistent" fieldName="subject" />
+      <Property Id="e277e930-d4f5-4801-8827-e0105f59e914" name="Tokens" label="Tokens : String" kind="Persistent" fieldName="tokens" />
+    </DomainClass>
+    <DomainClass Id="119d148d-63a5-4906-a43f-88c731c844d3" name="PaymentConfirmation" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="baf15feb-ca69-4734-be3a-9d4002f37274" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="2d46ca9b-c17b-4fcb-9060-df06f57d4888" name="Amount" type="Decimal" label="Amount : Decimal" kind="Persistent" fieldName="amount" />
+      <Property Id="f70565b6-603b-49bd-9d84-f72053b3b62e" name="BankId" type="Int32" label="BankId : Int32" nullable="true" kind="Persistent" fieldName="bankId" />
+      <Property Id="f657b4a4-14d0-40cf-94bf-b6734d614581" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="2f36630c-cc21-457b-96bd-17e2fc14acce" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="89eab445-9165-4074-a218-b867d6587f8a" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="40069a2a-08ff-456f-aa46-a457517624da" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="83e14889-0bb0-4064-90fd-b4738919f40b" name="Notes" label="Notes : String" kind="Persistent" fieldName="notes" />
+      <Property Id="332b786c-e574-47b1-86f7-628acf5c9709" name="OrderId" type="Int32" label="OrderId : Int32" kind="Persistent" fieldName="orderId" />
+      <Property Id="894ec241-6e3a-4541-ac9e-789f19345783" name="PaymentMethodId" type="Int32" label="PaymentMethodId : Int32" kind="Persistent" fieldName="paymentMethodId" />
+      <Property Id="a40d6032-bfc4-4c78-910f-d888a9ef7fe1" name="VerifiedByPersonId" type="Int32" label="VerifiedByPersonId : Int32" nullable="true" kind="Persistent" fieldName="verifiedByPersonId" />
+      <Property Id="82d679cc-1fea-4d89-9331-78d33cb6ec14" name="VerifiedWhen" type="DateTime" label="VerifiedWhen : DateTime" nullable="true" kind="Persistent" fieldName="verifiedWhen" />
+      <Property Id="2fd28d7c-bc67-4bb6-ade1-5b7ae36fa7c6" name="Date" type="DateTime" label="Date : DateTime" kind="Persistent" fieldName="date" />
+      <AssociationTargets>
+        <Association Id="fd2119e0-5772-431c-9240-125be99b5586" SourceMultiplicity="One" name="PaymentConfirmationHasPaymentMethod">
+          <DomainClassMoniker name="/EntitiesModel/PaymentMethod" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="42a1455e-52b4-4f62-8b7a-bf42438a87b6">
+              <NavigationalPropertyMoniker name="/EntitiesModel/PaymentMethod/PaymentConfirmations" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="14960a9f-d2ee-48ae-88ce-e5081678f7b0">
+              <NavigationalPropertyMoniker name="/EntitiesModel/PaymentConfirmation/PaymentMethod" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="b85faf31-85e7-4771-be7f-0ad915401b3a" SourceMultiplicity="One" name="PaymentConfirmationHasOrder">
+          <DomainClassMoniker name="/EntitiesModel/Order" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="b61e0cdd-5022-4756-bad9-b4244486e077">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Order/PaymentConfirmations" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="d3ff5866-4502-4f00-bc1f-de9f2b3b7fee">
+              <NavigationalPropertyMoniker name="/EntitiesModel/PaymentConfirmation/Order" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="a51d1f62-a8a8-4d3d-9d13-6c91afeb27da" SourceMultiplicity="ZeroOne" name="PaymentConfirmationHasBank">
+          <DomainClassMoniker name="/EntitiesModel/Bank" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="a10eb8c1-b6c3-4628-a156-9980a4b86514">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Bank/PaymentConfirmations" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="e9174ce9-1fa5-4930-9f44-4c9c48b1bd85">
+              <NavigationalPropertyMoniker name="/EntitiesModel/PaymentConfirmation/Bank" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="bebebd81-3b55-4327-b185-6d3064ead2c4">
+          <NavigationalProperty Id="56bea055-b7d5-4a52-badf-6df3d1666c6b" name="PaymentMethod" type="PaymentMethod" label="PaymentMethod : PaymentMethod" nullable="true" kind="Persistent" fieldName="paymentMethod" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="b6acaeae-e37e-4138-9694-3fe02ad3bb92">
+          <NavigationalProperty Id="f838b406-a249-4112-99eb-8f65906e5579" name="Order" type="Order" label="Order : Order" nullable="true" kind="Persistent" fieldName="order" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="67b1e673-2481-4c98-bb31-9402c7611bb3">
+          <NavigationalProperty Id="e3d17be4-869c-436e-a766-e15866a4cab4" name="Bank" type="Bank" label="Bank : Bank" nullable="true" kind="Persistent" fieldName="bank" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="e30ea231-452a-461a-9844-2bd3389d02cb" name="Bank" namespace="CelloStore.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="1cd2dd5e-40cf-4865-b7fa-3d1bb1a62ec5" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="id" />
+      <Property Id="068f91d2-d8a8-4cf3-b41f-f4f384ac34a9" name="AccountNumber" label="AccountNumber : String" kind="Persistent" fieldName="accountNumber" />
+      <Property Id="8d3c31b0-d9e2-4df6-8420-696e32956c06" name="ChangedBy" label="ChangedBy : String" kind="Persistent" fieldName="changedBy" />
+      <Property Id="060cbfce-6b82-4f51-94a2-69b44ac3511c" name="ChangedWhen" type="DateTime" label="ChangedWhen : DateTime" kind="Persistent" fieldName="changedWhen" />
+      <Property Id="b1566793-01a5-42ce-ad8e-4e37095c719c" name="CreatedBy" label="CreatedBy : String" kind="Persistent" fieldName="createdBy" />
+      <Property Id="666e839c-b51a-4a4d-b8d6-f152b88136df" name="CreatedWhen" type="DateTime" label="CreatedWhen : DateTime" kind="Persistent" fieldName="createdWhen" />
+      <Property Id="35cf0979-a4ef-4546-ab47-61bdd6a3c244" name="IsActive" type="Boolean" label="IsActive : Boolean" kind="Persistent" fieldName="isActive" />
+      <Property Id="eb3af5fb-9a77-40bf-b179-94b9cd92f388" name="Name" label="Name : String" kind="Persistent" fieldName="name" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="22e4b42d-dc0e-4a13-b2ab-be23ef79a740">
+          <NavigationalProperty Id="19b53015-2fab-475c-b080-4a6d39182d28" name="PaymentConfirmations" type="IList&lt;PaymentConfirmation&gt;" label="PaymentConfirmations : IList&lt;PaymentConfirmation&gt;" nullable="true" kind="Persistent" fieldName="paymentConfirmations" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="2668b108-7a98-4708-abed-c5e49338910d">
+      <domainContainer name="EntitiesModel" namespace="CelloStore.Data" showPropertiesCompartment="true">
+        <entitySetProperty name="Tags" namespace="CelloStore.Data" type="Tag" label="Tags : IQueryable&lt;CelloStore.Data.Tag&gt;" />
+        <entitySetProperty name="Roles" namespace="CelloStore.Data" type="Role" label="Roles : IQueryable&lt;CelloStore.Data.Role&gt;" />
+        <entitySetProperty name="Products" namespace="CelloStore.Data" type="Product" label="Products : IQueryable&lt;CelloStore.Data.Product&gt;" />
+        <entitySetProperty name="People" namespace="CelloStore.Data" type="Person" label="People : IQueryable&lt;CelloStore.Data.Person&gt;" />
+        <entitySetProperty name="PaymentMethods" namespace="CelloStore.Data" type="PaymentMethod" label="PaymentMethods : IQueryable&lt;CelloStore.Data.PaymentMethod&gt;" />
+        <entitySetProperty name="OrderStatusHistories" namespace="CelloStore.Data" type="OrderStatusHistory" label="OrderStatusHistories : IQueryable&lt;CelloStore.Data.OrderStatusHistory&gt;" />
+        <entitySetProperty name="OrderDetails" namespace="CelloStore.Data" type="OrderDetail" label="OrderDetails : IQueryable&lt;CelloStore.Data.OrderDetail&gt;" />
+        <entitySetProperty name="Orders" namespace="CelloStore.Data" type="Order" label="Orders : IQueryable&lt;CelloStore.Data.Order&gt;" />
+        <entitySetProperty name="Configurations" namespace="CelloStore.Data" type="Configuration" label="Configurations : IQueryable&lt;CelloStore.Data.Configuration&gt;" />
+        <entitySetProperty name="Categories" namespace="CelloStore.Data" type="Category" label="Categories : IQueryable&lt;CelloStore.Data.Category&gt;" />
+        <entitySetProperty name="Articles" namespace="CelloStore.Data" type="Article" label="Articles : IQueryable&lt;CelloStore.Data.Article&gt;" />
+        <entitySetProperty name="Areas" namespace="CelloStore.Data" type="Area" label="Areas : IQueryable&lt;CelloStore.Data.Area&gt;" />
+        <entitySetProperty name="AddressTypes" namespace="CelloStore.Data" type="AddressType" label="AddressTypes : IQueryable&lt;CelloStore.Data.AddressType&gt;" />
+        <entitySetProperty name="Showcases" namespace="CelloStore.Data" type="Showcase" label="Showcases : IQueryable&lt;CelloStore.Data.Showcase&gt;" />
+        <entitySetProperty name="AutoNumbers" namespace="CelloStore.Data" type="AutoNumber" label="AutoNumbers : IQueryable&lt;CelloStore.Data.AutoNumber&gt;" />
+        <entitySetProperty name="OrderStatus" namespace="CelloStore.Data" type="OrderStatus" label="OrderStatus : IQueryable&lt;CelloStore.Data.OrderStatus&gt;" />
+        <entitySetProperty name="DeliveryTimes" namespace="CelloStore.Data" type="DeliveryTime" label="DeliveryTimes : IQueryable&lt;CelloStore.Data.DeliveryTime&gt;" />
+        <entitySetProperty name="EmailTemplates" namespace="CelloStore.Data" type="EmailTemplate" label="EmailTemplates : IQueryable&lt;CelloStore.Data.EmailTemplate&gt;" />
+        <entitySetProperty name="PaymentConfirmations" namespace="CelloStore.Data" type="PaymentConfirmation" label="PaymentConfirmations : IQueryable&lt;CelloStore.Data.PaymentConfirmation&gt;" />
+        <entitySetProperty name="Banks" namespace="CelloStore.Data" type="Bank" label="Banks : IQueryable&lt;CelloStore.Data.Bank&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>

@@ -1,0 +1,72 @@
+﻿@model CelloStore.ViewModels.PaymentConfirmationViewModel
+
+
+<div class="container">
+    <div class="row">
+        <div class="page-header">
+            <h3>Konfirmasi Pembayaran</h3>
+        </div>
+    </div>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frm", name="frm" }))
+    {
+        @Html.ValidationSummary()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.OrderNo)</div>
+                <div class="col-md-5">
+                    @Html.Kendo().TextBoxFor(m => m.OrderNo)                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.SenderName)</div>
+                <div class="col-md-5">
+                    @Html.Kendo().TextBoxFor(m => m.SenderName)                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.BankId)</div>
+                <div class="col-md-5">
+                    @(Html.Kendo().DropDownListFor(m => m.BankId).DataSource(ds => ds.Read("GetBanks", "Shopping", new { area = String.Empty })).DataTextField("Name").DataValueField("Id").OptionLabel("Select Bank").HtmlAttributes(new { style="width:350px;"}))                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.PaymentDate)</div>
+                <div class="col-md-5">
+                    @Html.Kendo().DatePickerFor(m => m.PaymentDate)
+                    @Html.ValidationMessageFor(m => m.PaymentDate)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">@Html.LabelFor(m => m.PayAmount)</div>
+                <div class="col-md-5">
+                    @Html.Kendo().NumericTextBoxFor(m => m.PayAmount)
+                    @Html.ValidationMessageFor(m => m.PayAmount)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <button id="btnSubmit" class="btn btn-primary" type="submit" name="btnSubmit">Konfirmasi Pembayaran</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(function() {
+        $("#btnSubmit").click(function (e) {
+            e.preventDefault();
+            $(this).attr("disabled", "disabled");
+            $(this).text("Please wait...");
+            $("#frm").submit();
+        });
+
+    });
+</script>

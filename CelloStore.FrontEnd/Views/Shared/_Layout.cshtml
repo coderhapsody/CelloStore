@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belanja Bunga</title>
+    @Html.Partial("_References")
+</head>
+<body>
+    <script>
+        var appVars = {
+            cartUrl: "@Url.Action("CountCartItems", "Shopping", new { area = String.Empty })",
+            addToCartUrl: "@Url.Action("AddItemToCart", "Shopping", new { area = String.Empty })",
+            shoppingCartUrl: "@Url.Action("ViewCart", "Shopping", new { area = String.Empty })"
+            };
+        $.ajaxSetup({ cache: false });
+        kendo.culture("id-ID");
+    </script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/56041b7761b422211fc3a0e7/default';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+
+    <header id="header">
+
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    @Html.Partial("_LeftNav")
+
+                    @Html.Partial("_RightNav")
+
+                </div>
+            </div>
+        </nav>
+
+
+        <br /><br />
+        <div class="header-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <a href="@Href("~/")"><img src="@Url.Content("~/Images/home/logo.png")" alt="" /></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @RenderSection("showcase", false)
+
+    <section>
+        <span id="notification" style="display: none;"></span>
+        @RenderBody()
+    </section>
+
+    <div class="testimonial">
+        @RenderSection("bottom", false)
+    </div>
+
+    <br />
+    <footer id="footer">
+        @Html.Partial("_Footer")
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left" style="font-size:12px">Copyright &copy; 2015 Belanja Bunga.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @RenderSection("scripts", required: false)
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>
